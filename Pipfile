@@ -6,8 +6,10 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-django = "*"
+django = "==2.2"
 djangorestframework = "*"
+django-rest-swagger = "*"
+django-crispy-forms = "*"
 
 [requires]
 python_version = "3.7"
