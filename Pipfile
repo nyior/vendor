@@ -10,6 +10,7 @@ django = "==2.2"
 djangorestframework = "*"
 django-rest-swagger = "*"
 django-crispy-forms = "*"
+django-webpack-loader = "*"
 
 [requires]
 python_version = "3.7"

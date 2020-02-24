@@ -1,0 +1,18 @@
+{% extends 'account/base.html' %}
+{% load render_bundle from webpack_loader %}
+
+{% block content %}
+
+  <div class="container-fluid m-0">
+    <div class="row h-100 ">
+      <div class="col-12"> 
+
+        <div id="app">        
+          {% render_bundle 'app' %}    
+        </div> 
+
+      </div>
+    </div>
+  </div>  
+{% endblock %}
+    

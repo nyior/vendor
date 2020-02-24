@@ -10,7 +10,7 @@
 
 {% block content %}
 <div class="row h-100">
-  <div class="col-8 col-md-3 ml-auto mr-auto my-auto shadow p-3 text-center" >
+  <div class="col-8 col-md-3 ml-auto mr-auto my-auto shadow border p-3 text-center" >
 
       <div>
         {% block messages %}
@@ -33,7 +33,7 @@
       
       <div>
           <h3 class="mt-2 mb-4"><strong>MARCHE</strong></h3>
-          <form class="container-fluid text-center" id="signup_form" method="post" action="{% url 'account_signup' %}">
+          <form class=" text-center" id="signup_form" method="post" action="{% url 'account_signup' %}">
               {% csrf_token %}
             
               {{ form|crispy }}

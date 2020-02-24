@@ -14,8 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 
 from django.urls import path, include
+
+from core.views import IndexView
 
 from rest_framework_swagger.views import get_swagger_view
 schema_view = get_swagger_view(title="Marche API")
@@ -23,6 +27,8 @@ schema_view = get_swagger_view(title="Marche API")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path('', IndexView.as_view(), name='entry-point'),
 
     path('api-auth', include("rest_framework.urls")),
     
@@ -37,4 +43,6 @@ urlpatterns = [
     path('api/v1/', include('users.api.urls')),
 
     path('api/v1/docs/', schema_view),
-]
+] 
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
