@@ -11,6 +11,9 @@ djangorestframework = "*"
 django-rest-swagger = "*"
 django-crispy-forms = "*"
 django-webpack-loader = "*"
+django-rest-auth = "*"
+django-allauth = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.7"
