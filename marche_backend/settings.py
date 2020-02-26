@@ -55,9 +55,11 @@ INSTALLED_APPS = [
     'webpack_loader',
 
     #developer app
-    'users'
+    'users',
+    'adverts'
 ]
 
+AUTH_USER_MODEL = 'users.CustomUser'
 SITE_ID = 1
 
 MIDDLEWARE = [
@@ -157,9 +159,6 @@ STATICFILES_DIRS = [
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 STATIC_URL = '/static/'
-
-AUTH_USER_MODEL = 'users.CustomUser'
-
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',

@@ -4,7 +4,11 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.exceptions import ValidationError
 
 from users.api.serializers import *
+from adverts.api.serializers import AdvertSerializer
+
 from users.models import *
+from adverts.models import Advert
+
 from users.api.permissions import *
 
 
@@ -39,9 +43,17 @@ class ReviewListAPIView(generics.ListAPIView):
         user_id = self.kwargs.get("user_id")
         return Review.objects.filter(reviewee__id=user_id).order_by("-date_created")
 
+class AdsListAPIView(generics.ListAPIView):
+    serializer_class = AdvertSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        user_id = self.kwargs.get("user_id")
+        return Advert.objects.filter(user__id=user_id).order_by("-date_created")
+
 class ReviewRUDAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
-    permission_classes = [IsReviewerOrReadOnly]
+    permission_classes = [IsReviewerOrReadOnly, IsAuthenticatedOrReadOnly]
             
 

@@ -40,9 +40,12 @@ urlpatterns = [
 
     #path('rest-auth/registration/', include('rest_auth.registration.urls')),
 
+    path('docs/', schema_view),
+
     path('api/v1/', include('users.api.urls')),
 
-    path('api/v1/docs/', schema_view),
+    path('api/v1/', include('adverts.api.urls')),
+
 ] 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
