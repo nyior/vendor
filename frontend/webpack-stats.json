@@ -1,1 +1,1 @@
-{"status":"compiling","publicPath":"http://127.0.0.1:8080/"}
+{"status":"done","publicPath":"http://127.0.0.1:8080/","chunks":{"app":[{"name":"app.js","publicPath":"http://127.0.0.1:8080/app.js","path":"C:\\programScripts\\djangoScripts\\projects\\marche_backend\\frontend\\dist\\app.js"}]}}
