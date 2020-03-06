@@ -52,10 +52,11 @@ a:hover{
 }
 
 
-#login_form input{
-    
+
+label, input[type=search], input[type=text], input[type=number], input[type=password], input[type=email]{
     font-size: 1.4rem;
 }
+
 
 
 

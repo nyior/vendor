@@ -2,12 +2,23 @@ import { CSRF_TOKEN } from "./csrf_token.js";
 import axios from "axios";
 
 const API_URL = "http://localhost:8000";
-const endpoint = "http://localhost:8000";
 
-export class APIService {
-  constructor() {}
 
-  getResource(endpoint) {
-    return axios.get(`${API_URL}/${endpoint}`).then(response => response.data);
-  }
+function apiService(endpoint, method, data){
+  endpoint = `${API_URL}/${endpoint}`;
+
+  const config = {
+    url: endpoint,
+    method: method,
+    data: data !== undefined ? data : null,
+    headers: {
+      'content-type': 'application/json',
+      'X-CSRFTOKEN': CSRF_TOKEN
+    }  
+  };
+ 
+  return axios(config)
+    .then(response => response.data);
 }
+
+export { apiService };

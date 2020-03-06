@@ -1,6 +1,7 @@
 from rest_framework import generics, viewsets, mixins
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.generics import get_object_or_404
+from rest_framework.parsers import  MultiPartParser, FormParser, FileUploadParser
 
 from adverts.api.permissions import *
 
@@ -14,7 +15,7 @@ class AdvertViewSet(mixins.ListModelMixin,
                     mixins.UpdateModelMixin,
                     mixins.DestroyModelMixin,
                     viewsets.GenericViewSet):
-    queryset = Advert.objects.all()
+    queryset = Advert.objects.all().order_by("-date_created")
     lookup_field = 'slug'
     serializer_class = AdvertSerializer
     permission_classes = [IsUserOrReadOnly, IsAuthenticatedOrReadOnly]
@@ -24,6 +25,8 @@ class AdvertCreateAPIView(generics.CreateAPIView):
     serializer_class =  AdvertSerializer
     permission_classes = [IsAuthenticated]
 
+    parser_classes = [MultiPartParser, FormParser]
+
     def perform_create(self, serializer):
         slug = self.request.data["name"] + generate_random_string()
         user = self.request.user
@@ -31,6 +34,13 @@ class AdvertCreateAPIView(generics.CreateAPIView):
         category = get_object_or_404(Category, name=cat)
 
         serializer.save(slug=slug, user=user, category=category)
+
+class ImageCreateAPIView(generics.CreateAPIView):
+    queryset =  ImagFile.objects.all()
+    serializer_class = ImageSerializer
+    parser_classes = [MultiPartParser, FormParser]
+    
+
 
 class CategoryListAPIView(generics.ListAPIView):
     serializer_class = AdvertSerializer

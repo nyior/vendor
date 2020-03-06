@@ -13,9 +13,11 @@ class Advert(models.Model):
     description = models.TextField()
     price = models.FloatField()
     quantity = models.PositiveIntegerField(null=True)
-    ad_pic = models.ImageField(null=True, upload_to="ads_pics")
+    file = models.ImageField(upload_to="ads_pics")
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name="adverts")
     date_created = models.DateTimeField(auto_now_add=True)
 
-
+class ImagFile(models.Model):
+    
+    image = models.ImageField(null=True)
     

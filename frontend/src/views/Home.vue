@@ -10,7 +10,7 @@
           campus, and we help student entrepreneurs build successful businesses.
           We are Marche!
         </h3>
-        <router-link :to="{ name: 'products' }">
+        <router-link :to="{ name: 'adverts' }">
           <button class="btn btn-lg mt-2">Discover Available Products</button>
         </router-link>
       </div>
@@ -19,101 +19,104 @@
     <h1 class="heading mt-4 mb-2">
       Discover Products and Services by Categories
     </h1>
-    <div
-      class="row  categories  p-5  mt-4 mb-2 text-center d-flex justify-content-center"
-    >
-      <div class="col-md-3 col-6 p-0">
-        <div class="card m-2">
-          <div class="mt-5">
-            <a href="#"><i class="fa fa-shirtsinbulk"></i></a>
-          </div>
-          <hr />
-          <div class="card-body text-muted">
-            <a href="#"><strong>FASHION</strong></a>
+
+    <div class="container">
+      <div
+        class="row  categories  p-5  mt-4 mb-2 text-center d-flex justify-content-center"
+      >
+        <div class="col-md-3 col-6 p-0">
+          <div class="card m-2">
+            <div class="mt-5">
+              <a href="#"><i class="fa fa-shirtsinbulk"></i></a>
+            </div>
+            <hr />
+            <div class="card-body text-muted">
+              <a href="#"><strong>FASHION</strong></a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="col-md-3 col-6 p-0">
-        <div class="card m-2">
-          <div class="mt-5">
-            <a href="#"><i class="fa fa-shirtsinbulk"></i></a>
-          </div>
-          <hr />
-          <div class="card-body text-muted">
-            <a href="#"><strong>ELECTRONIC APPLIANCES</strong></a>
+        <div class="col-md-3 col-6 p-0">
+          <div class="card m-2">
+            <div class="mt-5">
+              <a href="#"><i class="fa fa-shirtsinbulk"></i></a>
+            </div>
+            <hr />
+            <div class="card-body text-muted">
+              <a href="#"><strong>ELECTRONIC APPLIANCES</strong></a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="col-md-3 col-6 p-0">
-        <div class="card m-2">
-          <div class="mt-5">
-            <a href="#"><i class="fa fa-shirtsinbulk"></i></a>
-          </div>
-          <hr />
-          <div class="card-body text-muted">
-            <a href="#"><strong>PHONES AND ACCESSORIES</strong></a>
+        <div class="col-md-3 col-6 p-0">
+          <div class="card m-2">
+            <div class="mt-5">
+              <a href="#"><i class="fa fa-shirtsinbulk"></i></a>
+            </div>
+            <hr />
+            <div class="card-body text-muted">
+              <a href="#"><strong>PHONES AND ACCESSORIES</strong></a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="col-md-3 col-6 p-0">
-        <div class="card m-2">
-          <div class="mt-5">
-            <a href="#"><i class="fa fa-shirtsinbulk"></i></a>
-          </div>
-          <hr />
-          <div class="card-body text-muted">
-            <a href="#"><strong>VIDEO GAMES</strong></a>
+        <div class="col-md-3 col-6 p-0">
+          <div class="card m-2">
+            <div class="mt-5">
+              <a href="#"><i class="fa fa-shirtsinbulk"></i></a>
+            </div>
+            <hr />
+            <div class="card-body text-muted">
+              <a href="#"><strong>VIDEO GAMES</strong></a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="col-md-3 col-6 p-0">
-        <div class="card m-2">
-          <div class="mt-5">
-            <a href="#"><i class="fa fa-shirtsinbulk"></i></a>
-          </div>
-          <hr />
-          <div class="card-body text-muted">
-            <a href="#"><strong>HEALTH AND FITNESS</strong></a>
+        <div class="col-md-3 col-6 p-0">
+          <div class="card m-2">
+            <div class="mt-5">
+              <a href="#"><i class="fa fa-shirtsinbulk"></i></a>
+            </div>
+            <hr />
+            <div class="card-body text-muted">
+              <a href="#"><strong>HEALTH AND FITNESS</strong></a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="col-md-3 col-6 ">
-        <div class="card m-2">
-          <div class="mt-5">
-            <a href="#"><i class="fa fa-shirtsinbulk"></i></a>
-          </div>
-          <hr />
-          <div class="card-body text-muted">
-            <a href="#"><strong>SERVICES</strong></a>
+        <div class="col-md-3 col-6  p-0">
+          <div class="card m-2">
+            <div class="mt-5">
+              <a href="#"><i class="fa fa-shirtsinbulk"></i></a>
+            </div>
+            <hr />
+            <div class="card-body text-muted">
+              <a href="#"><strong>SERVICES</strong></a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="col-md-3 col-6 p-0">
-        <div class="card m-2">
-          <div class="mt-5">
-            <a href="#"><i class="fa fa-shirtsinbulk"></i></a>
-          </div>
-          <hr />
-          <div class="card-body text-muted">
-            <a href="#"><strong>FOODS</strong></a>
+        <div class="col-md-3 col-6 p-0">
+          <div class="card m-2">
+            <div class="mt-5">
+              <a href="#"><i class="fa fa-shirtsinbulk"></i></a>
+            </div>
+            <hr />
+            <div class="card-body text-muted">
+              <a href="#"><strong>FOODS</strong></a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="col-md-3 col-6 p-0">
-        <div class="card m-2">
-          <div class="mt-5">
-            <a href="#"><i class="fa fa-shirtsinbulk"></i></a>
-          </div>
-          <hr />
-          <div class="card-body text-muted">
-            <a href="#"><strong>OTHERS</strong></a>
+        <div class="col-md-3 col-6 p-0">
+          <div class="card m-2">
+            <div class="mt-5">
+              <a href="#"><i class="fa fa-shirtsinbulk"></i></a>
+            </div>
+            <hr />
+            <div class="card-body text-muted">
+              <a href="#"><strong>OTHERS</strong></a>
+            </div>
           </div>
         </div>
       </div>
@@ -122,14 +125,12 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
 export default {
   name: "home",
-  components: {
-    HelloWorld
+  mounted: function(){
+    document.title = "Marche`"
   }
+
 };
 </script>
 

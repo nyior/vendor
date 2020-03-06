@@ -15,7 +15,9 @@
 
       <ul class="navbar-nav ">
         <li class="nav-item mr-3">
-          <a class="btn btn-lg " href="#">Advertise With Us</a>
+          <router-link :to="{ name: 'ads_create' }">
+            <button class="btn btn-lg">Advertise With Us</button>
+          </router-link>
         </li>
 
         <li class="nav-item mr-3 mt-2">
