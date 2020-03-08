@@ -127,10 +127,9 @@
 <script>
 export default {
   name: "home",
-  mounted: function(){
-    document.title = "Marche`"
+  mounted: function() {
+    document.title = "Marche`";
   }
-
 };
 </script>
 

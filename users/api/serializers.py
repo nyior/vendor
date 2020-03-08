@@ -26,7 +26,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
         if request.user == instance:
             return True
             
-        return instance.reviews.filter(reviewer=request.user).exists()
+        return instance.reviews.filter(reviewer__id=request.user.id).exists()
 
 
 class ReviewSerializer(serializers.ModelSerializer):

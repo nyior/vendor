@@ -18,7 +18,7 @@ class AdvertViewSet(mixins.ListModelMixin,
     queryset = Advert.objects.all().order_by("-date_created")
     lookup_field = 'slug'
     serializer_class = AdvertSerializer
-    permission_classes = [IsUserOrReadOnly, IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
 class AdvertCreateAPIView(generics.CreateAPIView):
     queryset =  Advert.objects.all()

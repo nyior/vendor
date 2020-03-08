@@ -3,8 +3,7 @@ import axios from "axios";
 
 const API_URL = "http://localhost:8000";
 
-
-function apiService(endpoint, method, data){
+function apiService(endpoint, method, data) {
   endpoint = `${API_URL}/${endpoint}`;
 
   const config = {
@@ -12,13 +11,12 @@ function apiService(endpoint, method, data){
     method: method,
     data: data !== undefined ? data : null,
     headers: {
-      'content-type': 'application/json',
-      'X-CSRFTOKEN': CSRF_TOKEN
-    }  
+      "content-type": "application/json",
+      "X-CSRFTOKEN": CSRF_TOKEN
+    }
   };
- 
-  return axios(config)
-    .then(response => response.data);
+
+  return axios(config).then(response => response.data);
 }
 
 export { apiService };

@@ -8,9 +8,7 @@
         v-for="advert in adverts"
         :key="advert.id"
       >
-        <router-link
-          :to="{name: 'ad_detail', params:{slug: advert.slug}}"
-           >
+        <router-link :to="{ name: 'ad_detail', params: { slug: advert.slug } }">
           <div class=" m-1 bg-grey">
             <a :href="advert.file">
               <img
@@ -37,11 +35,9 @@
 
     <div class="row text-center d-flex justify-content-center mt-4">
       <div class="col-6">
-        <p v-show="loadingAdverts"> ...loading...</p>
-        <a v-show="next" 
-            @click=" getAdverts"
-            class=" ">
-         <strong> Load More</strong>
+        <p v-show="loadingAdverts">...loading...</p>
+        <a v-show="next" @click="getAdverts" class=" ">
+          <strong> Load More</strong>
         </a>
       </div>
     </div>
@@ -49,8 +45,7 @@
 </template>
 
 <script>
-
-import {apiService } from "../common/api.service.js";
+import { apiService } from "../common/api.service.js";
 
 export default {
   name: "adverts",
@@ -58,7 +53,7 @@ export default {
     return {
       adverts: [],
       next: null,
-      loadingAdverts: false,
+      loadingAdverts: false
     };
   },
 
@@ -66,28 +61,27 @@ export default {
     getAdverts() {
       let get_adverts_url = "api/v1/adverts/";
 
-      if(this.next){
+      if (this.next) {
         get_adverts_url = this.next.slice(22);
       }
 
       this.loadingAdverts = true;
-      apiService(get_adverts_url, 'GET')
-          .then(data => {
-            this.loadingAdverts = false
-            this.adverts.push(...data.results) 
-            
-            if(data.next){
-              this.next = data.next
-            } else {
-              this.next = null;
-            }
-          })     
+      apiService(get_adverts_url, "GET").then(data => {
+        this.loadingAdverts = false;
+        this.adverts.push(...data.results);
+
+        if (data.next) {
+          this.next = data.next;
+        } else {
+          this.next = null;
+        }
+      });
     }
   },
 
-  created () {
+  created() {
     this.getAdverts();
-    document.title = "Advertisements"
+    document.title = "Advertisements";
   }
 };
 </script>
