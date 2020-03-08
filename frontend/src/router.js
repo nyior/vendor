@@ -5,7 +5,7 @@ import Adverts from "./views/Adverts.vue";
 import AdvertCreate from "./views/AdvertCreate.vue";
 import AdvertDetail from "./views/AdvertDetail.vue";
 import UserDetail from "./views/UserDetail.vue";
-import ReviewDetail from "./views/ReviewDetail.vue";
+
 
 Vue.use(Router);
 
@@ -32,14 +32,6 @@ export default new Router({
       component: UserDetail,
       props: true
     },
-
-    {
-      path: "/review_detail/:id",
-      name: "review_detail",
-      component: ReviewDetail,
-      props: true
-    },
-
     {
       path: "/ads_create",
       name: "ads_create",

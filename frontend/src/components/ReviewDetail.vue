@@ -1,10 +1,9 @@
 <template>
-  <div class=" container advert mt-5 ">
-    <div
-      class="row    mt-5 mb-2 text-center d-flex justify-content-center align-items-center"
-    >
-      <div class="col-md-6 col-12 p-0 mt-5">
+  
+      <div class=" p-0 mt-5">
+        
         <div>duration : {{ review.duration }} ago</div>
+        
         <div class="text-muted mt-2">
           <p>
             <strong>
@@ -15,9 +14,13 @@
           <hr />
           <p>rating: {{ review.rating }}</p>
         </div>
+
+        <div class="" v-if="isReviewAuthor">
+            <button class="btn btn-blue mr-2">Edit Review</button>
+            <button @click="DeleteReviewTrigger" class="btn btn-blue ml-2" >Delete Review</button>
+        </div>
       </div>
-    </div>
-  </div>
+    
 </template>
 
 <script>
@@ -27,15 +30,27 @@ export default {
   name: "review-detail",
 
   props: {
-    id: {
-      type: Number,
+    review: {
+      type: Object,
+      required: true
+    },
+
+    requestUser: {
+      type: String,
       required: true
     }
   },
+
   data() {
     return {
-      review: null
+      
     };
+  },
+  
+  computed: {
+      isReviewAuthor(){
+          return this.review.reviewer === this.requestUser;
+      }
   },
 
   methods: {
@@ -43,18 +58,14 @@ export default {
       document.title = title;
     },
 
-    getReview() {
-      let get_review_url = `api/v1/reviews/${this.id}/`;
-
-      apiService(get_review_url, "GET").then(data => {
-        this.review = data;
-        this.setPageTitle(data.description);
-      });
+    DeleteReviewTrigger(){
+      this.$emit('delete-review', this.review);
     }
   },
 
   mounted: function() {
-    this.getReview();
+  
+    this.setRequestUser();
   }
 };
 </script>

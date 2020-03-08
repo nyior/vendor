@@ -1,4 +1,6 @@
-from rest_framework import generics
+from rest_framework import generics 
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.generics import get_object_or_404
 from rest_framework.exceptions import ValidationError
@@ -16,6 +18,15 @@ class UserDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
     permission_classes = [HasAccountOrReadOnly, IsAuthenticatedOrReadOnly]
+
+class CurrentUserView(APIView):
+    def get(self, request):
+        user = request.user
+        return Response({
+            
+            'username': user.username,
+
+        })
 
 class ReviewCreateAPIView(generics.CreateAPIView):
     queryset = Review.objects.all()

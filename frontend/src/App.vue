@@ -7,11 +7,27 @@
 
 <script>
 import NavbarComponent from "./components/Navbar.vue";
+import { apiService } from "./common/api.service.js";
 
 export default {
   name: "App",
   components: {
     NavbarComponent
+  },
+
+  methods: {
+    async setUserInfo(){
+      let get_user_url = `api/v1/users/currentUser/`;
+
+      const data = await apiService(get_user_url, "GET");
+      const requestUser = data["username"]
+      window.localStorage.setItem("username", requestUser);
+
+    }
+  },
+
+  mounted: function(){
+    this.setUserInfo()
   }
 };
 </script>

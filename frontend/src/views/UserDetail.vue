@@ -79,17 +79,15 @@
 
     <div
       class="row text-center d-flex justify-content-center align-items-center"
-      v-for="review in reviews"
-      :key="review.id"
-    >
+      v-for="(review, index) in reviews"
+      :key="index"
+      >
       <div class="col-12 col-md-6">
-        <router-link :to="{ name: 'review_detail', params: { id: review.id } }">
-          <p>Rating: {{ review.rating }}</p>
-
-          <p>
-            {{ review.duration }}
-          </p>
-        </router-link>
+        <ReviewDetail
+            :review="review"
+            :requestUser="requestUser"
+            @delete-review="deleteReview"
+        />
       </div>
     </div>
 
@@ -106,6 +104,7 @@
 
 <script>
 import { apiService } from "../common/api.service.js";
+import ReviewDetail from "@/components/ReviewDetail.vue";
 
 export default {
   name: "user-detail",
@@ -116,11 +115,17 @@ export default {
       required: true
     }
   },
+
+  components: {
+    ReviewDetail
+  },
+
   data() {
     return {
       user: null,
       reviews: [],
       review_form: {
+        duration: null,
         rating: null,
         description: null
       },
@@ -129,7 +134,8 @@ export default {
       UserHasReviewed: false,
       showForm: false,
       next: null,
-      loadingReviews: false
+      loadingReviews: false,
+      requestUser: null
     };
   },
 
@@ -188,10 +194,24 @@ export default {
         .catch(error => {
           this.error = error;
         });
+    },
+    
+    deleteReview(review) {
+      let delete_review_url = `api/v1/reviews/${review.id}/`;
+
+      apiService(delete_review_url, "DELETE").then(data => {
+        this.$delete(this.reviews, this.reviews.indexOf(review));
+        this.UserHasReviewed = false;
+      });
+    },
+
+    setRequestUser(){
+        this.requestUser = window.localStorage.getItem("username");
     }
   },
 
   mounted: function() {
+    this.setRequestUser();
     this.getUser();
     this.getReviews();
   }
