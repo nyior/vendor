@@ -11,6 +11,7 @@ class CustomUser(AbstractUser):
     residence_hall = models.CharField(max_length=12)
     bio = models.TextField()
 
+#user-review
 class Review(models.Model):
     reviewer = models.ForeignKey(settings.AUTH_USER_MODEL,
     on_delete=models.CASCADE, related_name="reviews_created")

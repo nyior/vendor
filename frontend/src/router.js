@@ -4,6 +4,7 @@ import Home from "./views/Home.vue";
 import Adverts from "./views/Adverts.vue";
 import AdvertCreate from "./views/AdvertCreate.vue";
 import AdvertDetail from "./views/AdvertDetail.vue";
+import UserDetail from "./views/UserDetail.vue";
 
 Vue.use(Router);
 
@@ -21,6 +22,13 @@ export default new Router({
       path: "/ad_detail/:slug",
       name: "ad_detail",
       component: AdvertDetail,
+      props: true
+    },
+    
+    {
+      path: "/user_detail/:id",
+      name: "user_detail",
+      component: UserDetail,
       props: true
     },
 

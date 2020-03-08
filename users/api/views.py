@@ -11,7 +11,7 @@ from adverts.models import Advert
 
 from users.api.permissions import *
 
-
+#user
 class UserDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
