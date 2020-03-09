@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
+import ReviewEditor from "./views/ReviewEditor.vue";
 import Adverts from "./views/Adverts.vue";
 import AdvertCreate from "./views/AdvertCreate.vue";
 import AdvertDetail from "./views/AdvertDetail.vue";
@@ -36,6 +37,12 @@ export default new Router({
       path: "/ads_create",
       name: "ads_create",
       component: AdvertCreate
+    },
+    {
+      path: "/review/:id",
+      name: "edit_review",
+      component: ReviewEditor,
+      props: true
     },
     {
       path: "/adverts",

@@ -16,7 +16,12 @@
         </div>
 
         <div class="" v-if="isReviewAuthor">
-            <button class="btn btn-blue mr-2">Edit Review</button>
+            <router-link
+            
+              :to="{name: 'edit_review', params: {id: review.id }}"
+              class="btn btn-blue ml-2">
+                Edit Review
+            </router-link>
             <button @click="DeleteReviewTrigger" class="btn btn-blue ml-2" >Delete Review</button>
         </div>
       </div>
@@ -61,11 +66,6 @@ export default {
     DeleteReviewTrigger(){
       this.$emit('delete-review', this.review);
     }
-  },
-
-  mounted: function() {
-  
-    this.setRequestUser();
   }
 };
 </script>

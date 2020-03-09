@@ -36,7 +36,7 @@ class ReviewSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Review
-        exclude = ['reviewee', 'date_created']
+        exclude = ['date_created']
 
     def get_duration(self, object):
         date_created = object.date_created
