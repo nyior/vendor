@@ -190,6 +190,7 @@ export default {
         .then(data => {
           this.reviews.unshift(data);
           this.showForm = false;
+          this.UserHasReviewed = true;
         })
         .catch(error => {
           this.error = error;
