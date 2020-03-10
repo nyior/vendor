@@ -103,16 +103,56 @@ import { apiService } from "../common/api.service.js";
 
 export default {
   name: "adverts-create",
+
+  props: {
+    slug: {
+      type: String,
+      required: false
+    },
+
+    category: {
+      type: String,
+      required: true
+    },
+
+    name: {
+          type: String,
+          required: true,
+    },
+
+    price: {
+          type: Number,
+          required: true,
+    },
+
+    quantity: {
+          type: Number,
+          required: true,
+    },
+
+  
+    description: {
+          type: String,
+          required: true,
+      },
+
+    file: {
+          type: File,
+          required: true,
+      }
+  },
+
   data() {
     return {
       error: null,
 
       form: {
-        name: null,
-        price: null,
-        quantity: null,
-        description: null,
-        file: null
+        name: this.name,
+        price: this.price,
+        quantity: this.quantity,
+        description: this.description,
+        file: this.file,
+        category: this.category
       }
     };
   },
@@ -123,17 +163,24 @@ export default {
     },
 
     postAdvert() {
-      let post_advert_url = `api/v1/${this.form.category}/adverts/create/`;
+      let post_advert_url = `api/v1/adverts/`;
 
+      let method = "POST";
+      let file = this.form.file;
       let formData = new FormData();
-
+      
+      if (this.slug !== undefined) {
+        file = this.file
+        post_advert_url = `api/v1/adverts/${this.slug}/`;
+        method = 'PUT';
+      }
+      
+      formData.append("category", this.form.category);
       formData.append("name", this.form.name);
       formData.append("price", this.form.price);
       formData.append("quantity", this.form.quantity);
       formData.append("description", this.form.description);
-      formData.append("file", this.form.file);
-
-      let method = "POST";
+      formData.append("file", file);
 
       apiService(post_advert_url, method, formData)
         .then(data => {
@@ -146,6 +193,26 @@ export default {
           this.error = error;
         });
     }
+  },
+
+  async beforeRouteEnter(to, from, next){
+
+    if (to.params.slug !== undefined) {
+      let get_advert_url = `api/v1/adverts/${to.params.slug}/`;
+      
+      let data = await apiService(get_advert_url, "GET");
+      to.params.name = data.name;
+      to.params.price = data.price;
+      to.params.quantity = data.quantity;
+      to.params.description = data.description;
+      to.params.file = data.file;
+      to.params.category = data.category;
+
+      return next();
+    } else {
+      return next();
+    }
+     
   },
 
   mounted: function() {

@@ -5,12 +5,11 @@ from rest_framework.parsers import  MultiPartParser, FormParser, FileUploadParse
 
 from adverts.api.permissions import *
 
-
 from adverts.api.serializers import *
 from core.utils import generate_random_string
 
-
 class AdvertViewSet(mixins.ListModelMixin,
+                    mixins.CreateModelMixin,
                     mixins.RetrieveModelMixin,
                     mixins.UpdateModelMixin,
                     mixins.DestroyModelMixin,
@@ -20,27 +19,27 @@ class AdvertViewSet(mixins.ListModelMixin,
     serializer_class = AdvertSerializer
     permission_classes = [IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
-class AdvertCreateAPIView(generics.CreateAPIView):
-    queryset =  Advert.objects.all()
-    serializer_class =  AdvertSerializer
-    permission_classes = [IsAuthenticated]
-
     parser_classes = [MultiPartParser, FormParser]
+
+    def perform_update(self, serializer):
+        cat = self.request.data["category"] 
+        category = get_object_or_404(Category, name=cat)
+        serializer.save(category=category)
 
     def perform_create(self, serializer):
         slug = self.request.data["name"] + generate_random_string()
+        cat = self.request.data["category"] 
         user = self.request.user
-        cat = self.kwargs.get('category')
         category = get_object_or_404(Category, name=cat)
 
         serializer.save(slug=slug, user=user, category=category)
+
 
 class ImageCreateAPIView(generics.CreateAPIView):
     queryset =  ImagFile.objects.all()
     serializer_class = ImageSerializer
     parser_classes = [MultiPartParser, FormParser]
     
-
 
 class CategoryListAPIView(generics.ListAPIView):
     serializer_class = AdvertSerializer

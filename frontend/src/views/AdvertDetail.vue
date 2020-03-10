@@ -13,6 +13,11 @@
               alt="Responsive image"
             />
           </a>
+
+          <advertActions v-if="isAdvertOwner"
+                          :slug="advert.slug"
+                          :category="advert.category"/>
+
           <div class="text-muted mt-2">
             <p>
               <a href="#">
@@ -38,19 +43,27 @@
 
 <script>
 import { apiService } from "../common/api.service.js";
+import advertActions from "@/components/advertActions.vue"
 
 export default {
   name: "advert-detail",
+
+  components: {
+    advertActions
+  },
 
   props: {
     slug: {
       type: String,
       required: true
-    }
+    },
+
   },
+
   data() {
     return {
-      advert: null
+      advert: null,
+      requestUser: null,
     };
   },
 
@@ -66,11 +79,23 @@ export default {
         this.advert = data;
         this.setPageTitle(data.name);
       });
+    },
+
+    setRequestUser(){
+        this.requestUser = window.localStorage.getItem("username");
     }
   },
 
+  computed: {
+      isAdvertOwner(){
+          return this.advert.user.username === this.requestUser;
+      }
+  },
+
+
   mounted: function() {
     this.getAdvert();
+    this.setRequestUser();
   }
 };
 </script>

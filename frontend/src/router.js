@@ -34,9 +34,10 @@ export default new Router({
       props: true
     },
     {
-      path: "/ads_create",
+      path: "/ads_create/:slug?",
       name: "ads_create",
-      component: AdvertCreate
+      component: AdvertCreate,
+      props: true
     },
     {
       path: "/review/:id",
