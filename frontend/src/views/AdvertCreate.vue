@@ -73,7 +73,7 @@
           <div class="form-group">
             <label
               >Advert Image
-              <input type="file" id="file" v-on:change="handleFileUpload" />
+              <input type="file" ref="file"  v-on:change="handleFileUpload" />
             </label>
           </div>
 
@@ -137,7 +137,7 @@ export default {
       },
 
     file: {
-          type: File,
+          type: String,
           required: true,
       }
   },
@@ -170,7 +170,7 @@ export default {
       let formData = new FormData();
       
       if (this.slug !== undefined) {
-        file = this.file
+        //this.$refs.file.value = this.file;
         post_advert_url = `api/v1/adverts/${this.slug}/`;
         method = 'PUT';
       }
@@ -216,6 +216,7 @@ export default {
   },
 
   mounted: function() {
+    //this.setFileField();
     document.title = "Create Advert";
   }
 };
