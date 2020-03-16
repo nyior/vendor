@@ -13,6 +13,8 @@ class ReviewAdmin(admin.ModelAdmin):
    model = Review
    list_display = ['reviewer', 'reviewee', 'date_created']
 
+
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Review, ReviewAdmin)
+
 

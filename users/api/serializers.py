@@ -4,17 +4,21 @@ from datetime import datetime, timezone
 from django.utils.timesince import timesince
 
 from users.models import CustomUser, Review
-
-class CustomUserSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(read_only=True)
-    profile_picture = serializers.ImageField(required=False)
-    reviews = serializers.SerializerMethodField()
-    current_user_has_reviewed = serializers.SerializerMethodField()
-
+class AvatarSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = CustomUser
-        fields = ['current_user_has_reviewed','id', 'username', 'email', 'reviews', 'profile_picture', 'phone_number', 'residence_hall', 'bio']
+        fields = ("profile_picture",)
+
+class CustomUserSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+    reviews = serializers.SerializerMethodField()
+    current_user_has_reviewed = serializers.SerializerMethodField()
+    profile_picture = serializers.ImageField(read_only=True)
+
+    class Meta:
+        model = CustomUser
+        fields = ['profile_picture', 'current_user_has_reviewed','id', 'username', 'email', 'reviews', 'phone_number', 'residence_hall', 'bio']
 
     def get_reviews(self, object):
         return object.reviews.count()
@@ -27,6 +31,11 @@ class CustomUserSerializer(serializers.ModelSerializer):
             return True
             
         return instance.reviews.filter(reviewer__id=request.user.id).exists()
+
+    def validate_email(self, value):
+        if value.endswith("@aun.edu.ng"):
+            return value
+        raise serializers.ValidationError("Only AUN emails allowed fam !!")
 
 
 class ReviewSerializer(serializers.ModelSerializer):

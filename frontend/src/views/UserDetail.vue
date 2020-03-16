@@ -5,15 +5,41 @@
     >
       <div class="col-md-4 col-6 p-0">
         <div class=" m-1 bg-grey mt-5">
-          <a :href="user.profile_pic">
+          <div>
+            <a :href="user.profile_picture">
             <img
-              :src="user.profile_pic"
+              :src="user.profile_picture"
               style="height: 18rem;"
               class="img-fluid m-1"
               alt="Responsive image"
             />
-          </a>
-          <div class="text-muted mt-2">
+            </a>
+
+            <div v-if="UserHasProfile && !showAvatarUpdateForm">
+              <button class="btn btn-blue" @click="showAvatarUpdateForm = true">
+                change display picture
+              </button>
+            </div>
+
+            <div v-if="showAvatarUpdateForm ">
+              <form
+                @submit.prevent="UpdateAvatar"
+                class="p-3 "
+                enctype="multipart/form-data"
+              >
+                <div class="form-group">
+                  <label
+                    >
+                    <input type="file" ref="file"  v-on:change="handleFileUpload" />
+                  </label>
+                </div>
+
+                <button class="btn btn-lg btn-blue" type="submit">Post Avatar</button>
+              </form>
+            </div>
+          </div>
+          
+          <div class="text-muted mt-2" v-if="!showProfileUpdateForm">
             <p>
               <a href="#">
                 <strong>
@@ -23,6 +49,18 @@
                 </strong>
               </a>
             </p>
+          </div>
+          <div v-if="showProfileUpdateForm">
+            <UpdateUserProfileForm
+                :user="user"
+                @update-profile="UpdateProfile"
+            />
+          </div>
+
+          <div v-if="UserHasProfile && !showProfileUpdateForm">
+            <button class="btn btn-blue" @click="showProfileUpdateForm = true">
+              edit profile
+            </button>
           </div>
         </div>
       </div>
@@ -105,6 +143,7 @@
 <script>
 import { apiService } from "../common/api.service.js";
 import ReviewDetail from "@/components/ReviewDetail.vue";
+import UpdateUserProfileForm from "@/components/UpdateUserProfileForm.vue";
 
 export default {
   name: "user-detail",
@@ -117,12 +156,14 @@ export default {
   },
 
   components: {
-    ReviewDetail
+    ReviewDetail,
+    UpdateUserProfileForm
   },
 
   data() {
     return {
       user: null,
+      avatar: null,
       reviews: [],
       review_form: {
         duration: null,
@@ -133,15 +174,27 @@ export default {
       error: null,
       UserHasReviewed: false,
       showForm: false,
+      showProfileUpdateForm: false,
+      showAvatarUpdateForm: false,
       next: null,
       loadingReviews: false,
       requestUser: null
     };
   },
 
+  computed: {
+    UserHasProfile(){
+      return this.requestUser == this.user.username;
+    }
+  },
+
   methods: {
     setPageTitle(title) {
       document.title = title;
+    },
+
+    handleFileUpload(event) {
+      this.avatar = event.target.files[0];
     },
 
     getUser() {
@@ -196,6 +249,40 @@ export default {
           this.error = error;
         });
     },
+
+    UpdateProfile(formData) {
+      let updateprofile_url = `api/v1/users/${formData.user_id}/`;
+
+      let method = "PUT";
+
+      apiService(updateprofile_url, method, formData)
+        .then(data => {
+          this.user  = data;
+          this.requestUser = data.username;
+          this.showProfileUpdateForm = false;
+        })
+        .catch(error => {
+          this.error = error;
+        });
+    },
+
+    UpdateAvatar() {
+      let updateprofile_url = `api/v1/avatar/`;
+
+      let formData = new FormData();
+
+      formData.append("profile_picture", this.avatar);
+      let method = "PUT";
+
+      apiService(updateprofile_url, method, formData)
+        .then(data => {
+          this.user.profile_picture  = data.profile_picture;  
+          this.showAvatarUpdateForm = false; 
+        })
+        .catch(error => {
+          this.error = error;
+        });
+    },
     
     deleteReview(review) {
       let delete_review_url = `api/v1/reviews/${review.id}/`;
@@ -211,11 +298,12 @@ export default {
     }
   },
 
+
   mounted: function() {
     this.setRequestUser();
     this.getUser();
     this.getReviews();
-  }
+  },
 };
 </script>
 

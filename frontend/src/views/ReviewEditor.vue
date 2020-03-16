@@ -8,40 +8,18 @@
           Edit Your Review
         </h1>
 
-        <form
-        @submit.prevent="postReview"
+      <form
+        @submit.prevent="UpdateProfileImage"
         class="p-3 was-validated"
         enctype="multipart/form-data"
       >
         <div class="form-group">
-          <label for="quantity">Rating</label>
-          <input
-            type="number"
-            class="form-control required"
-            id="quantity"
-            
-            v-model="review_form.rating"
-            required
-          />
-          <div class="invalid-feedback">Only figures allowed</div>
-        </div>
-
-        <div class="form-group">
-          <label for="description">Advert Description</label>
-          <textarea
-            class="form-control"
-            id="description"
-            rows="5"
-            
-            v-model="review_form.description"
-          ></textarea>
+          
         </div>
 
         <button class="btn btn-lg btn-blue" type="submit">Post Review</button>
       </form>
-        <p v-if="error" class="mt-2">
-          <strong>{{ error }}</strong>
-        </p>
+      
       </div>
     </div>
   </div>

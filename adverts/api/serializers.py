@@ -24,8 +24,3 @@ class AdvertSerializer(serializers.ModelSerializer):
     def get_category(self, object):
         return object.category.name
 
-class ImageSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = ImagFile
-        fields = '__all__'

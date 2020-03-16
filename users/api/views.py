@@ -1,9 +1,12 @@
-from rest_framework import generics 
+from rest_framework import generics, mixins, viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.generics import get_object_or_404
 from rest_framework.exceptions import ValidationError
+
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
+from rest_framework.parsers import  MultiPartParser, FormParser, FileUploadParser
 
 from users.api.serializers import *
 from adverts.api.serializers import AdvertSerializer
@@ -27,6 +30,17 @@ class CurrentUserView(APIView):
             'username': user.username,
 
         })
+
+
+class AvatarUpdateView(generics.UpdateAPIView):
+    serializer_class = AvatarSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly, HasAvatarOrReadOnly]
+
+    parser_classes = [MultiPartParser, FormParser]
+
+    def get_object(self):
+        user = self.request.user
+        return user
 
 class ReviewCreateAPIView(generics.CreateAPIView):
     queryset = Review.objects.all()

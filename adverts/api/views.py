@@ -34,13 +34,7 @@ class AdvertViewSet(mixins.ListModelMixin,
 
         serializer.save(slug=slug, user=user, category=category)
 
-
-class ImageCreateAPIView(generics.CreateAPIView):
-    queryset =  ImagFile.objects.all()
-    serializer_class = ImageSerializer
-    parser_classes = [MultiPartParser, FormParser]
     
-
 class CategoryListAPIView(generics.ListAPIView):
     serializer_class = AdvertSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]

@@ -9,15 +9,12 @@ class Advert(models.Model):
     slug = models.SlugField(max_length=255, unique=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
     on_delete=models.CASCADE, related_name="adverts")
-    name = models.CharField(max_length=100, null=False)
-    description = models.TextField()
+    name = models.CharField(max_length=100)
+    description = models.TextField(null=True, blank=True)
     price = models.FloatField()
-    quantity = models.PositiveIntegerField(null=True)
-    file = models.ImageField(upload_to="ads_pics")
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name="adverts")
+    quantity = models.PositiveIntegerField(null=True, blank=True)
+    file = models.ImageField(upload_to="ads_pics", default="default.png")
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name="adverts")
     date_created = models.DateTimeField(auto_now_add=True)
 
-class ImagFile(models.Model):
-    
-    image = models.ImageField(null=True)
     

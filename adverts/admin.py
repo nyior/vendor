@@ -14,5 +14,5 @@ class AdvertAdmin(admin.ModelAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Advert, AdvertAdmin)
-admin.site.register(ImagFile)
+
 
