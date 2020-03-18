@@ -1,4 +1,4 @@
-from rest_framework import generics, mixins, viewsets
+from rest_framework import generics, mixins, viewsets, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
@@ -80,5 +80,41 @@ class ReviewRUDAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
     permission_classes = [IsReviewerOrReadOnly, IsAuthenticatedOrReadOnly]
-            
+
+class UserWishlistItemsAPIView(generics.ListAPIView):
+    serializer_class = CustomUserSerializer
+    permission_classes = [IsAuthenticated]
+    
+
+    def get_queryset(self):
+        user = self.request.user
+        return user.wishlist.all()
+
+class WishlistAPIView(APIView):
+    serializer_class = AdvertSerializer
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, slug):
+        advert = get_object_or_404(Advert, slug=slug) 
+        user = self.request.user 
+
+        user.wishlist.remove(advert) 
+        user.save()
+
+        serializer_context = {"request":request}
+        serializer = self.serializer_class(advert, context=serializer_context)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request, slug):
+        advert = get_object_or_404(Advert, slug=slug) 
+        user = self.request.user 
+
+        user.wishlist.add(advert) 
+        user.save()
+
+        serializer_context = {"request":request}
+        serializer = self.serializer_class(advert, context=serializer_context)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
 

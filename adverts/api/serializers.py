@@ -9,6 +9,7 @@ class AdvertSerializer(serializers.ModelSerializer):
     slug = serializers.SlugField(read_only=True)
     user = CustomUserSerializer(read_only=True)
     category = serializers.SerializerMethodField()
+    advert_in_current_user_wishlist= serializers.SerializerMethodField()
     duration = serializers.SerializerMethodField()
 
     class Meta:
@@ -24,3 +25,7 @@ class AdvertSerializer(serializers.ModelSerializer):
     def get_category(self, object):
         return object.category.name
 
+    def get_advert_in_current_user_wishlist(self, object):
+        request = self.context.get("request")
+        user  = request.user
+        return object.users.filter(id=user.id).exists()

@@ -21,7 +21,8 @@ export default {
 
       const data = await apiService(get_user_url, "GET");
       const requestUser = data["username"]
-      window.localStorage.setItem("username", requestUser);
+      const requestUserStatus = data["authenticated"]
+      window.localStorage.setItem("authenticated", requestUserStatus);
 
     }
   },

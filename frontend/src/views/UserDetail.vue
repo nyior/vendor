@@ -91,7 +91,7 @@
         </div>
 
         <div class="form-group">
-          <label for="description">Advert Description</label>
+          <label for="description">Say something about this user</label>
           <textarea
             class="form-control"
             id="description"

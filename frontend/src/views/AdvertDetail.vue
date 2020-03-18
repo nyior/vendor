@@ -17,6 +17,23 @@
           <advertActions v-if="isAdvertOwner"
                           :slug="advert.slug"
                           :category="advert.category"/>
+          <div v-else>
+             
+                <button 
+                      class="btn btn-sm"
+                      @click="toggle"
+
+                      :class="{
+                        'btn-danger':  addedToWishList,
+                        'btn-outline-danger':  !addedToWishList
+                      }"
+                  >
+                  <strong>add to wishlist</strong>
+                </button>
+                <br>
+                <strong v-if="message" class="text-success ">{{ message }}</strong>
+           
+          </div>
 
           <div class="text-muted mt-2">
             <p>
@@ -34,6 +51,8 @@
             >
               Seller: {{ advert.user.username }}
             </router-link>
+
+            Items in wishlist: {{ counter }}
           </div>
         </div>
       </div>
@@ -64,6 +83,9 @@ export default {
     return {
       advert: null,
       requestUser: null,
+      addedToWishList: null,
+      counter: 0,
+      message: null
     };
   },
 
@@ -77,8 +99,32 @@ export default {
 
       apiService(get_adverts_url, "GET").then(data => {
         this.advert = data;
+        this.addedToWishList = data.advert_in_current_user_wishlist;
         this.setPageTitle(data.name);
+
       });
+    },
+    toggle(){
+      this.addedToWishList === false ? this.addTowishList() : this.removeFromWishList();
+    },
+
+    addTowishList(){
+      
+      let endpoint = `api/v1/user/wishlist/advert/${this.slug}/`;
+      apiService(endpoint, "POST");
+      this.addedToWishList = true;
+      this.counter += 1;
+      this.message = "advert added to your wishlist"
+    },
+
+    removeFromWishList(){
+        
+      let endpoint = `api/v1/user/wishlist/advert/${this.slug}/`;
+      apiService(endpoint, "DELETE");
+      this.addedToWishList = false;
+
+      this.counter -= 1
+      this.message = "advert removed from your wishlist"
     },
 
     setRequestUser(){

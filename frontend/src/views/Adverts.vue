@@ -28,6 +28,7 @@
                 </a>
               </p>
             </div>
+
           </div>
         </router-link>
       </div>
@@ -53,10 +54,12 @@ export default {
     return {
       adverts: [],
       next: null,
-      loadingAdverts: false
+      loadingAdverts: false,
+      requestUser: null
     };
   },
 
+  
   methods: {
     getAdverts() {
       let get_adverts_url = "api/v1/adverts/";
@@ -76,13 +79,21 @@ export default {
           this.next = null;
         }
       });
+    },
+
+    setRequestUser(){
+        this.requestUser = window.localStorage.getItem("username");
     }
   },
 
-  created() {
+  mounted: function() {
+    this.setRequestUser();
+    
+  },
+  created(){
     this.getAdverts();
     document.title = "Advertisements";
-  }
+   }
 };
 </script>
 

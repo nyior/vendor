@@ -9,12 +9,32 @@
         </h1>
 
       <form
-        @submit.prevent="UpdateProfileImage"
+        @submit.prevent="updateReview"
         class="p-3 was-validated"
         enctype="multipart/form-data"
       >
         <div class="form-group">
-          
+          <label for="quantity">Rating</label>
+          <input
+            type="number"
+            class="form-control required"
+            id="quantity"
+            placeholder="required"
+            v-model="review_form.rating"
+            required
+          />
+          <div class="invalid-feedback">Only figures allowed</div>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Say Something About this User</label>
+          <textarea
+            class="form-control"
+            id="description"
+            rows="5"
+            placeholder="say something bro !!!"
+            v-model="review_form.description"
+          ></textarea>
         </div>
 
         <button class="btn btn-lg btn-blue" type="submit">Post Review</button>
@@ -77,7 +97,7 @@ export default {
 
 
   methods: {
-    postReview() {
+    updateReview() {
       let post_review_url = `api/v1/reviews/${this.id}/`;
 
       let method = "PUT";
