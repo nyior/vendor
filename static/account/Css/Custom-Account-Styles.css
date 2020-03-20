@@ -1,217 +1,192 @@
-
 /* Login Page Styles*/
-@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 
-html, body{
-    font-size: 62.5%; 
-    font-family: 'Montserrat' ;
-    letter-spacing:1px;
-    margin: 0px;
-    padding: 0px; 
+html,
+body {
+	font-size: 62.5%;
+	font-family: "Montserrat";
+	letter-spacing: 1px;
+	margin: 0px;
+    padding: 0px;
+    overflow-x: hidden!important;
 }
 
-.link{
-    text-decoration: none ;
-    color: white !important;
+.link {
+	text-decoration: none;
+	color: white !important;
 }
-.link:hover{
-    text-decoration: none !important;
-  
-}
-
-a{
-    text-decoration: none ;
-    color: black !important;
-}
-a:hover{
-    text-decoration: none !important;
-    color: #8033ff !important;
-  
+.link:hover {
+	text-decoration: none !important;
 }
 
-
-
-#login_form label{
-    display: none;
-} 
-#social-icon{
-    margin-right: 0.2rem;
+a {
+	text-decoration: none;
+	color: black !important;
+}
+a:hover {
+	text-decoration: none !important;
+	color: rgba(255, 255, 255, 0.8) !important;
 }
 
-.custom-btn{
-
-    width: 18em;
-    font-size: 1.4rem;
+#login_form label {
+	display: none;
 }
-.btn-blue{
-    background-color: #8033ff !important;
-    color: white !important;
+#social-icon {
+	margin-right: 0.2rem;
 }
 
-
-
-label, input[type=search], input[type=text], input[type=number], input[type=password], input[type=email]{
-    font-size: 1.4rem;
+.custom-btn {
+	width: 18em;
+	font-size: 1.4rem;
+}
+.btn-blue {
+	background-color: #8033ff !important;
+	color: white !important;
 }
 
-
-
-
-#login_form input[type=checkbox]{
-    display: none;
+label,
+input[type="search"],
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="email"] {
+	font-size: 1.4rem;
 }
 
-
-
-a:hover{
-text-decoration: none;    
-
+#login_form input[type="checkbox"] {
+	display: none;
 }
 
-
-
-.social_providers_list a{
-    text-decoration: none;
-   
+.social_providers_list a {
+	text-decoration: none;
 }
-
-
 
 /* Signup Page Styles */
 
-#signup_form input{
-    
-    font-size: 1.4rem;
+#signup_form input {
+	font-size: 1.4rem;
 }
 
-#signup_form label{
-    display: none;
+#signup_form label {
+	display: none;
 }
-
-
-
-
-
 
 /* Sign Out Page Styling */
 
-.confirm_logout_info{
-    text-align:center;
-    font-size: 1.3rem;
+.confirm_logout_info {
+	text-align: center;
+	font-size: 1.3rem;
 }
 
-#logout_form button{
-    margin-right: 2rem;
-    margin-left: 2.7rem;
-    margin-bottom: 1rem;
-    padding-bottom: 1rem;
-    width:8rem;
-    height: 2.4rem;
-    border-radius: 1.3rem;
-    border:2px solid;
+#logout_form button {
+	margin-right: 2rem;
+	margin-left: 2.7rem;
+	margin-bottom: 1rem;
+	padding-bottom: 1rem;
+	width: 8rem;
+	height: 2.4rem;
+	border-radius: 1.3rem;
+	border: 2px solid;
 }
 
-#logout_form a{
-    margin-right: 2rem;
-    margin-left: 2.7rem;
-    margin-bottom: 1rem;
-    padding-bottom: 1rem;
-    width:8rem;
-    height: 2.4rem;
-    border-radius: 1.3rem;
-    border:2px solid;
+#logout_form a {
+	margin-right: 2rem;
+	margin-left: 2.7rem;
+	margin-bottom: 1rem;
+	padding-bottom: 1rem;
+	width: 8rem;
+	height: 2.4rem;
+	border-radius: 1.3rem;
+	border: 2px solid;
 }
 
 /* Change Password Page Styles*/
 
-#change_password_form input{
-    width: 16rem;
-    height: 2.5rem;
-    padding-left:1rem;
-    font-size: 1.2rem;
+#change_password_form input {
+	width: 16rem;
+	height: 2.5rem;
+	padding-left: 1rem;
+	font-size: 1.2rem;
 }
 
-#change_password_form button{
-    margin-right: 1rem;
-    margin-left: 2.7rem;
-    margin-bottom: 1rem;
-    margin-top:1rem;
-    padding-bottom: 1rem;
-    width:10rem;
-    height: 2.4rem;
-    border-radius: 1.3rem;
-    border:2px solid;
+#change_password_form button {
+	margin-right: 1rem;
+	margin-left: 2.7rem;
+	margin-bottom: 1rem;
+	margin-top: 1rem;
+	padding-bottom: 1rem;
+	width: 10rem;
+	height: 2.4rem;
+	border-radius: 1.3rem;
+	border: 2px solid;
 }
 
-#change_password_form #id_oldpassword{
-    margin-left: 2.8rem;
+#change_password_form #id_oldpassword {
+	margin-left: 2.8rem;
 }
 
-#change_password_form #id_password1{
-    margin-left: 3.7rem;
+#change_password_form #id_password1 {
+	margin-left: 3.7rem;
 }
 
-#change_password_form #id_password2{
-    margin-left: 0.7rem;
+#change_password_form #id_password2 {
+	margin-left: 0.7rem;
 }
 
 /* Forgot Password Page Styling */
 
-.forgot_password_info{
-    text-align:center;
-    font-size: 1.3rem;
+.forgot_password_info {
+	text-align: center;
+	font-size: 1.3rem;
 }
 
-
-#forgot_password_form label{
-    padding-right: 1rem;
-    font-size: 1.2rem;
+#forgot_password_form label {
+	padding-right: 1rem;
+	font-size: 1.2rem;
 }
 
-#forgot_password_form input{
-    width: 16rem;
-    height: 2.5rem;
-    padding-left:1rem;
-    font-size: 1.2rem;
+#forgot_password_form input {
+	width: 16rem;
+	height: 2.5rem;
+	padding-left: 1rem;
+	font-size: 1.2rem;
 }
 
-
-#forgot_password_form button{
-    margin-right: 1rem;
-    margin-left: 2.7rem;
-    margin-bottom: 1rem;
-    margin-top:1rem;
-    padding-bottom: 1rem;
-    width:10rem;
-    height: 2.4rem;
-    border-radius: 1.3rem;
-    border:2px solid;
+#forgot_password_form button {
+	margin-right: 1rem;
+	margin-left: 2.7rem;
+	margin-bottom: 1rem;
+	margin-top: 1rem;
+	padding-bottom: 1rem;
+	width: 10rem;
+	height: 2.4rem;
+	border-radius: 1.3rem;
+	border: 2px solid;
 }
 
 /* Email Settings Page Styling */
 
-#email_form input{
-    width: 16rem;
-    height: 2.5rem;
-    padding-left:1rem;
-    font-size: 1.2rem;
+#email_form input {
+	width: 16rem;
+	height: 2.5rem;
+	padding-left: 1rem;
+	font-size: 1.2rem;
 }
 
-#email_form label{
-    padding-right: 1rem;
-    font-size: 1.2rem;
+#email_form label {
+	padding-right: 1rem;
+	font-size: 1.2rem;
 }
 
-.email_settings_info{
-    text-align:center;
-    font-size: 1.3rem;
+.email_settings_info {
+	text-align: center;
+	font-size: 1.3rem;
 }
 
 /* Email Confirmation Styling */
 
-#verification_sent_info{
-    text-align:center;
-    font-size: 1.3rem;
+#verification_sent_info {
+	text-align: center;
+	font-size: 1.3rem;
 }
-
