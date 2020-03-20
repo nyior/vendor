@@ -1,47 +1,49 @@
 <template>
-    <div class="single-image m-2"  style="height: 25rem;">
-      <div class="p-2">
-        <router-link :to="{ name: 'ad_detail', params: { slug: advert.slug } }">
-        <div class=" m-1 img ">
-          
-            <img
-              :src="advert.file"
-              style="height: 18rem; width: 12rem;"
-              class="img-fluid "
-              alt="Responsive image"
-            />
-        </div>
-        
-
-        <div class="mt-2 text-left pl-2">
-          {{ advert.name }}
-        </div>
-        </router-link>
-
-        <div class="mt-2 text-left pl-2">
-            
-              ₦{{ advert.price }}   
-            
-            <button 
-                v-if="!isAdvertOwner"
-                class="btn btn-sm"
-                @click="toggle"
-
-                :class="{
-                    'btn-danger':  addedToWishList,
-                    'btn-outline-danger':  !addedToWishList
-                }"
-            >
-            <strong>add to wishlist</strong>
-          </button>
+  <div style="position: relative">
+    <router-link :to="{ name: 'ad_detail', params: { slug: advert.slug } }">
+      <div class="m-1 bg-grey mt-5">
+        <div class="productImageBackground">
+          <img :src="advert.file" class="img-fluid productImage" alt="Responsive image" />
         </div>
       </div>
-    </div>
+
+      <div class="text-muted mt-2">
+        <p>
+          <a href="#">
+            <div class="d-flex productText">
+              <p class="productName">{{ advert.name }}</p>
+              <p class="price ml-md-auto">₦{{ advert.price }}</p>
+            </div>
+          </a>
+        </p>
+      </div>
+    </router-link>
+
+    <button v-if="!isAdvertOwner" class="btn btn-sm wishlist" @click="toggle">
+      <i class="far fa-heart fa-3x" v-if="!addedToWishList"></i>
+      <i class="fas fa-heart fa-3x" v-else></i>
+    </button>
+
+    <!-- <button
+      v-if="!isAdvertOwner"
+      class="btn btn-sm w-100"
+      @click="toggle"
+      :class="{
+                'btn-danger':  addedToWishList,
+                'btn-outline-danger':  !addedToWishList
+            }"
+    >
+    
+     
+      <strong v-if="addedToWishList">Remove from wishlist</strong>
+      <strong v-else>Add to wishlist</strong>
+      
+    </button> -->
+  </div>
 </template>
 
 <script>
 import { apiService } from "../common/api.service.js";
-
 
 export default {
   name: "advert-detail-minified",
@@ -50,8 +52,7 @@ export default {
     advert_object: {
       type: Object,
       required: true
-    },
-
+    }
   },
 
   data() {
@@ -67,46 +68,43 @@ export default {
       document.title = title;
     },
 
-    
-    toggle(){
-      this.addedToWishList === false ? this.addTowishList() : this.removeFromWishList();
+    toggle() {
+      this.addedToWishList === false
+        ? this.addTowishList()
+        : this.removeFromWishList();
     },
 
-    addTowishList(){
-      
+    addTowishList() {
       let endpoint = `api/v1/user/wishlist/advert/${this.advert.slug}/`;
       apiService(endpoint, "POST");
       this.addedToWishList = true;
-      
     },
 
-    removeFromWishList(){
-        
+    removeFromWishList() {
       let endpoint = `api/v1/user/wishlist/advert/${this.advert.slug}/`;
       apiService(endpoint, "DELETE");
       this.addedToWishList = false;
     },
 
-    setRequestUser(){
-        this.requestUser = window.localStorage.getItem("username");
+    setRequestUser() {
+      this.requestUser = window.localStorage.getItem("username");
     }
   },
 
   computed: {
-      isAdvertOwner(){
-          return this.advert.user.username === this.requestUser;
-      }
+    isAdvertOwner() {
+      return this.advert.user.username === this.requestUser;
+    }
   },
 
-
   mounted: function() {
-    
     this.setRequestUser();
   }
 };
 </script>
 
 <style scoped>
+<<<<<<< HEAD
   .single-image{
     background-color: #f9f9f9;
     font-size: 1.2rem;
@@ -116,4 +114,63 @@ export default {
     background-color: white;
     
   }
+=======
+.productImage {
+}
+
+.price {
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+a:hover {
+  color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.productText {
+  flex-flow: row;
+}
+
+.productName {
+  font-size: 1.3rem;
+}
+
+.productImageBackground {
+  height: 300px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+}
+
+.wishlist{
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: white;
+  padding: 1.7rem;
+  border-bottom-left-radius: 10px;
+}
+
+.wishlist i{
+  color: #7A09C4;
+  outline: none!important;
+  box-shadow: none!important;
+}
+
+
+@media only screen and (max-width: 640px) {
+  .productText {
+    flex-flow: column;
+  }
+
+  .productName {
+    font-size: 1rem;
+  }
+
+  .price {
+    font-size: 1rem;
+  }
+}
+>>>>>>> 761ac3c3a4c9d892e522a90ff1b1d01aa58d10af
 </style>

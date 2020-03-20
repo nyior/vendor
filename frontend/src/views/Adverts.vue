@@ -1,35 +1,22 @@
 <template>
-  <div class=" container products">
-    <div class="row p-5  mt-5  text-center d-flex justify-content-center">
-        <div class="col-12 ">
-             <CategoriesList/>
-        </div>
+  <div class="container-fluid products">
+    <div class="row pt-5 pb-0 mt-5 mb-2 text-center d-flex justify-content-center">
+      <div class="col-12">
+        <CategoriesList />
+      </div>
     </div>
 
-    <div
-      class="row  categories  p-5   mb-2 text-center d-flex justify-content-center"
-    >
-      <div
-        class="col-md-2 col-6 p-0"
-        v-for="advert in adverts"
-        :key="advert.id"
-      >
-        
-          
-              <AdvertMinified 
-                    :advert_object="advert"
-              />
-         
-        </router-link>
-       
+    <div class="row categories px-2 px-md-5 mt-0 mb-2 text-center d-flex">
+      <div class="col-md-3 col-6" v-for="advert in adverts" :key="advert.id">
+        <AdvertMinified :advert_object="advert" />
       </div>
     </div>
 
     <div class="row text-center d-flex justify-content-center mt-4">
       <div class="col-6">
         <p v-show="loadingAdverts">...loading...</p>
-        <a v-show="next" @click="getAdverts" class=" ">
-          <strong> Load More</strong>
+        <a v-show="next" @click="getAdverts" class>
+          <strong>Load More</strong>
         </a>
       </div>
     </div>
@@ -79,19 +66,18 @@ export default {
       });
     },
 
-    setRequestUser(){
-        this.requestUser = window.localStorage.getItem("username");
+    setRequestUser() {
+      this.requestUser = window.localStorage.getItem("username");
     }
   },
 
   mounted: function() {
     this.setRequestUser();
-    
   },
-  created(){
+  created() {
     this.getAdverts();
     document.title = "Advertisements";
-   }
+  }
 };
 </script>
 

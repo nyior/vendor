@@ -1,66 +1,52 @@
 <template>
-  <div class=" container advert mt-5 ">
-    <div
-      class="row    mt-5 mb-2 text-center d-flex justify-content-center align-items-center"
-    >
-      <div class="col-md-4 col-6 p-0">
-        <div class=" m-1 bg-grey mt-5">
-          <div>
-            <a :href="user.profile_picture">
-            <img
-              :src="user.profile_picture"
-              style="height: 18rem;"
-              class="img-fluid m-1"
-              alt="Responsive image"
-            />
-            </a>
-
-            <div v-if="UserHasProfile && !showAvatarUpdateForm">
-              <button class="btn btn-blue" @click="showAvatarUpdateForm = true">
-                change display picture
-              </button>
-            </div>
-
-            <div v-if="showAvatarUpdateForm ">
-              <form
-                @submit.prevent="UpdateAvatar"
-                class="p-3 "
-                enctype="multipart/form-data"
-              >
-                <div class="form-group">
-                  <label
-                    >
-                    <input type="file" ref="file"  v-on:change="handleFileUpload" />
-                  </label>
+  <div class="container-fluid p-5 mx-md-5 advert mt-5">
+    <div class="row p-md-5 w-100 mt-5 mb-2 mx-0 text-center d-flex">
+      <div class="col-md-3 col-12 p-0">
+        <div class="card">
+          <div class="m-1 bg-grey mt-5">
+            <div>
+              <a :href="user.profile_picture">
+                <div class="profilePicContainer">
+                  <img :src="user.profile_picture" class="img-fluid" alt="Responsive image" />
                 </div>
-
-                <button class="btn btn-lg btn-blue" type="submit">Post Avatar</button>
-              </form>
-            </div>
-          </div>
-          
-          <div class="text-muted mt-2" v-if="!showProfileUpdateForm">
-            <p>
-              <a href="#">
-                <strong>
-                  {{ user.username }} <br />
-                  {{ user.phone_number }}<br />
-                  {{ user.residence_hall }}
-                </strong>
               </a>
-            </p>
-          </div>
-          <div v-if="showProfileUpdateForm">
-            <UpdateUserProfileForm
-                :user="user"
-                @update-profile="UpdateProfile"
-            />
-          </div>
 
-          <div v-if="UserHasProfile && !showProfileUpdateForm">
-            <button class="btn btn-blue" @click="showProfileUpdateForm = true">
-              edit profile
-            </button>
+              <div v-if="UserHasProfile && !showAvatarUpdateForm">
+                <button
+                  class="btn mt-3 btn-blue"
+                  @click="showAvatarUpdateForm = true"
+                >change display picture</button>
+              </div>
+
+              <div v-if="showAvatarUpdateForm ">
+                <form @submit.prevent="UpdateAvatar" class="p-3" enctype="multipart/form-data">
+                  <div class="form-group">
+                    <label>
+                      <input type="file" ref="file" v-on:change="handleFileUpload" />
+                    </label>
+                  </div>
+
+                  <button class="btn btn-lg btn-blue" type="submit">Post Avatar</button>
+                </form>
+              </div>
+            </div>
+
+            <div class="text-muted mt-2" v-if="!showProfileUpdateForm">
+              <p>
+                <a href="#">
+                  <p class="username text-uppercase">{{ user.username }}</p>
+                  <p class="mobile">Mobile Number : {{ user.phone_number }}</p>
+                  <p class="hall">Residence Hall : {{ user.residence_hall }}</p>
+                </a>
+              </p>
+            </div>
+            <div v-if="showProfileUpdateForm">
+              <UpdateUserProfileForm :user="user" @update-profile="UpdateProfile" />
+            </div>
+
+            <div v-if="UserHasProfile && !showProfileUpdateForm">
+              <button class="btn btn-blue editButton mt-4" @click="showProfileUpdateForm = true">edit profile</button>
+            </div>
           </div>
         </div>
       </div>
@@ -72,11 +58,7 @@
     </div>
 
     <div v-if="showForm">
-      <form
-        @submit.prevent="postReview"
-        class="p-3 was-validated"
-        enctype="multipart/form-data"
-      >
+      <form @submit.prevent="postReview" class="p-3 was-validated" enctype="multipart/form-data">
         <div class="form-group">
           <label for="quantity">Rating</label>
           <input
@@ -107,9 +89,7 @@
 
     <div v-else>
       <div v-if="!UserHasReviewed">
-        <button class="btn btn-blue" @click="showForm = true">
-          review this user
-        </button>
+        <button class="btn btn-blue" @click="showForm = true">review this user</button>
       </div>
     </div>
 
@@ -119,13 +99,9 @@
       class="row text-center d-flex justify-content-center align-items-center"
       v-for="(review, index) in reviews"
       :key="index"
-      >
+    >
       <div class="col-12 col-md-6">
-        <ReviewDetail
-            :review="review"
-            :requestUser="requestUser"
-            @delete-review="deleteReview"
-        />
+        <ReviewDetail :review="review" :requestUser="requestUser" @delete-review="deleteReview" />
       </div>
     </div>
 
@@ -133,7 +109,7 @@
       <div class="col-6">
         <p v-show="loadingReviews">...loading...</p>
         <a v-show="next" @click="getReviews">
-          <strong> Load More</strong>
+          <strong>Load More</strong>
         </a>
       </div>
     </div>
@@ -183,7 +159,7 @@ export default {
   },
 
   computed: {
-    UserHasProfile(){
+    UserHasProfile() {
       return this.requestUser == this.user.username;
     }
   },
@@ -257,7 +233,7 @@ export default {
 
       apiService(updateprofile_url, method, formData)
         .then(data => {
-          this.user  = data;
+          this.user = data;
           this.requestUser = data.username;
           this.showProfileUpdateForm = false;
         })
@@ -276,14 +252,14 @@ export default {
 
       apiService(updateprofile_url, method, formData)
         .then(data => {
-          this.user.profile_picture  = data.profile_picture;  
-          this.showAvatarUpdateForm = false; 
+          this.user.profile_picture = data.profile_picture;
+          this.showAvatarUpdateForm = false;
         })
         .catch(error => {
           this.error = error;
         });
     },
-    
+
     deleteReview(review) {
       let delete_review_url = `api/v1/reviews/${review.id}/`;
 
@@ -293,18 +269,41 @@ export default {
       });
     },
 
-    setRequestUser(){
-        this.requestUser = window.localStorage.getItem("username");
+    setRequestUser() {
+      this.requestUser = window.localStorage.getItem("username");
     }
   },
-
 
   mounted: function() {
     this.setRequestUser();
     this.getUser();
     this.getReviews();
-  },
+  }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.profilePicContainer {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  flex-flow: column;
+  overflow: hidden;
+}
+
+.username{
+  color: #7A09C4;
+}
+
+a:hover{
+  color: black!important;
+}
+
+.editButton{
+  color: #7A09C4!important;
+  background: white!important;
+}
+</style>
