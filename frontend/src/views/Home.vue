@@ -26,97 +26,145 @@
       >
         <div class="col-md-3 col-6 p-0">
           <div class="card m-2">
-            <div class="mt-5">
-              <a href="#"><i class="fa fa-shirtsinbulk"></i></a>
-            </div>
-            <hr />
-            <div class="card-body text-muted">
-              <a href="#"><strong>FASHION</strong></a>
-            </div>
+            <router-link
+              :to="{ name: 'category', params: { category: 'Fashion' } }"
+            >
+              <div class="mt-5">
+                <i class="fa fa-shirtsinbulk"></i>
+              </div>
+              <hr />
+              <div class="card-body text-muted">
+                
+                <strong>FASHION</strong>
+                
+              </div>
+            </router-link> 
           </div>
         </div>
 
         <div class="col-md-3 col-6 p-0">
           <div class="card m-2">
-            <div class="mt-5">
-              <a href="#"><i class="fa fa-shirtsinbulk"></i></a>
-            </div>
-            <hr />
-            <div class="card-body text-muted">
-              <a href="#"><strong>ELECTRONIC APPLIANCES</strong></a>
-            </div>
+            <router-link
+              :to="{ name: 'category', params: { category: 'Electronic Appliances' } }"
+            >
+              <div class="mt-5">
+                <i class="fa fa-shirtsinbulk"></i>
+              </div>
+              <hr />
+              <div class="card-body text-muted">
+                
+                <strong>ELECTRONIC APPLIANCES</strong>
+                
+              </div>
+            </router-link> 
           </div>
         </div>
 
         <div class="col-md-3 col-6 p-0">
           <div class="card m-2">
-            <div class="mt-5">
-              <a href="#"><i class="fa fa-shirtsinbulk"></i></a>
-            </div>
-            <hr />
-            <div class="card-body text-muted">
-              <a href="#"><strong>PHONES AND ACCESSORIES</strong></a>
-            </div>
+            <router-link
+              :to="{ name: 'category', params: { category: 'Phones and Accessories' } }"
+            >
+              <div class="mt-5">
+                <i class="fa fa-shirtsinbulk"></i>
+              </div>
+              <hr />
+              <div class="card-body text-muted">
+                
+                <strong>PHONES AND ACCESSORIES</strong>
+                
+              </div>
+            </router-link> 
           </div>
         </div>
 
         <div class="col-md-3 col-6 p-0">
           <div class="card m-2">
-            <div class="mt-5">
-              <a href="#"><i class="fa fa-shirtsinbulk"></i></a>
-            </div>
-            <hr />
-            <div class="card-body text-muted">
-              <a href="#"><strong>VIDEO GAMES</strong></a>
-            </div>
+            <router-link
+              :to="{ name: 'category', params: { category: 'Video Games' } }"
+            >
+              <div class="mt-5">
+                <i class="fa fa-shirtsinbulk"></i>
+              </div>
+              <hr />
+              <div class="card-body text-muted">
+                
+                <strong>VIDEO GAMES</strong>
+                
+              </div>
+            </router-link> 
           </div>
         </div>
 
         <div class="col-md-3 col-6 p-0">
           <div class="card m-2">
-            <div class="mt-5">
-              <a href="#"><i class="fa fa-shirtsinbulk"></i></a>
-            </div>
-            <hr />
-            <div class="card-body text-muted">
-              <a href="#"><strong>HEALTH AND FITNESS</strong></a>
-            </div>
+            <router-link
+              :to="{ name: 'category', params: { category: 'Health and Beauty' } }"
+            >
+              <div class="mt-5">
+                <i class="fa fa-shirtsinbulk"></i>
+              </div>
+              <hr />
+              <div class="card-body text-muted">
+                
+                <strong>HEALTH AND BEAUTY</strong>
+                
+              </div>
+            </router-link> 
           </div>
         </div>
 
         <div class="col-md-3 col-6  p-0">
           <div class="card m-2">
-            <div class="mt-5">
-              <a href="#"><i class="fa fa-shirtsinbulk"></i></a>
-            </div>
-            <hr />
-            <div class="card-body text-muted">
-              <a href="#"><strong>SERVICES</strong></a>
-            </div>
+            <router-link
+              :to="{ name: 'category', params: { category: 'Services' } }"
+            >
+              <div class="mt-5">
+                <i class="fa fa-shirtsinbulk"></i>
+              </div>
+              <hr />
+              <div class="card-body text-muted">
+                
+                <strong>SERVICES</strong>
+                
+              </div>
+            </router-link> 
           </div>
         </div>
 
         <div class="col-md-3 col-6 p-0">
           <div class="card m-2">
-            <div class="mt-5">
-              <a href="#"><i class="fa fa-shirtsinbulk"></i></a>
-            </div>
-            <hr />
-            <div class="card-body text-muted">
-              <a href="#"><strong>FOODS</strong></a>
-            </div>
+            <router-link
+              :to="{ name: 'category', params: { category: 'Foods' } }"
+            >
+              <div class="mt-5">
+                <i class="fa fa-shirtsinbulk"></i>
+              </div>
+              <hr />
+              <div class="card-body text-muted">
+                
+                <strong>FOODS</strong>
+                
+              </div>
+            </router-link> 
           </div>
         </div>
 
         <div class="col-md-3 col-6 p-0">
           <div class="card m-2">
-            <div class="mt-5">
-              <a href="#"><i class="fa fa-shirtsinbulk"></i></a>
-            </div>
-            <hr />
-            <div class="card-body text-muted">
-              <a href="#"><strong>OTHERS</strong></a>
-            </div>
+            <router-link
+              :to="{ name: 'category', params: { category: 'Others' } }"
+            >
+              <div class="mt-5">
+                <i class="fa fa-shirtsinbulk"></i>
+              </div>
+              <hr />
+              <div class="card-body text-muted">
+                
+                <strong>OTHERS</strong>
+                
+              </div>
+            </router-link> 
           </div>
         </div>
       </div>

@@ -6,6 +6,8 @@ import Adverts from "./views/Adverts.vue";
 import AdvertCreate from "./views/AdvertCreate.vue";
 import AdvertDetail from "./views/AdvertDetail.vue";
 import UserDetail from "./views/UserDetail.vue";
+import Wishlist from "./views/Wishlist.vue";
+import Category from "./views/Category.vue";
 
 
 Vue.use(Router);
@@ -21,9 +23,22 @@ export default new Router({
     },
 
     {
+      path: "/wishlist",
+      name: "wishlist",
+      component: Wishlist
+    },
+
+    {
       path: "/ad_detail/:slug",
       name: "ad_detail",
       component: AdvertDetail,
+      props: true
+    },
+
+    {
+      path: "/category/:category",
+      name: "category",
+      component: Category,
       props: true
     },
 

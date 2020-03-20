@@ -20,12 +20,36 @@
           </router-link>
         </li>
 
-        <li class="nav-item mr-3 mt-2">
-          <a class="link " href="/accounts/login/">Login</a>
+       
+        <li class="nav-item mr-3 mt-2" v-if="!is_authenticated">
+            <a class="link " href="/accounts/login/">Login</a>
         </li>
-        <li class="nav-item mt-2">
-          <a class="link " href="/accounts/signup/">Register</a>
+        <li class="nav-item mt-2" v-if="!is_authenticated">
+            <a class="link " href="/accounts/signup/">Register</a>
         </li>
+        
+
+       
+        <li class="nav-item mr-3 mt-2" v-if="is_authenticated">
+           <a class="link " href="/accounts/logout/" >Logout</a>
+        </li>
+        <li class="nav-item mt-2 mr-3" v-if="is_authenticated">
+          <router-link
+              :to="{ name: 'wishlist' }"
+            >
+            <a class="link"> Wishlist </a>
+             
+          </router-link>
+        </li>
+        <li class="nav-item mt-2 " v-if="is_authenticated">
+           <router-link
+              :to="{ name: 'user_detail', params: { id: id } }"
+            >
+            <a class="link"> Account </a>
+             
+            </router-link>
+        </li>
+        
       </ul>
     </div>
   </nav>
@@ -33,8 +57,40 @@
 
 <script>
 export default {
-  name: "NavbarComponent"
+  name: "NavbarComponent",
+
+  props: {
+
+    authenticated: {
+      type: Boolean,
+      required: true
+    }
+  },
+
+  data(){
+    return{
+      id: null
+    };
+  },
+  
+  computed: {
+    is_authenticated(){
+      return this.authenticated;
+    }
+  },
+
+  methods: {
+    setUserId(){
+      this.id = window.localStorage.getItem("user_id");
+    }
+  },
+
+  mounted: function() {
+    this.setUserId();
+  }
+
 };
+
 </script>
 
 <style scoped>

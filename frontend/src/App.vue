@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <NavbarComponent />
+    <NavbarComponent 
+          :authenticated="is_authenticated"
+        
+    />
     <router-view />
   </div>
 </template>
@@ -15,20 +18,34 @@ export default {
     NavbarComponent
   },
 
+  data(){
+    return{
+      is_authenticated: null,
+    
+    }
+  },
+
   methods: {
     async setUserInfo(){
       let get_user_url = `api/v1/users/currentUser/`;
 
       const data = await apiService(get_user_url, "GET");
-      const requestUser = data["username"]
-      const requestUserStatus = data["authenticated"]
-      window.localStorage.setItem("authenticated", requestUserStatus);
+      const requestUser = data["username"];
+      const requestUserStatus = data["authenticated"];
+      const requestUserId = data["user_id"];
 
-    }
+      this.is_authenticated = data["authenticated"];
+    
+
+      window.localStorage.setItem("username", requestUser);
+      window.localStorage.setItem("authenticated", requestUserStatus);
+      window.localStorage.setItem("user_id", requestUserId);
+
+    },
   },
 
-  mounted: function(){
-    this.setUserInfo()
+  created(){
+    this.setUserInfo();
   }
 };
 </script>

@@ -25,9 +25,11 @@ class UserDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 class CurrentUserView(APIView):
     def get(self, request):
         user = request.user
+        
         return Response({
-            
             'username': user.username,
+            'authenticated': user.is_authenticated,
+            'user_id': user.id if user.is_authenticated else None
 
         })
 
@@ -82,7 +84,7 @@ class ReviewRUDAPIView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsReviewerOrReadOnly, IsAuthenticatedOrReadOnly]
 
 class UserWishlistItemsAPIView(generics.ListAPIView):
-    serializer_class = CustomUserSerializer
+    serializer_class = AdvertSerializer
     permission_classes = [IsAuthenticated]
     
 
