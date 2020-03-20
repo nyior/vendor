@@ -1,13 +1,13 @@
 <template>
   <div class=" container products">
-    <div class="row p-5  mt-5 mb-2 text-center d-flex justify-content-center">
+    <div class="row p-5  mt-5  text-center d-flex justify-content-center">
         <div class="col-12 ">
              <CategoriesList/>
         </div>
     </div>
 
     <div
-      class="row  categories  p-5  mt-5 mb-2 text-center d-flex justify-content-center"
+      class="row  categories  p-5   mb-2 text-center d-flex justify-content-center"
     >
       <div
         class="col-md-2 col-6 p-0"

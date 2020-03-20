@@ -1,42 +1,41 @@
 <template>
-    <div>
+    <div class="single-image m-2"  style="height: 25rem;">
+      <div class="p-2">
         <router-link :to="{ name: 'ad_detail', params: { slug: advert.slug } }">
-        <div class=" m-1 bg-grey mt-5">
+        <div class=" m-1 img ">
           
             <img
               :src="advert.file"
-              style="height: 18rem;"
-              class="img-fluid m-1"
+              style="height: 18rem; width: 12rem;"
+              class="img-fluid "
               alt="Responsive image"
             />
         </div>
         
 
-        <div class="text-muted mt-2">
-            <p>
-              <a href="#">
-                <strong>
-                  {{ advert.name }} <br />
-                  {{ advert.price }}
-                </strong>
-              </a>
-            </p>
-
+        <div class="mt-2 text-left pl-2">
+          {{ advert.name }}
         </div>
         </router-link>
 
-        <button 
-            v-if="!isAdvertOwner"
-            class="btn btn-sm"
-            @click="toggle"
+        <div class="mt-2 text-left pl-2">
+            
+              ₦{{ advert.price }}   
+            
+            <button 
+                v-if="!isAdvertOwner"
+                class="btn btn-sm"
+                @click="toggle"
 
-            :class="{
-                'btn-danger':  addedToWishList,
-                'btn-outline-danger':  !addedToWishList
-            }"
-        >
+                :class="{
+                    'btn-danger':  addedToWishList,
+                    'btn-outline-danger':  !addedToWishList
+                }"
+            >
             <strong>add to wishlist</strong>
-        </button>
+          </button>
+        </div>
+      </div>
     </div>
 </template>
 
@@ -107,4 +106,14 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+  .single-image{
+    background-color: #f9f9f9;
+    font-size: 1.2rem;
+  }
+
+  .img{
+    background-color: white;
+    
+  }
+</style>
