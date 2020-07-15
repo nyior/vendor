@@ -1,12 +1,19 @@
-from rest_framework import generics, viewsets, mixins
+from rest_framework import generics, viewsets, mixins, filters
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.generics import get_object_or_404
 from rest_framework.parsers import  MultiPartParser, FormParser, FileUploadParser
 
 from adverts.api.permissions import *
+from users.models import CustomUser
 
 from adverts.api.serializers import *
 from core.utils import generate_random_string
+
+class SearchList(generics.ListAPIView):
+    queryset = Advert.objects.all()
+    serializer_class = AdvertSerializer
+    filter_backend = [filters.SearchFilter]
+    search_fields = ["name"]
 
 class AdvertViewSet(mixins.ListModelMixin,
                     mixins.CreateModelMixin,
@@ -42,3 +49,12 @@ class CategoryListAPIView(generics.ListAPIView):
     def get_queryset(self):
         kwarg_slug = self.kwargs.get("category")
         return Advert.objects.filter(category__name=kwarg_slug).order_by("-date_created")
+
+class SellerShopAPIView(generics.ListAPIView):
+    serializer_class = AdvertSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        user_id = self.kwargs.get("user_id")
+        user = get_object_or_404(CustomUser, id=user_id)
+        return user.adverts.all().order_by("-date_created")

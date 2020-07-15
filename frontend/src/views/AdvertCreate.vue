@@ -30,6 +30,7 @@
             <label for="quantity">Quantity</label>
             <input
               type="number"
+              min="0"
               class="form-control required"
               id="quantity"
               placeholder="optional"
@@ -41,6 +42,7 @@
             <label for="unit-price">Unit Price</label>
             <input
               type="number"
+              min="0"
               class="form-control required"
               id="unit-price"
               placeholder="price per unit of product/service"
@@ -72,9 +74,9 @@
 
           <div class="form-group">
             <label
-              >Advert Image
-              <input type="file" ref="file"  v-on:change="handleFileUpload" />
-            </label>
+              >Add an image that shows your product/service (required)
+              <input type="file" required ref="file"  v-on:change="handleFileUpload" />
+            </label>  
           </div>
 
           <div class="form-group">

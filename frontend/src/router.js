@@ -8,6 +8,7 @@ import AdvertDetail from "./views/AdvertDetail.vue";
 import UserDetail from "./views/UserDetail.vue";
 import Wishlist from "./views/Wishlist.vue";
 import Category from "./views/Category.vue";
+import SearchView from "./views/SearchView.vue";
 
 
 Vue.use(Router);
@@ -46,6 +47,13 @@ export default new Router({
       path: "/user_detail/:id",
       name: "user_detail",
       component: UserDetail,
+      props: true
+    },
+
+    {
+      path: "/search/:search_key",
+      name: "search",
+      component: SearchView,
       props: true
     },
     {

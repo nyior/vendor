@@ -13,7 +13,7 @@ class Advert(models.Model):
     description = models.TextField(null=True, blank=True)
     price = models.FloatField()
     quantity = models.PositiveIntegerField(null=True, blank=True)
-    file = models.ImageField(upload_to="ads_pics", default="default.png")
+    file = models.ImageField(upload_to="ads_pics", default="default.png", null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name="adverts")
     date_created = models.DateTimeField(auto_now_add=True)
 

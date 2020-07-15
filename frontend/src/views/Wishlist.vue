@@ -1,38 +1,21 @@
 <template>
-  <div class=" container products">
+  <div class=" container-fluid products">
+    <router-link class="sell" :to="{ name: 'ads_create' }">
+      <button class="btn btn-lg">Sell on Marche</button>
+    </router-link>
     <div
       v-if="adverts"
-      class="row  categories  p-5  mt-5 mb-2 text-center d-flex justify-content-center"
+      class="row  pt-5 mt-5 categories  px-2 px-md-5 mt-0 mb-2 text-center d-flex"
     >
       <div
-        class="col-md-2 col-6 p-0"
+        class="col-md-3 col-6"
         v-for="advert in adverts"
         :key="advert.id"
       >
-        <router-link :to="{ name: 'ad_detail', params: { slug: advert.slug } }">
-          <div class=" m-1 bg-grey">
-            <a :href="advert.file">
-              <img
-                :src="advert.file"
-                style="height: 18rem;"
-                class="img-fluid m-1"
-                alt="Responsive image"
-              />
-            </a>
-            <div class="text-muted mt-2">
-              <p>
-                <a href="#">
-                  <strong>
-                    {{ advert.name }} <br />
-                    {{ advert.price }}
-                  </strong>
-                </a>
-              </p>
-            </div>
-
-          </div>
-        </router-link>
-        <button class="btn  btn-danger btn-sm" @click="removeFromWishList(advert.slug, advert)"> delete</button>
+        <AdvertMinified 
+        :advert_object="advert"
+        @remove="removeFromWishList(advert.slug, advert)"
+        />
       </div>
     </div>
 
@@ -48,9 +31,15 @@
 
 <script>
 import { apiService } from "../common/api.service.js";
+import AdvertMinified from "@/components/AdvertMinified.vue";
 
 export default {
   name: "wishlist",
+  
+  components: {
+      AdvertMinified
+  },
+
   data() {
     return {
       adverts: [],
@@ -59,6 +48,7 @@ export default {
       requestUser: null
     };
   },
+
   computed: {
       noAdverts(){
           if(this.adverts.length === 0){

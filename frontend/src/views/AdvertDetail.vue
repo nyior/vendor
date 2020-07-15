@@ -1,60 +1,25 @@
 <template>
   <div class=" container advert mt-5 ">
+    <router-link class="sell" :to="{ name: 'ads_create' }">
+      <button class="btn btn-lg">Sell on Marche</button>
+    </router-link>
     <div
-      class="row    mt-5 mb-2 text-center d-flex justify-content-center align-items-center"
+      class="row   pt-5 mt-5 mb-2 text-center d-flex justify-content-center align-items-center"
     >
-      <div class="col-md-4 col-6 p-0">
-        <div class=" m-1 bg-grey mt-5">
-          <a :href="advert.file">
-            <img
-              :src="advert.file"
-              style="height: 18rem;"
-              class="img-fluid m-1"
-              alt="Responsive image"
-            />
-          </a>
+      <div class="col-md-3 col-6 p-0">
 
+          <AdvertMinified :advert_object="advert"/>
+        
           <advertActions v-if="isAdvertOwner"
                           :slug="advert.slug"
                           :category="advert.category"/>
-          <div v-else>
-             
-                <button 
-                      class="btn btn-sm"
-                      @click="toggle"
-
-                      :class="{
-                        'btn-danger':  addedToWishList,
-                        'btn-outline-danger':  !addedToWishList
-                      }"
-                  >
-                  <strong>add to wishlist</strong>
-                </button>
-                <br>
-                <strong v-if="message" class="text-success ">{{ message }}</strong>
-           
-          </div>
-
-          <div class="text-muted mt-2">
-            <p>
-              <a href="#">
-                <strong>
-                  {{ advert.name }} <br />
-                  {{ advert.price }}
-                </strong>
-              </a>
-            </p>
-
+          
             <hr />
-            <router-link
+          <router-link
               :to="{ name: 'user_detail', params: { id: advert.user.id } }"
-            >
-              Seller: {{ advert.user.username }}
-            </router-link>
-
-            Items in wishlist: {{ counter }}
-          </div>
-        </div>
+          >
+            Seller: {{ advert.user.username }}
+          </router-link>
       </div>
     </div>
   </div>
@@ -63,12 +28,14 @@
 <script>
 import { apiService } from "../common/api.service.js";
 import advertActions from "@/components/advertActions.vue"
+import AdvertMinified from "@/components/AdvertMinified.vue";
 
 export default {
   name: "advert-detail",
 
   components: {
-    advertActions
+    advertActions,
+    AdvertMinified
   },
 
   props: {

@@ -183,18 +183,7 @@ export default {
   width: 50%;
 }
 
-.sell {
-  position: fixed;
-  bottom: 50px;
-  right: 50px;
-  z-index: 10;
-}
 
-.sell button{
-  background: #f0f0f0!important;
-  font-size: 1.5rem;
-  padding: 1rem 1.2rem;
-}
 
 @media only screen and (max-width: 600px) {
   .categoryImage {
@@ -204,11 +193,5 @@ export default {
   .col-md-3:nth-child(n + 5) {
     margin-top: 0rem;
   }
-
-  .sell {
-  position: fixed;
-  bottom: 30px;
-  right: 20px;
-}
 }
 </style>

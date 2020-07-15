@@ -23,22 +23,6 @@
       <i class="far fa-heart fa-3x" v-if="!addedToWishList"></i>
       <i class="fas fa-heart fa-3x" v-else></i>
     </button>
-
-    <!-- <button
-      v-if="!isAdvertOwner"
-      class="btn btn-sm w-100"
-      @click="toggle"
-      :class="{
-                'btn-danger':  addedToWishList,
-                'btn-outline-danger':  !addedToWishList
-            }"
-    >
-    
-     
-      <strong v-if="addedToWishList">Remove from wishlist</strong>
-      <strong v-else>Add to wishlist</strong>
-      
-    </button> -->
   </div>
 </template>
 
@@ -84,6 +68,7 @@ export default {
       let endpoint = `api/v1/user/wishlist/advert/${this.advert.slug}/`;
       apiService(endpoint, "DELETE");
       this.addedToWishList = false;
+      this.$emit("remove");
     },
 
     setRequestUser() {
@@ -104,7 +89,7 @@ export default {
 </script>
 
 <style scoped>
-<<<<<<< HEAD
+
   .single-image{
     background-color: #f9f9f9;
     font-size: 1.2rem;
@@ -114,9 +99,6 @@ export default {
     background-color: white;
     
   }
-=======
-.productImage {
-}
 
 .price {
   font-weight: 600;
@@ -172,5 +154,5 @@ a:hover {
     font-size: 1rem;
   }
 }
->>>>>>> 761ac3c3a4c9d892e522a90ff1b1d01aa58d10af
+
 </style>

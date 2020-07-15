@@ -3,11 +3,14 @@
     <router-link :to="{ name: 'home' }" class="navbar-brand pl-3">Marche`</router-link>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <form class="form-group has-search my-0 ml-auto mr-auto">
+      <form class="form-group has-search my-0 ml-auto mr-auto"
+             @submit.prevent="onSubmit">
         <input
           class="form-control mr-sm-2 p-3 px-4"
           type="search"
           placeholder="Search and discover products/services on Marche"
+          required
+          v-model="search_word"
         />
       </form>
 
@@ -60,7 +63,8 @@ export default {
 
   data() {
     return {
-      id: null
+      id: null,
+      search_word: null
     };
   },
 
@@ -73,6 +77,13 @@ export default {
   methods: {
     setUserId() {
       this.id = window.localStorage.getItem("user_id");
+    },
+
+    onSubmit(){
+      this.$router.push({
+            name: "search",
+            params: { search_key: this.search_word }
+      });
     }
   },
 

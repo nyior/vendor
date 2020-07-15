@@ -1,5 +1,8 @@
 <template>
   <div class=" container products">
+    <router-link class="sell" :to="{ name: 'ads_create' }">
+      <button class="btn btn-lg">Sell on Marche</button>
+    </router-link>
     <div
       class="row  categories  p-5 mt-5  mb-2 text-left d-flex justify-content-center align-items-center"
     >

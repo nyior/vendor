@@ -1,7 +1,10 @@
 <template>
   <div class="container-fluid p-5 mx-md-5 advert mt-5">
-    <div class="row p-md-5 w-100 mt-5 mb-2 mx-0 text-center d-flex">
-      <div class="col-md-3 col-12 p-0">
+    <router-link class="sell" :to="{ name: 'ads_create' }">
+      <button class="btn btn-lg">Sell on Marche</button>
+    </router-link>
+    <div class="row p-md-5  mt-5 mb-2  d-flex ">
+      <div class="col-md-6 col-12 p-0 ml-md-auto mr-md-auto text-center ">
         <div class="card">
           <div class="m-1 bg-grey mt-5">
             <div>
@@ -52,8 +55,41 @@
       </div>
     </div>
 
+    <div class="row   mb-2  mt-2 w-100 d-flex text-center">
+     
+          <div class="col-12 text-center">
+              <h1 class="heading" v-if="UserHasProfile"><strong>Your Shop</strong> </h1>
+              <h1 class="heading" v-else><strong>Seller's Shop</strong></h1>
+          </div>
+
+          <div class="row   mb-2 w-100 d-flex text-center">
+              <p v-if="!sellerShop" class="text-danger mt-5 pt-5" > 
+            <strong>Your shop is empty. Sell on Marche to populate your shop.</strong> 
+            </p>
+            
+            <div
+              class="col-md-3 col-6 m-2 p-0"
+              v-for="advert in sellerShop"
+              :key="advert.id"
+              v-else
+            >
+              <AdvertMinified :advert_object="advert"/>
+            </div>
+          </div>  
+      
+    </div>
+
+      <div class="row text-center d-flex justify-content-center mt-4">
+          <div class="col-6">
+            <p v-show="loadingAdverts">...loading...</p>
+            <a v-show="more" @click="getUserAdverts">
+                <strong>Load More</strong>
+            </a>
+          </div>
+      </div>
+
     <hr />
-    <div v-if="UserHasReviewed">
+    <div v-if="!UserHasProfile && UserHasReviewed">
       <p class="text-danger">You have reviewed this user in the past</p>
     </div>
 
@@ -97,10 +133,11 @@
 
     <div
       class="row text-center d-flex justify-content-center align-items-center"
-      v-for="(review, index) in reviews"
-      :key="index"
+      
     >
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-6"
+          v-for="(review, index) in reviews"
+          :key="index">
         <ReviewDetail :review="review" :requestUser="requestUser" @delete-review="deleteReview" />
       </div>
     </div>
@@ -120,9 +157,16 @@
 import { apiService } from "../common/api.service.js";
 import ReviewDetail from "@/components/ReviewDetail.vue";
 import UpdateUserProfileForm from "@/components/UpdateUserProfileForm.vue";
+import AdvertMinified from "@/components/AdvertMinified.vue";
 
 export default {
-  name: "user-detail",
+  name: "adverts-category",
+  
+  components: {
+      ReviewDetail,
+      UpdateUserProfileForm,
+      AdvertMinified
+  },
 
   props: {
     id: {
@@ -131,13 +175,9 @@ export default {
     }
   },
 
-  components: {
-    ReviewDetail,
-    UpdateUserProfileForm
-  },
-
   data() {
     return {
+      sellerShop: [],
       user: null,
       avatar: null,
       reviews: [],
@@ -153,7 +193,9 @@ export default {
       showProfileUpdateForm: false,
       showAvatarUpdateForm: false,
       next: null,
+      more: null,
       loadingReviews: false,
+      loadingAdverts: false,
       requestUser: null
     };
   },
@@ -200,6 +242,27 @@ export default {
           this.next = data.next;
         } else {
           this.next = null;
+        }
+      });
+    },
+
+    getUserAdverts(){
+      let get_shop_url = `api/v1/user/${this.id}/shop/`;
+
+      if (this.more) {
+        get_shop_url = this.more.slice(22);
+      }
+
+      this.loadingAdverts = true;
+
+      apiService(get_shop_url, "GET").then(data => {
+        this.sellerShop.push(...data.results);
+        this.loadingAdverts = false;
+
+        if (data.next) {
+          this.more = data.next;
+        } else {
+          this.more = null;
         }
       });
     },
@@ -278,6 +341,7 @@ export default {
     this.setRequestUser();
     this.getUser();
     this.getReviews();
+    this.getUserAdverts();
   }
 };
 </script>
