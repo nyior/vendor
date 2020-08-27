@@ -1,8 +1,27 @@
 <template>
   <div class="container-fluid pt-5 pb-0 mt-5  ">
-    <router-link class="sell" :to="{ name: 'ads_create' }">
+    <router-link class="sell hide-on-mobile" :to="{ name: 'ads_create' }">
       <button class="btn btn-lg">Sell on Marche</button>
     </router-link>
+
+    <div class="row  text-center px-4 hide-on-desktop">
+
+      <div class="col-md-12">
+
+        <form class="form-group has-search py-3"
+                @submit.prevent="onSubmit">
+          <input
+              class="form-control mr-sm-2 p-3 px-4"
+              type="search"
+              placeholder="Search and discover products/services on Marche"
+              required
+              v-model="search_word"
+          />
+        </form>
+
+      </div>
+
+    </div>
     
     <div class="row categories px-2 px-md-5 mt-0 mb-2 text-center d-flex">
       <div class="col-md-3 col-6" v-for="advert in adverts" :key="advert.id">
@@ -31,7 +50,7 @@ export default {
   props: {
 	  search_key: {
 		  type: String,
-		  required: true,
+		  required: false,
 	  }
   },
 

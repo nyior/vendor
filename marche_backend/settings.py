@@ -202,8 +202,8 @@ FRONTEND_DIR = os.path.join(BASE_DIR, 'frontend')
 
 WEBPACK_LOADER = {
     'DEFAULT': {
-        
-        'BUNDLE_DIR_NAME': '/bundles/',  
+        'CACHE' : False,
+        'BUNDLE_DIR_NAME': 'dist/',  
         'STATS_FILE': os.path.join(FRONTEND_DIR, 'webpack-stats.json'),
     }
 }

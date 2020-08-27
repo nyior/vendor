@@ -1,12 +1,12 @@
 <template>
   <div class="home">
-    <router-link class="sell" :to="{ name: 'ads_create' }">
+    <router-link class="sell hide-on-mobile" :to="{ name: 'ads_create' }">
       <button class="btn btn-lg">Sell on Marche</button>
     </router-link>
 
-    <div class="row m-0 w-100 h-100 home-hero">
-      <div class="col-12 d-flex flex-column align-items-center px-5 justify-content-center text-center ml-3" style="position: relative">
-        <div class="wrap-text">
+    <div class="row m-0  h-100 w-100 home-hero">
+      <div class="col-12 col-md-6 ml-md-auto mr-md-auto d-flex flex-column align-items-center justify-content-center text-center ">
+        <div>
           <h1 class="heading">Welcome to Marche</h1>
           <h4 class="mt-5">
             We help you discover products and services you are looking for on
@@ -25,13 +25,14 @@
 
     <div class="container">
       <div
-        class="row m-0 w-100 categories p-2 px-md-5 py-3 mt-0 mb-2 text-center d-flex justify-content-center"
+        class="row m-0 categories p-2 px-md-5 py-3 mt-0 mb-2 text-center d-flex justify-content-center"
       >
         <div class="col-md-3 col-6 p-0">
           <div class="m-2">
             <router-link :to="{ name: 'category', params: { category: 'Fashion' } }">
               <div class="mt-5">
-                <img src="../assets/fashion.svg" class="categoryImage" alt="Responsive image" />
+          
+                <i class="fa fa-female text-muted categoryImage" aria-hidden="true"></i>
               </div>
               <div class="card-body pt-5 text-muted">
                 <strong>FASHION</strong>
@@ -44,7 +45,8 @@
           <div class="m-2">
             <router-link :to="{ name: 'category', params: { category: 'Electronic Appliances' } }">
               <div class="mt-5">
-                <img src="../assets/monitor.svg" class="categoryImage" alt="Responsive image" />
+
+                <i class="fa fa-television text-muted categoryImage" aria-hidden="true"></i>
               </div>
               <div class="card-body pt-5 text-muted">
                 <strong>ELECTRONIC APPLIANCES</strong>
@@ -57,10 +59,11 @@
           <div class="m-2">
             <router-link :to="{ name: 'category', params: { category: 'Phones and Accessories' } }">
               <div class="mt-5">
-                <img src="../assets/smartphone.svg" class="categoryImage" alt="Responsive image" />
+               
+                <i class="fa fa-mobile text-muted categoryImage" aria-hidden="true"></i>
               </div>
               <div class="card-body pt-5 text-muted">
-                <strong>PHONES AND ACCESSORIES</strong>
+                <strong>GADGETS</strong>
               </div>
             </router-link>
           </div>
@@ -70,7 +73,9 @@
           <div class="m-2">
             <router-link :to="{ name: 'category', params: { category: 'Video Games' } }">
               <div class="mt-5">
-                <img src="../assets/console.svg" class="categoryImage" alt="Responsive image" />
+
+                <i class="fa fa-gamepad text-muted categoryImage" aria-hidden="true"></i>
+
               </div>
               <div class="card-body pt-5 text-muted">
                 <strong>VIDEO GAMES</strong>
@@ -83,7 +88,9 @@
           <div class="m-2">
             <router-link :to="{ name: 'category', params: { category: 'Health and Beauty' } }">
               <div class="mt-5">
-                <img src="../assets/medicine.svg" class="categoryImage" alt="Responsive image" />
+          
+
+                <i class="fa fa-medkit text-muted categoryImage" aria-hidden="true"></i>
               </div>
 
               <div class="card-body pt-5 text-muted">
@@ -97,7 +104,7 @@
           <div class="m-2">
             <router-link :to="{ name: 'category', params: { category: 'Services' } }">
               <div class="mt-5">
-                <img src="../assets/select.svg" class="categoryImage" alt="Responsive image" />
+                <i class="fa fa-handshake-o text-muted categoryImage" aria-hidden="true"></i>
               </div>
 
               <div class="card-body pt-5 text-muted">
@@ -111,7 +118,8 @@
           <div class="m-2">
             <router-link :to="{ name: 'category', params: { category: 'Foods' } }">
               <div class="mt-5">
-                <img src="../assets/fork.svg" class="categoryImage" alt="Responsive image" />
+
+                <i class="fa fa-cutlery text-muted categoryImage" aria-hidden="true"></i>
               </div>
 
               <div class="card-body pt-5 text-muted">
@@ -125,7 +133,8 @@
           <div class="m-2">
             <router-link :to="{ name: 'category', params: { category: 'Others' } }">
               <div class="mt-5">
-                <img src="../assets/others.svg" class="categoryImage" alt="Responsive image" />
+
+                <i class="fa fa-question-circle text-muted categoryImage" aria-hidden="true"></i>
               </div>
 
               <div class="card-body pt-5 text-muted">
@@ -172,17 +181,14 @@ export default {
 }
 
 .categoryImage {
-  height: 90px;
+  font-size: 20rem;
+  color: black;
+  opacity: 0.5;
 }
 
 .col-md-3:nth-child(n + 5) {
   margin-top: 3rem;
 }
-
-.wrap-text {
-  width: 50%;
-}
-
 
 
 @media only screen and (max-width: 600px) {

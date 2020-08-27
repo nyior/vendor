@@ -51,7 +51,7 @@ export default new Router({
     },
 
     {
-      path: "/search/:search_key",
+      path: "/search/:search_key?",
       name: "search",
       component: SearchView,
       props: true

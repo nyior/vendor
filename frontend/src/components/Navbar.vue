@@ -1,8 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-lg py-3 shadow my-navbar fixed-top">
+  <nav class="navbar navbar-expand-lg py-4 shadow my-navbar sticky-top">
     <router-link :to="{ name: 'home' }" class="navbar-brand pl-3">Marche`</router-link>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse">
       <form class="form-group has-search my-0 ml-auto mr-auto"
              @submit.prevent="onSubmit">
         <input
@@ -100,7 +100,7 @@ export default {
   font-size: 1.4rem;
   background-color: #7a09c4;
   font-weight: bold;
-  width: 100%
+  /* width: 100% */
 }
 .btn {
   background-color: white !important;

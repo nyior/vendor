@@ -12,10 +12,19 @@ body {
     overflow-x: hidden!important;
 }
 
+.margin-bottom{
+	margin-bottom: 10rem;
+}
+.text-muted {
+	color: black !important;
+	opacity: 0.7;
+}
+
 .link {
 	text-decoration: none;
 	color: white !important;
 }
+
 .link:hover {
 	text-decoration: none !important;
 }
@@ -24,6 +33,7 @@ a {
 	text-decoration: none;
 	color: black !important;
 }
+
 a:hover {
 	text-decoration: none !important;
 	color: rgba(255, 255, 255, 0.8) !important;
@@ -190,3 +200,30 @@ input[type="email"] {
 	text-align: center;
 	font-size: 1.3rem;
 }
+
+.hide-on-desktop{
+
+	visibility: hidden;
+}
+
+.hide-on-mobile{
+
+	visibility: visible;
+}
+
+/* for screens that are 600px wide and below */
+
+@media only screen and (max-width: 600px) {
+	.hide-on-mobile{
+
+		visibility: hidden;
+	}
+
+	.hide-on-desktop{
+
+		visibility: visible;
+	}
+}
+
+
+/* for screens that are 600px wide and higher */

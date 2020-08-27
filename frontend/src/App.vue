@@ -1,21 +1,30 @@
 <template>
   <div id="app">
-    <NavbarComponent 
+    <div class="margin-bottom">
+      <NavbarComponent 
           :authenticated="is_authenticated"
         
-    />
-    <router-view />
+      />
+
+      <router-view />
+
+    </div>
+    
+    <FooterComponent/>
   </div>
 </template>
 
 <script>
 import NavbarComponent from "./components/Navbar.vue";
+import FooterComponent from "./components/Footer.vue";
+
 import { apiService } from "./common/api.service.js";
 
 export default {
   name: "App",
   components: {
-    NavbarComponent
+    NavbarComponent, 
+    FooterComponent
   },
 
   data(){

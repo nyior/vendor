@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div style="position: relative">
     <router-link :to="{ name: 'ad_detail', params: { slug: advert.slug } }">
       <div class="m-1 bg-grey mt-5">
