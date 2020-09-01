@@ -1,11 +1,11 @@
 <template>
 
-	<div class="my-footer text-center shadow  hide-on-desktop py-4">
+	<div class="text-center shadow  hide-on-desktop py-4" id="my-footer">
 		
 		<div class="row m-2 text-muted">
 
 			<div class="col-2" >
-				<router-link :to="{ name: 'home' }" v-on:click="addActiveClass" class="footer-tab  active">
+				<router-link :to="{ name: 'home' }" class="footer-tab  active">
 					<div>
 						<i class="fa fa-window-maximize footer-icon"></i>
 					</div>
@@ -17,7 +17,7 @@
 			</div>
 
 			<div class="col-2" >
-				<router-link :to="{ name: 'search' }" v-on:click="addActiveClass" class="footer-tab  ">
+				<router-link :to="{ name: 'search' }" class="footer-tab">
 					<div>
 						<i class="fa fa-search footer-icon"></i>
 					</div>
@@ -29,7 +29,7 @@
 			</div>
 
 			<div class="col-4" >
-				<router-link :to="{ name: 'ads_create' }" v-on:click="addActiveClass" class="footer-tab ">
+				<router-link :to="{ name: 'ads_create' }"  class="footer-tab">
 					<div>
 						<i class="fa fa-plus-circle footer-icon"></i>
 					</div>
@@ -41,7 +41,7 @@
 			</div>
 
 			<div class="col-2" >
-				<router-link :to="{ name: 'wishlist' }" v-on:click="addActiveClass" class="footer-tab ">
+				<router-link :to="{ name: 'wishlist' }"  class="footer-tab">
 					<div>
 						<i class="fa fa-gratipay footer-icon"></i>
 					</div>
@@ -53,13 +53,13 @@
 			</div>
 
 			<div class="col-2">
-				<router-link :to="{ name: 'home' }" v-on:click="addActiveClass" class="footer-tab ">
+				<router-link :to="{ name: 'home' }" class="footer-tab">
 					<div>
 						<i class="fa fa-user-circle footer-icon"></i>
 					</div>
 					
 					<div class="mt-1">
-						<small>Profile</small>
+						<small>You</small>
 					</div>
 				</router-link>
 			</div>
@@ -79,24 +79,25 @@
 
 		addActiveClass() {
 
-			let footerTabsList = document.getElementsByClassName("footer-tab")
+			var footerTabsList = document.getElementsByClassName("footer-tab")
 
 			for (let index = 0; index < footerTabsList.length; index++) {
-				if (this == footerTabsList[index]){
-					
-					if (!this.classList.contains('active')) {
-						this.classList.add('active');
-					}
 
-				}else{
-
-					if (footerTabsList[index].classList.contains('active')) {
-						footerTabsList[index].classList.remove('active');
-					}
-				}				
+				footerTabsList[index].addEventListener("click", function() {
+					let current = document.getElementsByClassName("active");
+					// current[0].classList.remove("active");
+					current[0].className = current[0].className.replace(" active", "");
+					footerTabsList[index].className += " active";
+					// footerTabsList[index].classList.add("active");
+				
+				});				
 			}
 		}
-	}
+	},
+
+	mounted: function() {
+    	this.addActiveClass();
+  }
 
     
   };
@@ -105,7 +106,7 @@
 
 <style scoped>
 
-.my-footer {
+#my-footer {
   font-size: 1.4rem;
   letter-spacing: 1px;
   width: 100%;

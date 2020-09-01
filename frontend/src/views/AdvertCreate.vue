@@ -109,38 +109,38 @@ export default {
   props: {
     slug: {
       type: String,
-      required: false
+      required: false,
     },
 
     category: {
       type: String,
-      required: true
+      required: false,
     },
 
     name: {
           type: String,
-          required: true,
+          required: false,
     },
 
     price: {
           type: Number,
-          required: true,
+          required: false,
     },
 
     quantity: {
           type: Number,
-          required: true,
+          required: false,
     },
 
   
     description: {
           type: String,
-          required: true,
+          required: false,
       },
 
     file: {
           type: String,
-          required: true,
+          required: false,
       }
   },
 
@@ -220,6 +220,7 @@ export default {
   mounted: function() {
     //this.setFileField();
     document.title = "Create Advert";
+
   }
 };
 </script>

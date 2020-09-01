@@ -13,7 +13,7 @@ import SearchView from "./views/SearchView.vue";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: "history",
 
   routes: [
@@ -26,7 +26,11 @@ export default new Router({
     {
       path: "/wishlist",
       name: "wishlist",
-      component: Wishlist
+      
+      component: Wishlist,
+      meta: {
+        requiresAuth: true,
+      },
     },
 
     {
@@ -46,8 +50,12 @@ export default new Router({
     {
       path: "/user_detail/:id",
       name: "user_detail",
+      
       component: UserDetail,
-      props: true
+      props: true,
+      meta: {
+        requiresAuth: true,
+      },
     },
 
     {
@@ -60,7 +68,11 @@ export default new Router({
       path: "/ads_create/:slug?",
       name: "ads_create",
       component: AdvertCreate,
-      props: true
+      
+      props: true,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/review/:id",
@@ -72,11 +84,25 @@ export default new Router({
       path: "/adverts",
       name: "adverts",
       component: Adverts
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      //component: () =>
-      // import(/* webpackChunkName: "about" */ "./views/Adverts.vue")
+      
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  var check = true;
+
+  if (to.matched.some(route => route.meta.requiresAuth)) {
+
+    if (window.localStorage.getItem("authenticated") === "true") {
+      next();
+    } else {
+      
+      next('/');
+    }
+    
+  }
+  next();
+});
+
+export default router;
