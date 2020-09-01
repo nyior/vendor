@@ -1,7 +1,10 @@
 <template>
+
   <div class="mt-5 ">
+
      <ul class="list-unstyled list-inline">
-         <li class="list-inline-item border-right p-2">
+
+        <li class="list-inline-item border-right p-2">
             <router-link
               :to="{ name: 'adverts'}"
             >
@@ -13,6 +16,7 @@
               </div>
             </router-link> 
         </li> 
+
         <li class="list-inline-item border-right p-2">
             <router-link
               :to="{ name: 'category', params: { category: 'Fashion' } }"
@@ -120,17 +124,23 @@
               </div>
             </router-link> 
         </li> 
+
      </ul>
+
   </div>
+  
 </template>
 
 <script>
 
-export default {
-  name: "categories-list",
+  export default {
 
+    name: "categories-list",
   
-};
+  };
+
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

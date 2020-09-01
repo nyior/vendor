@@ -158,46 +158,46 @@ export default {
 </script>
 
 <style scoped>
-.home-hero {
-  font-size: 1.4rem;
-  background-image: linear-gradient(#7a09c4, #200135);
-  color: white;
-}
+  .home-hero {
+    font-size: 1.4rem;
+    background-image: linear-gradient(#7a09c4, #200135);
+    color: white;
+  }
 
-.btn {
-  background-color: white !important;
-  color: #200135 !important;
-  font-weight: bold;
-}
+  .btn {
+    background-color: white !important;
+    color: #200135 !important;
+    font-weight: bold;
+  }
 
-.fa:hover {
-  color: #200135 !important;
-}
+  .fa:hover {
+    color: #200135 !important;
+  }
 
-.fa {
-  font-size: 7rem !important;
-  color: rgb(27, 21, 21) !important;
-  font-weight: bold;
-}
+  .fa {
+    font-size: 7rem !important;
+    color: rgb(27, 21, 21) !important;
+    font-weight: bold;
+  }
 
-.categoryImage {
-  font-size: 20rem;
-  color: black;
-  opacity: 0.5;
-}
-
-.col-md-3:nth-child(n + 5) {
-  margin-top: 3rem;
-}
-
-
-@media only screen and (max-width: 600px) {
   .categoryImage {
-    height: 60px;
+    font-size: 20rem;
+    color: black;
+    opacity: 0.5;
   }
 
   .col-md-3:nth-child(n + 5) {
-    margin-top: 0rem;
+    margin-top: 3rem;
   }
-}
+
+
+  @media only screen and (max-width: 600px) {
+    .categoryImage {
+      height: 60px;
+    }
+
+    .col-md-3:nth-child(n + 5) {
+      margin-top: 0rem;
+    }
+  }
 </style>

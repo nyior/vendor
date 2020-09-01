@@ -1,8 +1,6 @@
 from django.urls import path, include
-from users.api.views import *
-from rest_framework.routers import DefaultRouter
+from apps.users.api.views import *
 
-#profile image viewset
 
 urlpatterns = [
     path("user/wishlist/advert/<slug:slug>/", WishlistAPIView.as_view(), name="wishlist"),

@@ -1,15 +1,29 @@
-from rest_framework import generics, viewsets, mixins, filters
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
+from rest_framework import (generics, 
+                            viewsets, 
+                            mixins, 
+                            filters)
+
+from rest_framework.permissions import (IsAuthenticatedOrReadOnly, 
+                                        IsAuthenticated)
+
 from rest_framework.generics import get_object_or_404
-from rest_framework.parsers import  MultiPartParser, FormParser, FileUploadParser
 
-from adverts.api.permissions import *
-from users.models import CustomUser
+from rest_framework.parsers import  (MultiPartParser, 
+                                        FormParser, 
+                                        FileUploadParser)
 
-from adverts.api.serializers import *
-from core.utils import generate_random_string
+from apps.adverts.api.permissions import *
+from apps.users.models import CustomUser
+
+from apps.adverts.api.serializers import *
+from apps.core.utils import generate_random_string
 
 class SearchList(generics.ListAPIView):
+
+    """ This returns a list of products/services
+        based on search keyword
+    """
+
     queryset = Advert.objects.all()
     serializer_class = AdvertSerializer
     filter_backend = [filters.SearchFilter]
@@ -21,6 +35,10 @@ class AdvertViewSet(mixins.ListModelMixin,
                     mixins.UpdateModelMixin,
                     mixins.DestroyModelMixin,
                     viewsets.GenericViewSet):
+
+    """ This generates crud views for adverts.
+    """
+
     queryset = Advert.objects.all().order_by("-date_created")
     lookup_field = 'slug'
     serializer_class = AdvertSerializer
@@ -43,6 +61,9 @@ class AdvertViewSet(mixins.ListModelMixin,
 
     
 class CategoryListAPIView(generics.ListAPIView):
+
+    """ This returns a list of product categories
+    """
     serializer_class = AdvertSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
@@ -51,6 +72,10 @@ class CategoryListAPIView(generics.ListAPIView):
         return Advert.objects.filter(category__name=kwarg_slug).order_by("-date_created")
 
 class SellerShopAPIView(generics.ListAPIView):
+
+    """ This returns a list of adverts created by a user
+    """
+
     serializer_class = AdvertSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 

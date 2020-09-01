@@ -1,8 +1,11 @@
 <template>
+
   <div class=" container-fluid products">
+
     <router-link class="sell" :to="{ name: 'ads_create' }">
       <button class="btn btn-lg">Sell on Marche</button>
     </router-link>
+
     <div class="row p-5  mt-5 mb-2 text-center d-flex justify-content-center">
         <div class="col-12 ">
              <CategoriesList/>
@@ -38,6 +41,7 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -108,17 +112,15 @@ export default {
     this.setRequestUser();
     
   },
+
   created(){
     this.getAdverts();
     document.title = "Advertisements";
-   }
+  }
+
 };
 </script>
 
 <style scoped>
-.home-hero {
-  font-size: 1.4rem;
-  background-image: linear-gradient(#7a09c4, #200135);
-  color: white;
-}
+
 </style>

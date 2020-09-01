@@ -27,64 +27,67 @@
 </template>
 
 <script>
-import { apiService } from "../common/api.service.js";
-import CategoriesList from "@/components/CategoriesList.vue";
-import AdvertMinified from "@/components/AdvertMinified.vue";
 
-export default {
-  name: "adverts",
-  data() {
-    return {
-      adverts: [],
-      next: null,
-      loadingAdverts: false,
-      requestUser: null,
-      addedToWishList: null
-    };
-  },
+  import { apiService } from "../common/api.service.js";
+  import CategoriesList from "@/components/CategoriesList.vue";
+  import AdvertMinified from "@/components/AdvertMinified.vue";
 
-  components: {
-    CategoriesList,
-    AdvertMinified
-  },
-
-  methods: {
-    getAdverts() {
-      let get_adverts_url = "api/v1/adverts/";
-
-      if (this.next) {
-        get_adverts_url = this.next.slice(22);
-      }
-
-      this.loadingAdverts = true;
-      apiService(get_adverts_url, "GET").then(data => {
-        this.loadingAdverts = false;
-        this.adverts.push(...data.results);
-
-        if (data.next) {
-          this.next = data.next;
-        } else {
-          this.next = null;
-        }
-      });
+  export default {
+    name: "adverts",
+    data() {
+      return {
+        adverts: [],
+        next: null,
+        loadingAdverts: false,
+        requestUser: null,
+        addedToWishList: null
+      };
     },
 
-    setRequestUser() {
-      this.requestUser = window.localStorage.getItem("username");
-    }
-  },
+    components: {
+      CategoriesList,
+      AdvertMinified
+    },
 
-  mounted: function() {
-    this.setRequestUser();
-  },
-  created() {
-    this.getAdverts();
-    document.title = "Advertisements";
-  }
-};
+    methods: {
+      getAdverts() {
+        let get_adverts_url = "api/v1/adverts/";
+
+        if (this.next) {
+          get_adverts_url = this.next.slice(22);
+        }
+
+        this.loadingAdverts = true;
+        apiService(get_adverts_url, "GET").then(data => {
+          this.loadingAdverts = false;
+          this.adverts.push(...data.results);
+
+          if (data.next) {
+            this.next = data.next;
+          } else {
+            this.next = null;
+          }
+        });
+      },
+
+      setRequestUser() {
+        this.requestUser = window.localStorage.getItem("username");
+      }
+    },
+
+    mounted: function() {
+      this.setRequestUser();
+    },
+    created() {
+      this.getAdverts();
+      document.title = "Advertisements";
+    }
+  };
+
 </script>
 
 <style>
+
   .sell {
     position: fixed;
     bottom: 50px;
@@ -106,4 +109,5 @@ export default {
       right: 20px;
     }
   }
+  
 </style>

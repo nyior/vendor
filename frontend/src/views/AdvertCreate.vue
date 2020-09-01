@@ -1,12 +1,14 @@
 <template>
+
   <div class=" container products">
-    <div
-      class="row  categories  p-5 mt-5  mb-2 text-left d-flex justify-content-center align-items-center"
+    <div class="row  categories  p-5 mt-5  mb-2 text-left d-flex  justify-content-center align-items-center"
     >
-      <div class="col-md-6 col-12 mt-5 shadow border">
-        <h1 class="heading mt-4 mb-2">
+
+      <h1 class="heading mt-5 mb-2">
           Create an Advert Now
-        </h1>
+      </h1>
+
+      <div class="col-md-6 col-12 mt-5 shadow border px-3 py-3">
 
         <form
           @submit.prevent="postAdvert"
@@ -38,6 +40,7 @@
             />
             <div class="invalid-feedback">Only figures allowed</div>
           </div>
+
           <div class="form-group">
             <label for="unit-price">Unit Price</label>
             <input
@@ -53,6 +56,7 @@
               Please fill out this field with figures only
             </div>
           </div>
+
           <div class="form-group mb-2">
             <label for="category">Advert Category</label>
             <select
@@ -92,137 +96,144 @@
 
           <button class="btn btn-lg btn-blue" type="submit">Post Advert</button>
         </form>
+
         <p v-if="error" class="mt-2">
           <strong>{{ error }}</strong>
         </p>
+
       </div>
+
     </div>
+
   </div>
+
 </template>
 
 <script>
-import { apiService } from "../common/api.service.js";
 
-export default {
-  name: "adverts-create",
+  import { apiService } from "../common/api.service.js";
 
-  props: {
-    slug: {
-      type: String,
-      required: false,
-    },
+  export default {
+    name: "adverts-create",
 
-    category: {
-      type: String,
-      required: false,
-    },
-
-    name: {
-          type: String,
-          required: false,
-    },
-
-    price: {
-          type: Number,
-          required: false,
-    },
-
-    quantity: {
-          type: Number,
-          required: false,
-    },
-
-  
-    description: {
-          type: String,
-          required: false,
+    props: {
+      slug: {
+        type: String,
+        required: false,
       },
 
-    file: {
-          type: String,
-          required: false,
-      }
-  },
+      category: {
+        type: String,
+        required: false,
+      },
 
-  data() {
-    return {
-      error: null,
+      name: {
+            type: String,
+            required: false,
+      },
 
-      form: {
-        name: this.name,
-        price: this.price,
-        quantity: this.quantity,
-        description: this.description,
-        file: this.file,
-        category: this.category
-      }
-    };
-  },
+      price: {
+            type: Number,
+            required: false,
+      },
 
-  methods: {
-    handleFileUpload(event) {
-      this.form.file = event.target.files[0];
+      quantity: {
+            type: Number,
+            required: false,
+      },
+
+    
+      description: {
+            type: String,
+            required: false,
+        },
+
+      file: {
+            type: String,
+            required: false,
+        }
     },
 
-    postAdvert() {
-      let post_advert_url = `api/v1/adverts/`;
+    data() {
+      return {
+        error: null,
 
-      let method = "POST";
-      let file = this.form.file;
-      let formData = new FormData();
-      
-      if (this.slug !== undefined) {
-        //this.$refs.file.value = this.file;
-        post_advert_url = `api/v1/adverts/${this.slug}/`;
-        method = 'PUT';
+        form: {
+          name: this.name,
+          price: this.price,
+          quantity: this.quantity,
+          description: this.description,
+          file: this.file,
+          category: this.category
+        }
+      };
+    },
+
+    methods: {
+      handleFileUpload(event) {
+        this.form.file = event.target.files[0];
+      },
+
+      postAdvert() {
+        let post_advert_url = `api/v1/adverts/`;
+
+        let method = "POST";
+        let file = this.form.file;
+        let formData = new FormData();
+        
+        if (this.slug !== undefined) {
+          //this.$refs.file.value = this.file;
+          post_advert_url = `api/v1/adverts/${this.slug}/`;
+          method = 'PUT';
+        }
+        
+        formData.append("category", this.form.category);
+        formData.append("name", this.form.name);
+        formData.append("price", this.form.price);
+        formData.append("quantity", this.form.quantity);
+        formData.append("description", this.form.description);
+        formData.append("file", file);
+
+        apiService(post_advert_url, method, formData)
+          .then(data => {
+            this.$router.push({
+              name: "ad_detail",
+              params: { slug: data.slug }
+            });
+          })
+          .catch(error => {
+            this.error = error;
+          });
+      }
+    },
+
+    async beforeRouteEnter(to, from, next){
+
+      if (to.params.slug !== undefined) {
+        let get_advert_url = `api/v1/adverts/${to.params.slug}/`;
+        
+        let data = await apiService(get_advert_url, "GET");
+        to.params.name = data.name;
+        to.params.price = data.price;
+        to.params.quantity = data.quantity;
+        to.params.description = data.description;
+        to.params.file = data.file;
+        to.params.category = data.category;
+
+        return next();
+      } else {
+        return next();
       }
       
-      formData.append("category", this.form.category);
-      formData.append("name", this.form.name);
-      formData.append("price", this.form.price);
-      formData.append("quantity", this.form.quantity);
-      formData.append("description", this.form.description);
-      formData.append("file", file);
+    },
 
-      apiService(post_advert_url, method, formData)
-        .then(data => {
-          this.$router.push({
-            name: "ad_detail",
-            params: { slug: data.slug }
-          });
-        })
-        .catch(error => {
-          this.error = error;
-        });
+    mounted: function() {
+      //this.setFileField();
+      document.title = "Create Advert";
+
     }
-  },
-
-  async beforeRouteEnter(to, from, next){
-
-    if (to.params.slug !== undefined) {
-      let get_advert_url = `api/v1/adverts/${to.params.slug}/`;
-      
-      let data = await apiService(get_advert_url, "GET");
-      to.params.name = data.name;
-      to.params.price = data.price;
-      to.params.quantity = data.quantity;
-      to.params.description = data.description;
-      to.params.file = data.file;
-      to.params.category = data.category;
-
-      return next();
-    } else {
-      return next();
-    }
-     
-  },
-
-  mounted: function() {
-    //this.setFileField();
-    document.title = "Create Advert";
-
-  }
-};
+  };
+  
 </script>
 
 <style scoped></style>

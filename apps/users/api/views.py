@@ -8,21 +8,28 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.parsers import  MultiPartParser, FormParser, FileUploadParser
 
-from users.api.serializers import *
-from adverts.api.serializers import AdvertSerializer
+from apps.users.api.serializers import *
+from apps.adverts.api.serializers import AdvertSerializer
 
-from users.models import *
-from adverts.models import Advert
+from apps.users.models import *
+from apps.adverts.models import Advert
 
-from users.api.permissions import *
+from apps.users.api.permissions import *
 
-#user
+
 class UserDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+
+    """ This retrieves a single user from the database
+    """
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
     permission_classes = [HasAccountOrReadOnly, IsAuthenticatedOrReadOnly]
 
+
 class CurrentUserView(APIView):
+
+    """ This view returns the current user
+    """
     def get(self, request):
         user = request.user
         
@@ -35,6 +42,10 @@ class CurrentUserView(APIView):
 
 
 class AvatarUpdateView(generics.UpdateAPIView):
+
+    """ This allows users to update their avatar
+    """
+
     serializer_class = AvatarSerializer
     permission_classes = [IsAuthenticatedOrReadOnly, HasAvatarOrReadOnly]
 
@@ -44,7 +55,12 @@ class AvatarUpdateView(generics.UpdateAPIView):
         user = self.request.user
         return user
 
+
 class ReviewCreateAPIView(generics.CreateAPIView):
+
+    """ This allows users create reviews
+    """
+
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
     permission_classes = [IsAuthenticated]
@@ -62,7 +78,12 @@ class ReviewCreateAPIView(generics.CreateAPIView):
         
         serializer.save(reviewer=reviewer, reviewee=reviewee)
 
+
 class ReviewListAPIView(generics.ListAPIView):
+
+    """ This returns a list of reviews for a user
+    """
+
     serializer_class = ReviewSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
@@ -70,7 +91,12 @@ class ReviewListAPIView(generics.ListAPIView):
         user_id = self.kwargs.get("user_id")
         return Review.objects.filter(reviewee__id=user_id).order_by("-date_created")
 
+
 class AdsListAPIView(generics.ListAPIView):
+
+    """ This returns a list of ads created by a user
+    """
+
     serializer_class = AdvertSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
@@ -78,12 +104,21 @@ class AdsListAPIView(generics.ListAPIView):
         user_id = self.kwargs.get("user_id")
         return Advert.objects.filter(user__id=user_id).order_by("-date_created")
 
+
 class ReviewRUDAPIView(generics.RetrieveUpdateDestroyAPIView):
+
+    """ This allows users to rud a review
+    """
+
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
     permission_classes = [IsReviewerOrReadOnly, IsAuthenticatedOrReadOnly]
 
+
 class UserWishlistItemsAPIView(generics.ListAPIView):
+
+    """ This returns all the items in a user's wishlist
+    """
     serializer_class = AdvertSerializer
     permission_classes = [IsAuthenticated]
     
@@ -92,7 +127,9 @@ class UserWishlistItemsAPIView(generics.ListAPIView):
         user = self.request.user
         return user.wishlist.all()
 
+
 class WishlistAPIView(APIView):
+    
     serializer_class = AdvertSerializer
     permission_classes = [IsAuthenticated]
 

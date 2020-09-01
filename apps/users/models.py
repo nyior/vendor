@@ -1,11 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
-from adverts.models import Advert
+from apps.adverts.models import Advert
 
 # Create your models here.
 
 class CustomUser(AbstractUser):
+
+    """ This class models a marche user
+    """
     id = models.AutoField(primary_key=True)
     phone_number = models.CharField(max_length=15, null=True, blank=True)
     residence_hall = models.CharField(max_length=12, null=True, blank=True)
@@ -16,6 +19,9 @@ class CustomUser(AbstractUser):
 
 #user-review
 class Review(models.Model):
+
+    """ This class models a review object
+    """
     reviewer = models.ForeignKey(settings.AUTH_USER_MODEL,
     on_delete=models.CASCADE, related_name="reviews_created")
     reviewee = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, 

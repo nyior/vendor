@@ -29,45 +29,47 @@
 </template>
 
 <script>
-import { apiService } from "../common/api.service.js";
 
-export default {
-  name: "review-detail",
+  import { apiService } from "../common/api.service.js";
 
-  props: {
-    review: {
-      type: Object,
-      required: true
-    },
+  export default {
+    name: "review-detail",
 
-    requestUser: {
-      type: String,
-      required: true
-    }
-  },
+    props: {
+      review: {
+        type: Object,
+        required: true
+      },
 
-  data() {
-    return {
-      
-    };
-  },
-  
-  computed: {
-      isReviewAuthor(){
-          return this.review.reviewer === this.requestUser;
+      requestUser: {
+        type: String,
+        required: true
       }
-  },
-
-  methods: {
-    setPageTitle(title) {
-      document.title = title;
     },
 
-    DeleteReviewTrigger(){
-      this.$emit('delete-review', this.review);
+    data() {
+      return {
+        
+      };
+    },
+    
+    computed: {
+        isReviewAuthor(){
+            return this.review.reviewer === this.requestUser;
+        }
+    },
+
+    methods: {
+      setPageTitle(title) {
+        document.title = title;
+      },
+
+      DeleteReviewTrigger(){
+        this.$emit('delete-review', this.review);
+      }
     }
-  }
-};
+  };
+
 </script>
 
 <style scoped></style>

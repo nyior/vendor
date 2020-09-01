@@ -1,11 +1,20 @@
 from django.db import models
 from django.conf import settings
 
-# Create your models here.
+
 class Category(models.Model):
+
+    """ This class models an advert category. 
+        E.g. : video game, fashion etc.
+    """
+
     name = models.CharField(max_length=70, null=False)
 
 class Advert(models.Model):
+
+    """ This class models an advert object. 
+    """
+    
     slug = models.SlugField(max_length=255, unique=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
     on_delete=models.CASCADE, related_name="adverts")

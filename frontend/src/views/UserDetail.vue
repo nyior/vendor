@@ -347,27 +347,29 @@ export default {
 </script>
 
 <style scoped>
-.profilePicContainer {
-  border-radius: 50%;
-  width: 200px;
-  height: 200px;
-  display: flex;
-  justify-content: center;
-  margin: auto;
-  flex-flow: column;
-  overflow: hidden;
-}
 
-.username{
-  color: #7A09C4;
-}
+  .profilePicContainer {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    flex-flow: column;
+    overflow: hidden;
+  }
 
-a:hover{
-  color: black!important;
-}
+  .username{
+    color: #7A09C4;
+  }
 
-.editButton{
-  color: #7A09C4!important;
-  background: white!important;
-}
+  a:hover{
+    color: black!important;
+  }
+
+  .editButton{
+    color: #7A09C4!important;
+    background: white!important;
+  }
+
 </style>

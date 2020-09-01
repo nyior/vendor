@@ -1,6 +1,7 @@
 <template>
   
     <div class=" p-0 mt-5">
+
         <form
            @submit.prevent="UpdateUserProfileTrigger"
           class="p-3 was-validated"
@@ -79,40 +80,42 @@
 </template>
 
 <script>
-import { apiService } from "../common/api.service.js";
 
-export default {
-  name: "update-profile",
+  import { apiService } from "../common/api.service.js";
 
-  props: {
-    user: {
-      type:Object,
-      required: true
+  export default {
+    name: "update-profile",
+
+    props: {
+      user: {
+        type:Object,
+        required: true
+      },
+
     },
 
-  },
-
-  data() {
-    return {
-      form: {
-        user_id: this.user.id,
-        username: this.user.username,
-        email: this.user.email,
-        phone_number: this.user.phone_number,
-        residence_hall: this.user.residence_hall,
-        bio: this.user.bio
-      }
-    };
-  },
-  
-  methods: {
+    data() {
+      return {
+        form: {
+          user_id: this.user.id,
+          username: this.user.username,
+          email: this.user.email,
+          phone_number: this.user.phone_number,
+          residence_hall: this.user.residence_hall,
+          bio: this.user.bio
+        }
+      };
+    },
     
-   UpdateUserProfileTrigger(){
-      this.$emit('update-profile', this.form);
+    methods: {
+      
+    UpdateUserProfileTrigger(){
+        this.$emit('update-profile', this.form);
+      }
     }
-  }
 
-};
+  };
+
 </script>
 
 <style scoped>

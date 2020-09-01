@@ -103,9 +103,5 @@ export default {
 </script>
 
 <style scoped>
-.home-hero {
-  font-size: 1.4rem;
-  background-image: linear-gradient(#7a09c4, #200135);
-  color: white;
-}
+
 </style>

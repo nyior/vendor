@@ -1,11 +1,16 @@
 from rest_framework import serializers
-from adverts.models import *
-from users.api.serializers import CustomUserSerializer
+from apps.adverts.models import *
+from apps.users.api.serializers import CustomUserSerializer
 
 from datetime import datetime, timezone
 from django.utils.timesince import timesince
 
 class AdvertSerializer(serializers.ModelSerializer):
+
+    """ This serializes an advert object
+
+    """
+
     slug = serializers.SlugField(read_only=True)
     user = CustomUserSerializer(read_only=True)
     category = serializers.SerializerMethodField()

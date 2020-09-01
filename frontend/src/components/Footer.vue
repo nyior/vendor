@@ -106,26 +106,26 @@
 
 <style scoped>
 
-#my-footer {
-  font-size: 1.4rem;
-  letter-spacing: 1px;
-  width: 100%;
-  
-  background-color: white ;
-  position: fixed;
-  bottom: 0px;
-  
-}
+	#my-footer {
+		font-size: 1.4rem;
+		letter-spacing: 1px;
+		width: 100%;
+		
+		background-color: white ;
+		position: fixed;
+		bottom: 0px;
+	}
 
-.footer-icon{
-	font-size: 2rem;	
-}
+	.footer-icon{
+		font-size: 2rem;	
+	}
 
-.active{
-	color: #7a09c4 !important;
-}
+	.active{
+		color: #7a09c4 !important;
+	}
 
-ul li {
-  margin: 0rem 1.5rem;
-}
+	ul li {
+		margin: 0rem 1.5rem;
+	}
+
 </style>

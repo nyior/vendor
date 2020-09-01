@@ -12,41 +12,46 @@
     
 </template>
 
+
 <script>
-import { apiService } from "../common/api.service.js";
 
-export default {
-  name: "advert-actions",
+  import { apiService } from "../common/api.service.js";
 
-  props: {
-    slug: {
-      type:String,
-      required: true
+  export default {
+    name: "advert-actions",
+
+    props: {
+      slug: {
+        type: String,
+        required: true
+      },
+
     },
 
-  },
-
-  data() {
-    return {
-      
-    };
-  },
-  
-  methods: {
+    data() {
+      return {
+        
+      };
+    },
     
-    deleteAdvert(review) {
-      let delete_advert_url = `api/v1/adverts/${this.slug}/`;
+    methods: {
+      
+      deleteAdvert(review) {
 
-      apiService(delete_advert_url, "DELETE").then(data => {
-        this.$router.push("/adverts");
-      }).catch(error => {
-          console.log(error);
-      });
-    },
+        let delete_advert_url = `api/v1/adverts/${this.slug}/`;
 
-  }
+        apiService(delete_advert_url, "DELETE").then(data => {
+          this.$router.push("/adverts");
+        }).catch(error => {
+            console.log(error);
+        });
 
-};
+      },
+
+    }
+
+  };
+
 </script>
 
 <style scoped>

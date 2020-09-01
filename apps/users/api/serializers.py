@@ -3,14 +3,22 @@ from rest_framework import serializers
 from datetime import datetime, timezone
 from django.utils.timesince import timesince
 
-from users.models import CustomUser, Review
+from apps.users.models import CustomUser, Review
+
 class AvatarSerializer(serializers.ModelSerializer):
     
+    """ This serializes a user's avatar
+    """
     class Meta:
         model = CustomUser
         fields = ("profile_picture",)
 
+
 class CustomUserSerializer(serializers.ModelSerializer):
+
+    """ This serialiazes a custom user
+    """
+
     id = serializers.IntegerField(read_only=True)
     reviews = serializers.SerializerMethodField()
     current_user_has_reviewed = serializers.SerializerMethodField()
@@ -56,7 +64,12 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
 #         return object.advert
 
+
 class ReviewSerializer(serializers.ModelSerializer):
+
+    """ This serializes a user review
+    """
+
     id = serializers.IntegerField(read_only=True)
     reviewer = serializers.StringRelatedField(read_only=True)
     duration = serializers.SerializerMethodField()
