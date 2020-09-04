@@ -1,14 +1,16 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
-import ReviewEditor from "./views/ReviewEditor.vue";
-import Adverts from "./views/Adverts.vue";
-import AdvertCreate from "./views/AdvertCreate.vue";
-import AdvertDetail from "./views/AdvertDetail.vue";
-import UserDetail from "./views/UserDetail.vue";
-import Wishlist from "./views/Wishlist.vue";
-import Category from "./views/Category.vue";
-import SearchView from "./views/SearchView.vue";
+
+import Home from "@/views/Home/Home.vue";
+import ReviewEditor from "@/views/Reviews/ReviewEditor.vue";
+import Adverts from "@/views/Adverts/Adverts.vue";
+import AdvertCreate from "@/views/Adverts/AdvertCreate.vue";
+import AdvertDetail from "@/views/Adverts/AdvertDetail.vue";
+import UserDetail from "@/views/User/UserDetail.vue";
+import Wishlist from "@/views/Wishlist/Wishlist.vue";
+import Category from "@/views/Category/Category.vue";
+import SearchView from "@/views/Search/SearchView.vue";
+import JoinMarche from "@/views/Modals/JoinMarche.vue";
 
 
 Vue.use(Router);
@@ -24,13 +26,20 @@ const router = new Router({
     },
 
     {
+      path: "/join",
+      name: "join",
+      component: JoinMarche
+    },
+
+    {
       path: "/wishlist",
       name: "wishlist",
-      
       component: Wishlist,
+
       meta: {
         requiresAuth: true,
       },
+        
     },
 
     {
@@ -53,9 +62,19 @@ const router = new Router({
       
       component: UserDetail,
       props: true,
+
+      // children: [
+      //   {
+      //     path: "/join",
+      //     name: "join",
+      //     component: JoinMarche
+      //   }
+      // ],
+
       meta: {
         requiresAuth: true,
       },
+
     },
 
     {
@@ -64,22 +83,27 @@ const router = new Router({
       component: SearchView,
       props: true
     },
+
     {
       path: "/ads_create/:slug?",
       name: "ads_create",
       component: AdvertCreate,
       
       props: true,
-      meta: {
-        requiresAuth: true,
-      },
+
+      // meta: {
+      //   requiresAuth: true,
+      // },
+
     },
+
     {
       path: "/review/:id",
       name: "edit_review",
       component: ReviewEditor,
       props: true
     },
+
     {
       path: "/adverts",
       name: "adverts",
@@ -90,18 +114,24 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  var check = true;
+  var isAuthenticated = JSON.parse(window.localStorage.getItem("authenticated"));
 
   if (to.matched.some(route => route.meta.requiresAuth)) {
 
-    if (window.localStorage.getItem("authenticated") === "true") {
+    if (isAuthenticated) {
+
       next();
-    } else {
+
+    } else { 
+
+      next({
+        name: "join" // back to safety route //
+      });
       
-      next('/');
     }
     
   }
+
   next();
 });
 

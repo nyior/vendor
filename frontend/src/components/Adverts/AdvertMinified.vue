@@ -8,6 +8,7 @@
         <div id="productImageBackground">
           <img :src="advert.file" class="img-fluid productImage" alt="Responsive image" />
         </div>
+        
       </div>
 
       <div class="text-muted mt-2">
@@ -32,7 +33,7 @@
 
 <script>
 
-  import { apiService } from "../common/api.service.js";
+  import { apiService } from "@/common/api.service.js";
 
   export default {
     name: "advert-detail-minified",

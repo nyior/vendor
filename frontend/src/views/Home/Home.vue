@@ -4,24 +4,28 @@
       <button class="btn btn-lg">Sell on Marche</button>
     </router-link>
 
-    <div class="row m-0  h-100 w-100 home-hero">
-      <div class="col-12 col-md-6 ml-md-auto mr-md-auto d-flex flex-column align-items-center justify-content-center text-center ">
-        <div>
+    <div class="row home-hero">
+      <div class="col-12 col-md-10 ml-md-auto mr-md-auto d-flex flex-column align-items-center text-center ">
+        <div class="hero-text">
           <h1 class="heading">Welcome to Marche</h1>
-          <h4 class="mt-5">
+          <h4 class="mt-5 sub-heading">
             We help you discover products and services you are looking for on
             campus, and we help student entrepreneurs build successful businesses.
             We are Marche!
           </h4>
           <router-link :to="{ name: 'adverts' }">
-            <button class="btn btn-lg mt-4 px-4">Explore</button>
+            <button class="btn btn-lg mt-4 py-3 white-btn">Explore</button>
           </router-link>
         </div>
         <!-- <img src="../assets/collage.png" alt=""> -->
       </div>
     </div>
 
-    <h1 class="heading mt-4 mb-2 py-5">Discover Products and Services by Categories</h1>
+    <div class="col-12 col-md-10 ml-md-auto mr-md-auto text-center mt-5">
+      <h1 class="heading mt-4 mb-2 py-5">
+        Discover Products and Services by Categories
+      </h1>
+    </div>
 
     <div class="container">
       <div
@@ -159,17 +163,17 @@ export default {
 
 <style scoped>
   .home-hero {
-    font-size: 1.4rem;
     background-image: linear-gradient(#7a09c4, #200135);
     color: white;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
-  .btn {
-    background-color: white !important;
-    color: #200135 !important;
-    font-weight: bold;
+  .hero-text {
+      margin-top:15rem;
   }
-
   .fa:hover {
     color: #200135 !important;
   }
@@ -199,5 +203,9 @@ export default {
     .col-md-3:nth-child(n + 5) {
       margin-top: 0rem;
     }
+
+    .hero-text {
+      margin-top:10rem;
+  }
   }
 </style>

@@ -5,7 +5,7 @@
     >
 
       <h1 class="heading mt-5 mb-2">
-          Create an Advert Now
+          Create an Advert 
       </h1>
 
       <div class="col-md-6 col-12 mt-5 shadow border px-3 py-3">
@@ -15,6 +15,23 @@
           class="p-3 was-validated"
           enctype="multipart/form-data"
         >
+
+          <div class="form-group mb-3">
+
+            <canvas class="rounded text-center" id="picture" width="250" height="150">
+
+              
+            </canvas>
+
+            <input type="file" 
+                    required ref="file"  
+                    v-on:change="handleFileUpload" 
+                    accept="image/gif, image/jpeg, image/png"
+                    id="hide-icon"
+            />
+                   
+          </div>
+          
           <div class="form-group">
             <label for="advert-name">Advert Name</label>
             <input
@@ -77,13 +94,6 @@
           </div>
 
           <div class="form-group">
-            <label
-              >Add an image that shows your product/service (required)
-              <input type="file" required ref="file"  v-on:change="handleFileUpload" />
-            </label>  
-          </div>
-
-          <div class="form-group">
             <label for="description">Advert Description</label>
             <textarea
               class="form-control"
@@ -111,7 +121,7 @@
 
 <script>
 
-  import { apiService } from "../common/api.service.js";
+  import { apiService } from "@/common/api.service.js";
 
   export default {
     name: "adverts-create",
@@ -236,4 +246,20 @@
   
 </script>
 
-<style scoped></style>
+<style scoped>
+
+#hide-icon{
+  display: none;
+}
+
+#picture{
+  background-color: grey;
+  color: white;
+  font-weight: bolder;
+}
+
+p{
+  z-index: 1;
+}
+
+</style>

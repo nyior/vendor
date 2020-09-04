@@ -41,8 +41,8 @@
 </template>
 
 <script>
-import { apiService } from "../common/api.service.js";
-import AdvertMinified from "@/components/AdvertMinified.vue";
+import { apiService } from "@/common/api.service.js";
+import AdvertMinified from "@/components/Adverts/AdvertMinified.vue";
 
 export default {
   name: "SearchView",

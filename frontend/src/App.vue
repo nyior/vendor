@@ -15,12 +15,16 @@
 </template>
 
 <script>
-import NavbarComponent from "./components/Navbar.vue";
-import FooterComponent from "./components/Footer.vue";
 
-import { apiService } from "./common/api.service.js";
+// need to figure out how to import multiple components at once
+
+import NavbarComponent from "@/components/Navigation/Navbar.vue";
+import  FooterComponent from "@/components/Navigation/Footer.vue";
+
+import { apiService } from "@/common/api.service.js";
 
 export default {
+
   name: "App",
   components: {
     NavbarComponent, 
@@ -29,8 +33,8 @@ export default {
 
   data(){
     return{
+
       is_authenticated: null,
-    
     }
   },
 
@@ -55,26 +59,28 @@ export default {
 
   created(){
     this.setUserInfo();
-    console.log(window.localStorage.getItem("authenticated"));
   }
 };
+
 </script>
 
 <style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+  #app {
+    font-family: "Avenir", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+  }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+  #nav a {
+    font-weight: bold;
+    color: #2c3e50;
+  }
+
+  #nav a.router-link-exact-active {
+    color: #42b983;
+  }
+
 </style>

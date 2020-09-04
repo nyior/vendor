@@ -154,10 +154,10 @@
 </template>
 
 <script>
-import { apiService } from "../common/api.service.js";
-import ReviewDetail from "@/components/ReviewDetail.vue";
-import UpdateUserProfileForm from "@/components/UpdateUserProfileForm.vue";
-import AdvertMinified from "@/components/AdvertMinified.vue";
+import { apiService } from "@/common/api.service.js";
+import ReviewDetail from "@/components/Reviews/ReviewDetail.vue";
+import UpdateUserProfileForm from "@/components/User/UpdateUserProfileForm.vue";
+import AdvertMinified from "@/components/Adverts/AdvertMinified.vue";
 
 export default {
   name: "adverts-category",

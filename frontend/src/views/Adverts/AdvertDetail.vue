@@ -28,15 +28,17 @@
 </template>
 
 <script>
-  import { apiService } from "../common/api.service.js";
-  import advertActions from "@/components/advertActions.vue"
-  import AdvertMinified from "@/components/AdvertMinified.vue";
+  import { apiService } from "@/common/api.service.js";
 
+  // I will have to figure out how to import multiple files at once
+  import AdvertActions from "@/components/Adverts/AdvertActions.vue"
+  import AdvertMinified from "@/components/Adverts/AdvertActions.vue"
+  
   export default {
     name: "advert-detail",
 
     components: {
-      advertActions,
+      AdvertActions,
       AdvertMinified
     },
 

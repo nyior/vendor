@@ -28,9 +28,10 @@
 
 <script>
 
-  import { apiService } from "../common/api.service.js";
-  import CategoriesList from "@/components/CategoriesList.vue";
-  import AdvertMinified from "@/components/AdvertMinified.vue";
+  import { apiService } from "@/common/api.service.js";
+  
+  import CategoriesList from "@/components/Category/CategoriesList.vue";
+  import AdvertMinified from "@/components/Adverts/AdvertMinified.vue";
 
   export default {
     name: "adverts",

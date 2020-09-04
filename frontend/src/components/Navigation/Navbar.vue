@@ -1,6 +1,6 @@
 <template>
 
-  <nav class="navbar navbar-expand-lg py-4 shadow my-navbar sticky-top">
+  <nav class="navbar navbar-expand-lg py-4 shadow my-navbar  sticky-top">
 
     <router-link :to="{ name: 'home' }" class="navbar-brand pl-3">Marche`</router-link>
 
@@ -20,7 +20,7 @@
 
         <li class="nav-item mr-3">
           <router-link :to="{ name: 'adverts' }">
-            <button class="btn btn-lg">Explore</button>
+            <button class="btn btn-lg white-btn py-3">Explore</button>
           </router-link>
         </li>
 
@@ -113,11 +113,6 @@
     background-color: #7a09c4;
     font-weight: bold;
     /* width: 100% */
-  }
-  .btn {
-    background-color: white !important;
-    color: #200135 !important;
-    font-weight: bold;
   }
 
   .navbar-brand {
