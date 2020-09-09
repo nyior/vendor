@@ -1,6 +1,6 @@
 <template>
 
-  <nav class="navbar navbar-expand-lg py-4 shadow my-navbar  sticky-top">
+  <nav class="navbar navbar-expand-lg py-3 shadow my-navbar  sticky-top">
 
     <router-link :to="{ name: 'home' }" class="navbar-brand pl-3">Marche`</router-link>
 
@@ -20,19 +20,19 @@
 
         <li class="nav-item mr-3">
           <router-link :to="{ name: 'adverts' }">
-            <button class="btn btn-lg white-btn py-3">Explore</button>
+            <button class="btn  white-btn py-3">Explore</button>
           </router-link>
         </li>
 
-        <li class="nav-item mr-3 mt-2" v-if="!is_authenticated">
+        <li class="nav-item mr-3 mt-3" v-if="!is_authenticated">
           <a class="link" href="/accounts/login/">Login</a>
         </li>
 
-        <li class="nav-item mt-2" v-if="!is_authenticated">
+        <li class="nav-item mt-3" v-if="!is_authenticated">
           <a class="link" href="/accounts/signup/">Register</a>
         </li>
 
-        <li class="nav-item mr-3 mt-2" v-if="is_authenticated">
+        <li class="nav-item mr-3 mt-3" v-if="is_authenticated">
           <a class="link" href="/accounts/logout/">Logout</a>
         </li>
 
@@ -56,14 +56,21 @@
 
     </div>
 
+    <CategoryList />
+
   </nav>
 
 </template>
 
 <script>
+  import CategoryList from "@/components/Category/CategoriesList.vue"
 
   export default {
     name: "NavbarComponent",
+
+    components: {
+      CategoryList
+    },
 
     props: {
       authenticated: {
@@ -95,6 +102,14 @@
               name: "search",
               params: { search_key: this.search_word }
         });
+      },
+
+      openNav(){
+        document.getElementById("myNav").style.width = "70%";
+      },
+  
+      closeNav(){
+        document.getElementById("myNav").style.width = "0%";
       }
     },
 
@@ -111,7 +126,7 @@
   .my-navbar {
     font-size: 1.4rem;
     background-color: #7a09c4;
-    font-weight: bold;
+    color: white !important;
     /* width: 100% */
   }
 

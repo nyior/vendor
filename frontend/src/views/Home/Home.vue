@@ -1,20 +1,19 @@
 <template>
   <div class="home">
-    <router-link class="sell hide-on-mobile" :to="{ name: 'ads_create' }">
-      <button class="btn btn-lg">Sell on Marche</button>
-    </router-link>
+    
+    <Sell />
 
     <div class="row home-hero">
       <div class="col-12 col-md-10 ml-md-auto mr-md-auto d-flex flex-column align-items-center text-center ">
         <div class="hero-text">
           <h1 class="heading">Welcome to Marche</h1>
-          <h4 class="mt-5 sub-heading">
+          <h4 class="mt-5 sub-heading px-4">
             We help you discover products and services you are looking for on
             campus, and we help student entrepreneurs build successful businesses.
             We are Marche!
           </h4>
           <router-link :to="{ name: 'adverts' }">
-            <button class="btn btn-lg mt-4 py-3 white-btn">Explore</button>
+            <button class="btn mt-4 py-3 blue-btn">Explore</button>
           </router-link>
         </div>
         <!-- <img src="../assets/collage.png" alt=""> -->
@@ -22,7 +21,7 @@
     </div>
 
     <div class="col-12 col-md-10 ml-md-auto mr-md-auto text-center mt-5">
-      <h1 class="heading mt-4 mb-2 py-5">
+      <h1 class="heading mt-4 mb-2 py-5 px-md-5 px-2">
         Discover Products and Services by Categories
       </h1>
     </div>
@@ -153,22 +152,27 @@
 </template>
 
 <script>
-export default {
-  name: "home",
-  mounted: function() {
-    document.title = "Marche`";
-  }
-};
+import Sell from "@/components/Others/Sell.vue"
+
+  export default {
+    name: "home",
+
+    components: {
+      Sell
+    },
+
+    mounted: function() {
+      document.title = "Marche`";
+    }
+  };
+
 </script>
 
 <style scoped>
   .home-hero {
-    background-image: linear-gradient(#7a09c4, #200135);
-    color: white;
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    
+    padding-bottom: 15rem;
+    overflow-y: hidden;
   }
 
   .hero-text {
@@ -196,6 +200,13 @@ export default {
 
 
   @media only screen and (max-width: 600px) {
+
+    .home-hero {
+    
+      padding-bottom: 20rem;
+      overflow-y: hidden;
+    }
+
     .categoryImage {
       height: 60px;
     }
@@ -205,7 +216,7 @@ export default {
     }
 
     .hero-text {
-      margin-top:10rem;
-  }
+      margin-top:15rem;
+    }
   }
 </style>

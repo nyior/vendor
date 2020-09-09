@@ -1,8 +1,7 @@
 <template>
   <div class="container-fluid products">
-    <router-link class="sell" :to="{ name: 'ads_create' }">
-      <button class="btn btn-lg">Sell on Marche</button>
-    </router-link>
+    <Sell />
+    
     <div class="row pt-5 pb-0 mt-5 mb-2 text-center d-flex justify-content-center">
       <div class="col-12">
         <CategoriesList />
@@ -33,8 +32,11 @@
   import CategoriesList from "@/components/Category/CategoriesList.vue";
   import AdvertMinified from "@/components/Adverts/AdvertMinified.vue";
 
+  import Sell from "@/components/Others/Sell.vue"
+
   export default {
-    name: "adverts",
+    name: "home",
+
     data() {
       return {
         adverts: [],
@@ -47,7 +49,8 @@
 
     components: {
       CategoriesList,
-      AdvertMinified
+      AdvertMinified,
+      Sell
     },
 
     methods: {
@@ -89,26 +92,5 @@
 
 <style>
 
-  .sell {
-    position: fixed;
-    bottom: 50px;
-    right: 50px;
-    z-index: 10;
-  }
-
-  .sell button{
-    background: #f0f0f0!important;
-    font-size: 1.5rem;
-    padding: 1rem 1.2rem;
-  }
-
-  @media only screen and (max-width: 600px) {
-    
-    .sell {
-      position: fixed;
-      bottom: 30px;
-      right: 20px;
-    }
-  }
   
 </style>

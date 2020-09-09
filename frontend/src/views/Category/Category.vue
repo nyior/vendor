@@ -2,9 +2,7 @@
 
   <div class=" container-fluid products">
 
-    <router-link class="sell" :to="{ name: 'ads_create' }">
-      <button class="btn btn-lg">Sell on Marche</button>
-    </router-link>
+    <Sell />
 
     <div class="row p-5  mt-5 mb-2 text-center d-flex justify-content-center">
         <div class="col-12 ">
@@ -49,12 +47,16 @@ import { apiService } from "@/common/api.service.js";
 import CategoriesList from "@/components/Category/CategoriesList.vue";
 import AdvertMinified from "@/components/Adverts/AdvertMinified.vue";
 
+import Sell from "@/components/Others/Sell.vue"
+
+
 export default {
   name: "adverts-category",
   
   components: {
       CategoriesList,
-      AdvertMinified
+      AdvertMinified,
+      Sell
   },
 
   props: {

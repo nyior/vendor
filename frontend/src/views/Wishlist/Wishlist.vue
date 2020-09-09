@@ -1,8 +1,7 @@
 <template>
   <div class=" container-fluid products">
-    <router-link class="sell" :to="{ name: 'ads_create' }">
-      <button class="btn btn-lg">Sell on Marche</button>
-    </router-link>
+    <Sell />
+
     <div
       v-if="adverts"
       class="row  pt-5 mt-5 categories  px-2 px-md-5 mt-0 mb-2 text-center d-flex"
@@ -24,20 +23,30 @@
              <h4 class="heading mt-4 mb-2 text-danger">
                  <strong> You haven't saved any item yet !!</strong>
             </h4>
+
+            <router-view></router-view>
         </div>
     </div>
+
+    
   </div>
 </template>
 
 <script>
 import { apiService } from "@/common/api.service.js";
+
 import AdvertMinified from "@/components/Adverts/AdvertMinified.vue";
+
+import Sell from "@/components/Others/Sell.vue"
+
+
 
 export default {
   name: "wishlist",
   
   components: {
-      AdvertMinified
+      AdvertMinified,
+      Sell
   },
 
   data() {

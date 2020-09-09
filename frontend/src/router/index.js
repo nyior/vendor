@@ -10,7 +10,7 @@ import UserDetail from "@/views/User/UserDetail.vue";
 import Wishlist from "@/views/Wishlist/Wishlist.vue";
 import Category from "@/views/Category/Category.vue";
 import SearchView from "@/views/Search/SearchView.vue";
-import JoinMarche from "@/views/Modals/JoinMarche.vue";
+import JoinMarche from "@/components/Modals/JoinMarche.vue";
 
 
 Vue.use(Router);
@@ -26,19 +26,17 @@ const router = new Router({
     },
 
     {
-      path: "/join",
-      name: "join",
-      component: JoinMarche
-    },
-
-    {
       path: "/wishlist",
       name: "wishlist",
       component: Wishlist,
 
-      meta: {
-        requiresAuth: true,
-      },
+      children: [
+        {
+          path: "",
+          name: "join",
+          components: JoinMarche 
+        }
+      ],
         
     },
 
@@ -63,17 +61,17 @@ const router = new Router({
       component: UserDetail,
       props: true,
 
-      // children: [
-      //   {
-      //     path: "/join",
-      //     name: "join",
-      //     component: JoinMarche
-      //   }
-      // ],
+      children: [
+        {
+          path: "",
+          name: "join",
+          component: JoinMarche
+        }
+      ],
 
-      meta: {
-        requiresAuth: true,
-      },
+      // meta: {
+      //   requiresAuth: true,
+      // },
 
     },
 
@@ -91,9 +89,15 @@ const router = new Router({
       
       props: true,
 
-      // meta: {
-      //   requiresAuth: true,
-      // },
+      children: [
+        {
+          path: " ",
+          name: "join",
+          components: {
+            JoinMarche
+          }
+        }
+      ],
 
     },
 
@@ -113,26 +117,26 @@ const router = new Router({
   ]
 });
 
-router.beforeEach((to, from, next) => {
-  var isAuthenticated = JSON.parse(window.localStorage.getItem("authenticated"));
+// router.beforeEach((to, from, next) => {
+//   var isAuthenticated = JSON.parse(window.localStorage.getItem("authenticated"));
 
-  if (to.matched.some(route => route.meta.requiresAuth)) {
+//   if (to.matched.some(route => route.meta.requiresAuth)) {
 
-    if (isAuthenticated) {
+//     if (isAuthenticated) {
 
-      next();
+//       next();
 
-    } else { 
+//     } else { 
 
-      next({
-        name: "join" // back to safety route //
-      });
+//       next({
+//         name: "join" // back to safety route //
+//       });
       
-    }
+//     }
     
-  }
+//   }
 
-  next();
-});
+//   next();
+// });
 
 export default router;

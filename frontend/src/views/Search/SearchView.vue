@@ -1,8 +1,6 @@
 <template>
   <div class="container-fluid pt-5 pb-0 mt-5  ">
-    <router-link class="sell hide-on-mobile" :to="{ name: 'ads_create' }">
-      <button class="btn btn-lg">Sell on Marche</button>
-    </router-link>
+    <Sell />
 
     <div class="row  text-center px-4 hide-on-desktop">
 
@@ -43,6 +41,8 @@
 <script>
 import { apiService } from "@/common/api.service.js";
 import AdvertMinified from "@/components/Adverts/AdvertMinified.vue";
+import Sell from "@/components/Others/Sell.vue"
+
 
 export default {
   name: "SearchView",
@@ -64,7 +64,8 @@ export default {
   },
 
   components: {
-    AdvertMinified
+    AdvertMinified,
+    Sell
   },
 
   methods: {

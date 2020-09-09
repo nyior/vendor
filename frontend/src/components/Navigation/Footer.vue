@@ -5,7 +5,7 @@
 		<div class="row m-2 text-muted">
 
 			<div class="col-2" >
-				<router-link :to="{ name: 'home' }" class="footer-tab  active">
+				<router-link :to="{ name: 'home' }" class="footer-tab">
 					<div>
 						<i class="fa fa-window-maximize footer-icon"></i>
 					</div>
@@ -75,29 +75,29 @@
   export default {
     name: "Footer",
 
-	methods: {
+// 	methods: {
 
-		addActiveClass() {
+// 		addActiveClass() {
 
-			var footerTabsList = document.getElementsByClassName("footer-tab")
+// 			var footerTabsList = document.getElementsByClassName("footer-tab")
 
-			for (let index = 0; index < footerTabsList.length; index++) {
+// 			for (let index = 0; index < footerTabsList.length; index++) {
 
-				footerTabsList[index].addEventListener("click", function() {
-					let current = document.getElementsByClassName("active");
-					// current[0].classList.remove("active");
-					current[0].className = current[0].className.replace(" active", "");
-					footerTabsList[index].className += " active";
-					// footerTabsList[index].classList.add("active");
+// 				footerTabsList[index].addEventListener("click", function() {
+// 					let current = document.getElementsByClassName("active");
+// 					// current[0].classList.remove("active");
+// 					current[0].className = current[0].className.replace(" active", "");
+// 					footerTabsList[index].className += " active";
+// 					// footerTabsList[index].classList.add("active");
 				
-				});				
-			}
-		}
-	},
+// 				});				
+// 			}
+// 		}
+// 	},
 
-	mounted: function() {
-    	this.addActiveClass();
-  }
+// 	mounted: function() {
+//     	this.addActiveClass();
+//   }
 
     
   };
@@ -120,12 +120,9 @@
 		font-size: 2rem;	
 	}
 
-	.active{
+	#my-footer .router-link-exact-active {
 		color: #7a09c4 !important;
-	}
-
-	ul li {
-		margin: 0rem 1.5rem;
+		cursor: pointer;
 	}
 
 </style>

@@ -1,12 +1,13 @@
 <template>
 
   <div class=" container products">
-    <div class="row  categories  p-5 mt-5  mb-2 text-left d-flex  justify-content-center align-items-center"
-    >
 
-      <h1 class="heading mt-5 mb-2">
-          Create an Advert 
-      </h1>
+    <div class="row  categories  p-5 mt-5  mb-2 text-left d-flex  justify-content-center align-items-center">
+      <div class="col-12 text-center ">
+        <h1 class="heading mt-5 mb-2">
+            Create an Advert 
+        </h1>
+      </div>
 
       <div class="col-md-6 col-12 mt-5 shadow border px-3 py-3">
 
@@ -16,23 +17,30 @@
           enctype="multipart/form-data"
         >
 
-          <div class="form-group mb-3">
+          <div class="form-group mb-5 mt-3 text-center">
+          
+            <label for="file" style="cursor: pointer;">
+            
+              <img :src="img_src"  class="img-fluid rounded"  
+                  id="product-image"
+                  width="300" 
+                  height="200"
+              />
 
-            <canvas class="rounded text-center" id="picture" width="250" height="150">
-
-              
-            </canvas>
+            </label>
 
             <input type="file" 
-                    required ref="file"  
-                    v-on:change="handleFileUpload" 
-                    accept="image/gif, image/jpeg, image/png"
-                    id="hide-icon"
-            />
-                   
+                required ref="file"  
+                v-on:change="handleFileUpload" 
+                accept="image/gif, image/jpeg, image/png" 
+                style="display: none;" 
+                id="file"
+            /> 
+
+                    
           </div>
           
-          <div class="form-group">
+          <div class="form-group mt-3">
             <label for="advert-name">Advert Name</label>
             <input
               type="text"
@@ -45,7 +53,7 @@
             <div class="invalid-feedback">Please fill out this field.</div>
           </div>
 
-          <div class="form-group">
+          <div class="form-group mt-3">
             <label for="quantity">Quantity</label>
             <input
               type="number"
@@ -58,7 +66,7 @@
             <div class="invalid-feedback">Only figures allowed</div>
           </div>
 
-          <div class="form-group">
+          <div class="form-group mt-3">
             <label for="unit-price">Unit Price</label>
             <input
               type="number"
@@ -74,7 +82,7 @@
             </div>
           </div>
 
-          <div class="form-group mb-2">
+          <div class="form-group mb-2 mt-3">
             <label for="category">Advert Category</label>
             <select
               class="form-control"
@@ -93,7 +101,7 @@
             </div>
           </div>
 
-          <div class="form-group">
+          <div class="form-group mt-3">
             <label for="description">Advert Description</label>
             <textarea
               class="form-control"
@@ -104,12 +112,23 @@
             ></textarea>
           </div>
 
-          <button class="btn btn-lg btn-blue" type="submit">Post Advert</button>
+          <button class="btn  blue-btn" type="submit">create</button>
         </form>
 
         <p v-if="error" class="mt-2">
           <strong>{{ error }}</strong>
         </p>
+
+      </div>
+
+    </div>
+
+    <div class="row  p-5  d-flex  justify-content-center align-items-center"
+          >
+
+      <div class="col-md-6 col-12 mt-5 px-3 py-3">
+
+         <router-view ></router-view>
 
       </div>
 
@@ -122,9 +141,16 @@
 <script>
 
   import { apiService } from "@/common/api.service.js";
+  import { is_authenticated } from "@/common/global_variables.js";
+
+  import JoinMarche from "@/components/Modals/JoinMarche.vue";
 
   export default {
     name: "adverts-create",
+
+    components: {
+      JoinMarche
+    },
 
     props: {
       slug: {
@@ -168,6 +194,8 @@
       return {
         error: null,
 
+        img_src: null,
+
         form: {
           name: this.name,
           price: this.price,
@@ -175,13 +203,16 @@
           description: this.description,
           file: this.file,
           category: this.category
-        }
+        }, 
+
+        is_authenticated: is_authenticated
       };
     },
 
     methods: {
       handleFileUpload(event) {
         this.form.file = event.target.files[0];
+        this.img_src = URL.createObjectURL(event.target.files[0]);
       },
 
       postAdvert() {
@@ -248,18 +279,13 @@
 
 <style scoped>
 
-#hide-icon{
-  display: none;
-}
+  #product-image{
+    
+      background-color: grey;
+  }
 
-#picture{
-  background-color: grey;
-  color: white;
-  font-weight: bolder;
-}
-
-p{
-  z-index: 1;
-}
+  p{
+    z-index: 1;
+  }
 
 </style>
