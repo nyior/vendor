@@ -11,31 +11,12 @@
 
 {% block content %}
 
-<div class="row h-100 m-0 w-100">
-    <div class="col-8 border col-md-3 ml-auto mr-auto my-auto shadow p-3 text-center" >
+<div class="row h-100 m-100 px-5  px-md-0">
+    <div class="col-12 col-md-4 ml-md-auto mr-md-auto my-auto border shadow p-3  text-center" >
 
-      <div>
-          {% block messages %}
-            {% if messages %}
-              <div>
-                  <ul>
-                  {% for message in messages %}
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <strong>{{message}}</strong>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                    </div>
-                  {% endfor %}
-                  </ul>
-              </div>
-            {% endif %}
-          {% endblock %}
-      </div>
+          <h3 class="mt-5 mb-5 pacifico"><strong>MARCHE</strong></h3>
 
-      <div >
-          <h3 class="mt-2 mb-4"><strong>MARCHE</strong></h3>
-          <form  id="login_form" method="POST" action="{% url 'account_login' %}">
+          <form  class="mt-5 mb-5" id="login_form" method="POST" action="{% url 'account_login' %}">
               {% csrf_token %}
               
               {{ form|crispy }}
@@ -46,27 +27,31 @@
               
               {% endif %}
 
-              <div class="mb-2">
-                  <button  class="btn btn-blue  custom-btn p-1" type="submit"><strong>Sign In</strong></button>
-              </div>
+              <div class="row py-3 px-3 mb-5">
 
-              <div>
-                  {% load account socialaccount %}
-  
-                  {% get_providers as socialaccount_providers %}
-                  <ul class="social_providers_list p-0 m-0">
-                  {% for provider in socialaccount_providers %}
-                      <a title="{{provider.name}}" class="btn btn-danger p-1 custom-btn" 
-                      href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}"><strong>Sign In With Google</strong> </a>
-                  {% endfor %}
-                  </ul>
+                <div class="col-6 m-0 p-0 text-left">
+                    <button  class="btn blue-btn" type="submit">Sign In</button>
+                </div>
+
+                <div class="col-6 m-0 p-0 text-right">
+                    {% load account socialaccount %}
+    
+                    {% get_providers as socialaccount_providers %}
+                    <ul class="social_providers_list p-0 m-0">
+                    {% for provider in socialaccount_providers %}
+                        <a title="{{provider.name}}" class="btn red-btn" 
+                        href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">Google</a>
+                    {% endfor %}
+                    </ul>
+                </div>
+
               </div>
 
               <hr>
-              <strong>
+              <small class="text-muted">
 
                   <a  class="" href="{% url 'account_reset_password' %}">Forgot Password ?</a> OR  <a  class="" href="{% url 'account_signup' %}">Don't Have an Account ?</a>  
-              </strong>
+              </small>
             </form>
 
       </div>

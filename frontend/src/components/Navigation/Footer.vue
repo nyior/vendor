@@ -53,7 +53,7 @@
 			</div>
 
 			<div class="col-2">
-				<router-link :to="{ name: 'home' }" class="footer-tab">
+				<router-link :to="{ name: 'user_detail', params: { id: id } }" class="footer-tab">
 					<div>
 						<i class="fa fa-user-circle footer-icon"></i>
 					</div>
@@ -71,35 +71,16 @@
 </template>
 
 <script>
+import { user_id }  from "@/common/global_variables.js"
 
   export default {
-    name: "Footer",
-
-// 	methods: {
-
-// 		addActiveClass() {
-
-// 			var footerTabsList = document.getElementsByClassName("footer-tab")
-
-// 			for (let index = 0; index < footerTabsList.length; index++) {
-
-// 				footerTabsList[index].addEventListener("click", function() {
-// 					let current = document.getElementsByClassName("active");
-// 					// current[0].classList.remove("active");
-// 					current[0].className = current[0].className.replace(" active", "");
-// 					footerTabsList[index].className += " active";
-// 					// footerTabsList[index].classList.add("active");
-				
-// 				});				
-// 			}
-// 		}
-// 	},
-
-// 	mounted: function() {
-//     	this.addActiveClass();
-//   }
-
-    
+	name: "Footer", 
+	
+	data() {
+      return {
+        id: user_id,
+      };
+    },
   };
 
 </script>

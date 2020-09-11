@@ -36,7 +36,7 @@
           <router-link
             :to="{ name: 'category', params: { category: 'Phones and Accessories' } }"
           >
-            Phones and Accessories
+            Phones/Accessories
           </router-link> 
         </li> 
 
@@ -81,7 +81,16 @@
             </router-link> 
         </li> 
 
+        <li class="nav-item  mt-3" v-if="!is_authenticated">
+          <a class="btn color-purple white-btn py-3" href="/accounts/login/">Join</a>
+        </li>
+
+        <li class="nav-item  mt-5" v-if="is_authenticated">
+          <a class="btn color-purple white-btn py-3" href="/accounts/logout/">Logout</a>
+        </li>
+
      </ul>
+    
 
   </div>
 
@@ -92,10 +101,17 @@
 </template>
 
 <script>
+import { is_authenticated }  from "@/common/global_variables.js"
 
   export default {
 
     name: "categories-list",
+
+    data() {
+      return {
+        is_authenticated: is_authenticated,
+      };
+    },
 
     methods: {
     
@@ -123,6 +139,11 @@
     text-decoration: none;
     color: white !important;
     font-size: 1.6rem;
+  }
+
+  a.color-purple{
+    color: #7a09c4 !important;
+    font-weight: bold;
   }
 
   .overlay {

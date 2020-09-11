@@ -20,13 +20,17 @@
       </div>
     </div>
 
-    <div class="col-12 col-md-10 ml-md-auto mr-md-auto text-center mt-5">
-      <h1 class="heading mt-4 mb-2 py-5 px-md-5 px-2">
-        Discover Products and Services by Categories
-      </h1>
-    </div>
 
-    <div class="container">
+    <div class="container hide-on-mobile">
+
+      <div class="row">
+        <div class="col-12 col-md-10 ml-md-auto mr-md-auto text-center mt-5">
+          <h1 class="heading mt-4 mb-2 py-5 px-md-5 px-3">
+            Discover Products and Services by Categories
+          </h1>
+        </div>
+      </div>
+
       <div
         class="row m-0 categories p-2 px-md-5 py-3 mt-0 mb-2 text-center d-flex justify-content-center"
       >

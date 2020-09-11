@@ -2,7 +2,7 @@
 
   <nav class="navbar navbar-expand-lg py-3 shadow my-navbar  sticky-top">
 
-    <router-link :to="{ name: 'home' }" class="navbar-brand pl-3">Marche`</router-link>
+    <router-link :to="{ name: 'home' }" class="navbar-brand pacifico pl-3">Marche`</router-link>
 
     <div class="collapse navbar-collapse">
       <form class="form-group has-search my-0 ml-auto mr-auto"
@@ -36,7 +36,7 @@
           <a class="link" href="/accounts/logout/">Logout</a>
         </li>
 
-        <li class="nav-item mt-2 mr-3" v-if="is_authenticated">
+        <li class="nav-item mr-3 mt-3" v-if="is_authenticated">
           <router-link :to="{ name: 'wishlist' }">
             <a class="link">
               <i class="far fa-heart"></i>
@@ -44,7 +44,7 @@
           </router-link>
         </li>
 
-        <li class="nav-item mt-2" v-if="is_authenticated">
+        <li class="nav-item mt-3" v-if="is_authenticated">
           <router-link :to="{ name: 'user_detail', params: { id: id } }">
             <a class="link">
               <i class="far fa-user"></i>
@@ -65,6 +65,9 @@
 <script>
   import CategoryList from "@/components/Category/CategoriesList.vue"
 
+  import { user_id }  from "@/common/global_variables.js"
+  import { is_authenticated }  from "@/common/global_variables.js"
+
   export default {
     name: "NavbarComponent",
 
@@ -72,31 +75,16 @@
       CategoryList
     },
 
-    props: {
-      authenticated: {
-        type: Boolean,
-        required: true
-      }
-    },
-
     data() {
       return {
-        id: null,
-        search_word: null
+        id: user_id,
+        search_word: null,
+        is_authenticated: is_authenticated
       };
     },
 
-    computed: {
-      is_authenticated() {
-        return this.authenticated;
-      }
-    },
-
     methods: {
-      setUserId() {
-        this.id = window.localStorage.getItem("user_id");
-      },
-
+    
       onSubmit(){
         this.$router.push({
               name: "search",
@@ -111,17 +99,12 @@
       closeNav(){
         document.getElementById("myNav").style.width = "0%";
       }
-    },
-
-    mounted: function() {
-      this.setUserId();
     }
+
   };
 </script>
 
 <style scoped>
-
-  @import url("https://fonts.googleapis.com/css?family=Pacifico&display=swap");
 
   .my-navbar {
     font-size: 1.4rem;
@@ -133,7 +116,6 @@
   .navbar-brand {
     font-weight: bold;
     font-size: 2rem;
-    font-family: "Pacifico";
     color: white !important;
   }
 

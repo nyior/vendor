@@ -13,27 +13,10 @@
   <div class="col-8 col-md-3 ml-auto mr-auto my-auto shadow border p-3 text-center" >
 
       <div>
-        {% block messages %}
-          {% if messages %}
-          <div>
-              <ul>
-              {% for message in messages %}
-              <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                      <strong>{{message}}</strong>
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                      </button>
-              </div>
-              {% endfor %}
-              </ul>
-          </div>
-          {% endif %}
-        {% endblock %}
-      </div>
-      
-      <div>
-          <h3 class="mt-2 mb-4"><strong>MARCHE</strong></h3>
-          <form class=" text-center" id="signup_form" method="post" action="{% url 'account_signup' %}">
+
+          <h3 class="mt-5 mb-5 pacifico">MARCHE</h3>
+
+          <form class="mt-5 mb-5 text-center" id="signup_form" method="post" action="{% url 'account_signup' %}">
               {% csrf_token %}
             
               {{ form|crispy }}
@@ -43,30 +26,35 @@
               <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
               
               {% endif %}
-              
-              <div class="mb-2">
-                  <button  class="btn  btn-blue custom-btn p-1" type="submit"><strong>Register Now</strong></button>
-              </div>
+            
+              <div class="row py-3 px-3 mb-5">
 
-              <div>
-                  {% load account socialaccount %}
-  
-                  {% get_providers as socialaccount_providers %}
-                  <ul class="social_providers_list p-0 m-0">
-                  {% for provider in socialaccount_providers %}
-                      <a title="{{provider.name}}" class="btn btn-danger p-1 custom-btn" 
-                      href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}"><strong>Register With Google</strong> </a>
-                  {% endfor %}
-                  </ul>
+                <div class="col-6 m-0 p-0 text-left">
+                    <button  class="btn blue-btn" type="submit">Sign Up</button>
+                </div>
+
+                <div class="col-6 m-0 p-0 text-right">
+                    {% load account socialaccount %}
+    
+                    {% get_providers as socialaccount_providers %}
+                    <ul class="social_providers_list p-0 m-0">
+                    {% for provider in socialaccount_providers %}
+                        <a title="{{provider.name}}" class="btn red-btn" 
+                        href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">Google</a>
+                    {% endfor %}
+                    </ul>
+                </div>
+
               </div>
 
               <hr>
-              <strong>
-                 <a  class="" href="{% url 'account_login' %}">Already Have an Account ?</a>  
-              </strong>
-            </form>
+              <small class="text-muted">
 
-            
+                <a  class="" href="{% url 'account_login' %}">Already Have an Account ?</a>    
+              </small>
+              
+            </form>
+           
       </div>
 
   </div>

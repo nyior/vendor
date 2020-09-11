@@ -2,11 +2,13 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 
+@import url("https://fonts.googleapis.com/css?family=Pacifico&display=swap");
+
 html,
 body {
 	font-size: 62.5%;
 	font-family: "Montserrat";
-	letter-spacing: 1px;
+	letter-spacing: 1px !important;
 	margin: 0px;
     padding: 0px;
     overflow-x: hidden!important;
@@ -15,10 +17,21 @@ body {
 .margin-bottom{
 	margin-bottom: 10rem;
 }
+
+.pacifico{
+	font-family: "Pacifico";
+}
+
 .text-muted {
 	color: black !important;
 	opacity: 0.7;
 }
+
+small{
+	font-size: 1.4rem !important;
+	letter-spacing: 1px;
+}
+
 
 .heading{
 	font-size: 5rem;	
@@ -45,49 +58,60 @@ a {
 
 a:hover {
 	text-decoration: none !important;
-	color: rgba(255, 255, 255, 0.8) !important;
 }
 
 #login_form label {
 	display: none;
 }
-#social-icon {
-	margin-right: 0.2rem;
-}
 
-.custom-btn {
-	width: 18em;
-	font-size: 1.4rem;
-}
 
 .white-btn {
     background-color: white !important;
-    color: #200135 !important;
-	font-weight: bold;
-	width: 10em;
-	font-size: 2rem;
-}
-.btn-blue {
-	background-color: #8033ff !important;
-	color: white !important;
+    color: #7a09c4 !important;
+	width: 12rem !important;
+	font-size: 1.2rem !important;
+	letter-spacing: 1px !important;
+	
 }
 
-label,
+.blue-btn {
+	background-color: #7a09c4 !important;
+	color: white !important;
+	width: 14rem !important;
+	font-size: 1.4rem !important;
+	letter-spacing: 1px !important;
+	
+}
+
+.red-btn {
+	background-color: #d34836 !important;
+	color: white !important;
+	width: 14rem !important;
+	font-size: 1.4rem !important;
+	letter-spacing: 1px !important;
+	
+}
+
+label,  textarea,
 input[type="search"],
 input[type="text"],
 input[type="number"],
 input[type="password"],
-input[type="email"] {
-	font-size: 1.4rem;
+input[type="email"] 
+{
+
+	font-size: 1.4rem !important;
+}
+
+
+.invalid-feedback{
+	font-size: 1.4rem !important;	
 }
 
 #login_form input[type="checkbox"] {
 	display: none;
 }
 
-.social_providers_list a {
-	text-decoration: none;
-}
 
 /* Signup Page Styles */
 
@@ -211,7 +235,6 @@ input[type="email"] {
 	font-size: 1.3rem;
 }
 
-/* Email Confirmation Styling */
 
 #verification_sent_info {
 	text-align: center;
@@ -228,12 +251,13 @@ input[type="email"] {
 	visibility: visible;
 }
 
+
 /* for screens that are 600px wide and below */
 
 @media only screen and (max-width: 600px) {
 	.hide-on-mobile{
 
-		visibility: hidden;
+		display: None;
 	}
 
 	.hide-on-desktop{
@@ -249,7 +273,12 @@ input[type="email"] {
 		font-size: 1.5rem;
 		opacity: 0.7;	
 	}
+
+	.sell {
+		position: fixed;
+		bottom: 30px;
+		right: 20px;
+	  }
 }
 
 
-/* for screens that are 600px wide and higher */

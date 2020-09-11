@@ -1,10 +1,7 @@
 <template>
   <div id="app">
     <div class="margin-bottom">
-      <NavbarComponent 
-          :authenticated="is_authenticated"
-        
-      />
+      <NavbarComponent />
 
       <router-view />
 
@@ -15,8 +12,6 @@
 </template>
 
 <script>
-
-// need to figure out how to import multiple components at once
 
 import NavbarComponent from "@/components/Navigation/Navbar.vue";
 import  FooterComponent from "@/components/Navigation/Footer.vue";
@@ -35,6 +30,7 @@ export default {
     return{
 
       is_authenticated: null,
+      
     }
   },
 
