@@ -6,18 +6,15 @@ from django.utils.timesince import timesince
 from apps.users.models import CustomUser, Review
 
 class AvatarSerializer(serializers.ModelSerializer):
-    
-    """ This serializes a user's avatar
-    """
+    """This serializes a user's avatar"""
+
     class Meta:
         model = CustomUser
         fields = ("profile_picture",)
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
-
-    """ This serialiazes a custom user
-    """
+    """ This serialiazes a custom user"""
 
     id = serializers.IntegerField(read_only=True)
     reviews = serializers.SerializerMethodField()
