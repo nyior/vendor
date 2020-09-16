@@ -1,6 +1,6 @@
 <template>
 
-  <div class=" container products">
+  <div class="container products">
 
     <div class="row  categories  p-5 mt-5  mb-2 text-left d-flex  justify-content-center align-items-center">
       <div class="col-12 text-center ">
@@ -191,6 +191,7 @@
     },
 
     data() {
+
       return {
         error: null,
 
@@ -210,6 +211,7 @@
     },
 
     methods: {
+
       handleFileUpload(event) {
         this.form.file = event.target.files[0];
         this.img_src = URL.createObjectURL(event.target.files[0]);

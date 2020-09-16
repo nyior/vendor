@@ -6,7 +6,6 @@ from apps.adverts.models import Advert
 # Create your models here.
 
 class CustomUser(AbstractUser):
-
     """ This class models a marche user
     """
     id = models.AutoField(primary_key=True)
@@ -19,7 +18,6 @@ class CustomUser(AbstractUser):
 
 #user-review
 class Review(models.Model):
-
     """ This class models a review object
     """
     reviewer = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -31,5 +29,7 @@ class Review(models.Model):
     description = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+       unique_together = ("reviewer", "reviewee")
 
 
