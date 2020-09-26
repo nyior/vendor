@@ -155,6 +155,8 @@
 
 <script>
 import { apiService } from "@/common/api.service.js";
+import { is_authenticated } from "@/common/global_variables.js";
+
 import ReviewDetail from "@/components/Reviews/ReviewDetail.vue";
 import UpdateUserProfileForm from "@/components/User/UpdateUserProfileForm.vue";
 import AdvertMinified from "@/components/Adverts/AdvertMinified.vue";
@@ -171,7 +173,7 @@ export default {
   props: {
     id: {
       type: Number,
-      required: true
+      required: false
     }
   },
 
@@ -342,6 +344,22 @@ export default {
     this.getUser();
     this.getReviews();
     this.getUserAdverts();
+  },
+
+  async beforeRouteEnter(to, from, next){
+
+    if (is_authenticated) {
+
+      next();
+
+    } else {
+
+      next({
+        name: 'continue' // back to safety route //
+      });
+
+    } 
+
   }
 };
 </script>

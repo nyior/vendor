@@ -34,6 +34,7 @@
 
 <script>
 import { apiService } from "@/common/api.service.js";
+import { is_authenticated } from "@/common/global_variables.js";
 
 import AdvertMinified from "@/components/Adverts/AdvertMinified.vue";
 
@@ -106,6 +107,22 @@ export default {
     this.setRequestUser();
     this.getAdverts();
     document.title = "Wishlist";  
+  },
+
+  async beforeRouteEnter(to, from, next){
+
+    if (is_authenticated) {
+
+      next();
+
+    } else {
+
+      next({
+        name: 'continue' // back to safety route //
+      });
+
+    } 
+
   }
 };
 

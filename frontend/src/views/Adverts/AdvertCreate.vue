@@ -123,7 +123,7 @@
 
     </div>
 
-    <div class="row  p-5  d-flex  justify-content-center align-items-center"
+    <!-- <div class="row  p-5  d-flex  justify-content-center align-items-center"
           >
 
       <div class="col-md-6 col-12 mt-5 px-3 py-3">
@@ -131,8 +131,7 @@
          <router-view ></router-view>
 
       </div>
-
-    </div>
+    </div> -->
 
   </div>
 
@@ -250,7 +249,7 @@
 
     async beforeRouteEnter(to, from, next){
 
-      if (to.params.slug !== undefined) {
+      if (to.params.slug !== undefined && is_authenticated) {
         let get_advert_url = `api/v1/adverts/${to.params.slug}/`;
         
         let data = await apiService(get_advert_url, "GET");
@@ -262,8 +261,16 @@
         to.params.category = data.category;
 
         return next();
+      } else if(!is_authenticated) {
+
+        return next({
+          name: 'continue' // back to safety route //
+        });
+
       } else {
+
         return next();
+        
       }
       
     },
@@ -280,7 +287,6 @@
 <style scoped>
 
   #product-image{
-    
       background-color: grey;
   }
 

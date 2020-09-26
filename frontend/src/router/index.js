@@ -11,6 +11,9 @@ import Wishlist from "@/views/Wishlist/Wishlist.vue";
 import Category from "@/views/Category/Category.vue";
 import SearchView from "@/views/Search/SearchView.vue";
 import JoinMarche from "@/components/Modals/JoinMarche.vue";
+import Continue from "@/views/Auth/Continue.vue";
+
+import { is_authenticated } from "@/common/global_variables.js";
 
 
 Vue.use(Router);
@@ -23,6 +26,12 @@ const router = new Router({
       path: "/",
       name: "home",
       component: Home
+    },
+
+    {
+      path: "/continue",
+      name: "continue",
+      component: Continue
     },
 
     {
@@ -69,10 +78,6 @@ const router = new Router({
         }
       ],
 
-      // meta: {
-      //   requiresAuth: true,
-      // },
-
     },
 
     {
@@ -97,8 +102,7 @@ const router = new Router({
             JoinMarche
           }
         }
-      ],
-
+      ]
     },
 
     {
@@ -118,18 +122,19 @@ const router = new Router({
 });
 
 // router.beforeEach((to, from, next) => {
-//   var isAuthenticated = JSON.parse(window.localStorage.getItem("authenticated"));
+//   let isAuthenticated = is_authenticated;
 
-//   if (to.matched.some(route => route.meta.requiresAuth)) {
+//   if (to.matched.some(route => route.meta.requiresAuth)){
 
 //     if (isAuthenticated) {
+//       console.log("user is authenticated")
 
 //       next();
 
 //     } else { 
-
+//       console.log("user is not authenticated redirecting to home")
 //       next({
-//         name: "join" // back to safety route //
+//         name: 'home' // back to safety route //
 //       });
       
 //     }
@@ -137,6 +142,7 @@ const router = new Router({
 //   }
 
 //   next();
+  
 // });
 
 export default router;
