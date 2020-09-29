@@ -13,9 +13,6 @@ import SearchView from "@/views/Search/SearchView.vue";
 import JoinMarche from "@/components/Modals/JoinMarche.vue";
 import Continue from "@/views/Auth/Continue.vue";
 
-import { is_authenticated } from "@/common/global_variables.js";
-
-
 Vue.use(Router);
 
 const router = new Router({
@@ -31,21 +28,25 @@ const router = new Router({
     {
       path: "/continue",
       name: "continue",
-      component: Continue
+      component: Continue,
+      meta: { 
+        hideFooter: true,
+        title: "continue"
+      }
     },
 
     {
       path: "/wishlist",
       name: "wishlist",
       component: Wishlist,
-
-      children: [
-        {
-          path: "",
-          name: "join",
-          components: JoinMarche 
-        }
-      ],
+      
+      // children: [
+      //   {
+      //     path: "",
+      //     name: "join",
+      //     components: JoinMarche 
+      //   }
+      // ],
         
     },
 
@@ -53,13 +54,15 @@ const router = new Router({
       path: "/ad_detail/:slug",
       name: "ad_detail",
       component: AdvertDetail,
-      props: true
+      props: true,
+      meta: { hideFooter: true }
     },
 
     {
       path: "/category/:category",
       name: "category",
       component: Category,
+      meta: { hideFooter: true },
       props: true
     },
 
@@ -68,15 +71,16 @@ const router = new Router({
       name: "user_detail",
       
       component: UserDetail,
+      meta: { hideFooter: true },
       props: true,
 
-      children: [
-        {
-          path: "",
-          name: "join",
-          component: JoinMarche
-        }
-      ],
+      // children: [
+      //   {
+      //     path: "",
+      //     name: "join",
+      //     component: JoinMarche
+      //   }
+      // ],
 
     },
 
@@ -91,24 +95,27 @@ const router = new Router({
       path: "/ads_create/:slug?",
       name: "ads_create",
       component: AdvertCreate,
+
+      meta: { hideFooter: true, title: "sell on marche" },
       
       props: true,
 
-      children: [
-        {
-          path: " ",
-          name: "join",
-          components: {
-            JoinMarche
-          }
-        }
-      ]
+      // children: [
+      //   {
+      //     path: " ",
+      //     name: "join",
+      //     components: {
+      //       JoinMarche
+      //     }
+      //   }
+      // ]
     },
 
     {
       path: "/review/:id",
       name: "edit_review",
       component: ReviewEditor,
+      meta: { hideFooter: true },
       props: true
     },
 
@@ -121,23 +128,15 @@ const router = new Router({
   ]
 });
 
+
 // router.beforeEach((to, from, next) => {
 //   let isAuthenticated = is_authenticated;
 
-//   if (to.matched.some(route => route.meta.requiresAuth)){
+//   if (to.matched.some(route => route.meta.hideFooter)){
 
-//     if (isAuthenticated) {
-//       console.log("user is authenticated")
+//     to.$emit('hide:footer');
 
-//       next();
-
-//     } else { 
-//       console.log("user is not authenticated redirecting to home")
-//       next({
-//         name: 'home' // back to safety route //
-//       });
-      
-//     }
+//     next();
     
 //   }
 

@@ -2,10 +2,6 @@
 
 <div> 
 
-	<div class="p-5">
-		<i class="fa fa-long-arrow-left" aria-hidden="true" @click="close"></i>
-	</div>
-	
 	<div class="row continue-hero px-5">
       <div class="col-12 col-md-10 ml-md-auto mr-md-auto d-flex flex-column align-items-center text-center ">
         <div class="hero-text">
@@ -27,17 +23,16 @@
 </template>
 
 <script>
-
+  const self = this
 	export default {
 
-		name: "JoinMarche",
+    name: "JoinMarche",
 
 		methods: {
 			close () {
 				this.$router.back()
-			}
-  		}
-	
+			},
+    },
 	};
 
 </script>

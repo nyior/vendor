@@ -2,9 +2,15 @@
 
   <nav class="navbar navbar-expand-lg py-3 shadow my-navbar  sticky-top">
 
-    <router-link :to="{ name: 'home' }" class="navbar-brand pacifico pl-3">Marche`</router-link>
+    <i class="fa fa-long-arrow-left  pl-3" id="back-arrow" aria-hidden="true" @click="back" v-if="hide_nav_brand"></i>
 
-    <div class="collapse navbar-collapse">
+    <i class="navbar-brand  pl-md-5" v-if="hide_nav_brand">
+      {{ title }}
+    </i>
+
+    <router-link :to="{ name: 'home' }" class="navbar-brand pacifico pl-3" v-if="!hide_nav_brand">Marche`</router-link>
+
+    <div class="collapse navbar-collapse" v-if="!hide_nav_brand">
       <form class="form-group has-search my-0 ml-auto mr-auto"
              @submit.prevent="onSubmit">
         <input
@@ -56,7 +62,7 @@
 
     </div>
 
-    <CategoryList />
+    <CategoryList v-if="!hide_nav_brand"/>
 
   </nav>
 
@@ -75,10 +81,24 @@
       CategoryList
     },
 
+    props: {
+      hide_nav_brand: {
+        type: Boolean,
+        required: true,
+      },
+
+      title: {
+        type: String,
+        required: false,
+      },
+    },
+
     data() {
       return {
         id: user_id,
         search_word: null,
+        hide_nav_brand: this.hide_nav_brand,
+        title: this.title,
         is_authenticated: is_authenticated
       };
     },
@@ -98,7 +118,12 @@
   
       closeNav(){
         document.getElementById("myNav").style.width = "0%";
-      }
+      },
+
+			back () {
+				this.$router.back()
+			}
+  
     }
 
   };
@@ -128,5 +153,10 @@
   ul li {
     margin: 0rem 1.5rem;
   }
+
+  #back-arrow{
+		font-size: 2rem;	
+    color: white;
+	}
 
 </style>
