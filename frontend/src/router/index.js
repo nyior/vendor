@@ -29,7 +29,7 @@ const router = new Router({
       path: "/continue",
       name: "continue",
       component: Continue,
-      meta: { 
+      meta: {
         hideFooter: true,
         title: "continue"
       }
@@ -38,16 +38,15 @@ const router = new Router({
     {
       path: "/wishlist",
       name: "wishlist",
-      component: Wishlist,
-      
+      component: Wishlist
+
       // children: [
       //   {
       //     path: "",
       //     name: "join",
-      //     components: JoinMarche 
+      //     components: JoinMarche
       //   }
       // ],
-        
     },
 
     {
@@ -69,10 +68,10 @@ const router = new Router({
     {
       path: "/user_detail/:id",
       name: "user_detail",
-      
+
       component: UserDetail,
       meta: { hideFooter: true },
-      props: true,
+      props: true
 
       // children: [
       //   {
@@ -81,7 +80,6 @@ const router = new Router({
       //     component: JoinMarche
       //   }
       // ],
-
     },
 
     {
@@ -97,8 +95,8 @@ const router = new Router({
       component: AdvertCreate,
 
       meta: { hideFooter: true, title: "sell on marche" },
-      
-      props: true,
+
+      props: true
 
       // children: [
       //   {
@@ -123,11 +121,9 @@ const router = new Router({
       path: "/adverts",
       name: "adverts",
       component: Adverts
-      
     }
   ]
 });
-
 
 // router.beforeEach((to, from, next) => {
 //   let isAuthenticated = is_authenticated;
@@ -137,11 +133,11 @@ const router = new Router({
 //     to.$emit('hide:footer');
 
 //     next();
-    
+
 //   }
 
 //   next();
-  
+
 // });
 
 export default router;

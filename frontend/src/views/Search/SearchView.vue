@@ -3,24 +3,19 @@
     <Sell />
 
     <div class="row  text-center px-4 hide-on-desktop">
-
       <div class="col-md-12">
-
-        <form class="form-group has-search py-3"
-                @submit.prevent="onSubmit">
+        <form class="form-group has-search py-3" @submit.prevent="onSubmit">
           <input
-              class="form-control mr-sm-2 p-3 px-4"
-              type="search"
-              placeholder="Search and discover products/services on Marche"
-              required
-              v-model="search_word"
+            class="form-control mr-sm-2 p-3 px-4"
+            type="search"
+            placeholder="Search and discover products/services on Marche"
+            required
+            v-model="search_word"
           />
         </form>
-
       </div>
-
     </div>
-    
+
     <div class="row categories px-2 px-md-5 mt-0 mb-2 text-center d-flex">
       <div class="col-md-3 col-6" v-for="advert in adverts" :key="advert.id">
         <AdvertMinified :advert_object="advert" />
@@ -41,17 +36,16 @@
 <script>
 import { apiService } from "@/common/api.service.js";
 import AdvertMinified from "@/components/Adverts/AdvertMinified.vue";
-import Sell from "@/components/Others/Sell.vue"
-
+import Sell from "@/components/Others/Sell.vue";
 
 export default {
   name: "SearchView",
 
   props: {
-	  search_key: {
-		  type: String,
-		  required: false,
-	  }
+    search_key: {
+      type: String,
+      required: false
+    }
   },
 
   data() {
@@ -59,7 +53,7 @@ export default {
       adverts: [],
       next: null,
       loadingAdverts: false,
-	    search_word: this.search_key
+      search_word: this.search_key
     };
   },
 
@@ -87,8 +81,7 @@ export default {
           this.next = null;
         }
       });
-    },
-
+    }
   },
 
   mounted: function() {
@@ -98,6 +91,4 @@ export default {
 };
 </script>
 
-<style scoped>
-  
-</style>
+<style scoped></style>

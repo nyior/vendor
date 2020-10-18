@@ -1,33 +1,32 @@
 <template>
-
   <div class=" container-fluid products">
-
     <Sell />
 
     <div class="row p-5  mt-5 mb-2 text-center d-flex justify-content-center">
-        <div class="col-12 ">
-             <CategoriesList/>
-        </div>
+      <div class="col-12 ">
+        <CategoriesList />
+      </div>
     </div>
 
     <div
       v-if="adverts"
       class="row  categories   px-2 px-md-5 mt-0 mb-2 text-center d-flex"
     >
-    <div
-        class="col-md-3 col-6 "
-        v-for="advert in adverts"
-        :key="advert.id"
-    >
-      <AdvertMinified :advert_object="advert"/>
-    </div>
-    <div class="row p-5  mt-5 mb-2 text-center d-flex justify-content-center" v-if="noAdverts">
+      <div class="col-md-3 col-6 " v-for="advert in adverts" :key="advert.id">
+        <AdvertMinified :advert_object="advert" />
+      </div>
+      <div
+        class="row p-5  mt-5 mb-2 text-center d-flex justify-content-center"
+        v-if="noAdverts"
+      >
         <div class="col-12 text-center">
-             <h4 class="heading mt-4 mb-2 text-danger">
-                 <strong> Nothing found in this category, may be check back later !!</strong>
-            </h4>
+          <h4 class="heading mt-4 mb-2 text-danger">
+            <strong>
+              Nothing found in this category, may be check back later !!</strong
+            >
+          </h4>
         </div>
-    </div>
+      </div>
     </div>
 
     <div class="row text-center d-flex justify-content-center mt-4">
@@ -39,7 +38,6 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -47,23 +45,22 @@ import { apiService } from "@/common/api.service.js";
 import CategoriesList from "@/components/Category/CategoriesList.vue";
 import AdvertMinified from "@/components/Adverts/AdvertMinified.vue";
 
-import Sell from "@/components/Others/Sell.vue"
-
+import Sell from "@/components/Others/Sell.vue";
 
 export default {
   name: "adverts-category",
-  
+
   components: {
-      CategoriesList,
-      AdvertMinified,
-      Sell
+    CategoriesList,
+    AdvertMinified,
+    Sell
   },
 
   props: {
-      category: {
-          type: String,
-          required: true
-      }
+    category: {
+      type: String,
+      required: true
+    }
   },
 
   data() {
@@ -77,13 +74,13 @@ export default {
   },
 
   computed: {
-      noAdverts(){
-          if(this.adverts.length === 0){
-              return true;
-          }
+    noAdverts() {
+      if (this.adverts.length === 0) {
+        return true;
       }
+    }
   },
-  
+
   methods: {
     getAdverts() {
       let get_adverts_url = `api/v1/${this.advert_category}/adverts/`;
@@ -105,24 +102,20 @@ export default {
       });
     },
 
-    setRequestUser(){
-        this.requestUser = window.localStorage.getItem("username");
+    setRequestUser() {
+      this.requestUser = window.localStorage.getItem("username");
     }
   },
 
   mounted: function() {
     this.setRequestUser();
-    
   },
 
-  created(){
+  created() {
     this.getAdverts();
     document.title = "Advertisements";
   }
-
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

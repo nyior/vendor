@@ -1,9 +1,5 @@
 {% extends 'account/base.html' %}
-{% load static %}
-
-{% block style %}
-  <link rel="stylesheet" href="{% static 'bundle.css' %}">
-{% endblock %}
+{% load render_bundle from webpack_loader %}
 
 {% block content %}
 
@@ -12,15 +8,11 @@
       <div class="col-12"> 
 
         <div id="app">        
-             
+          {% render_bundle 'app' %}    
         </div> 
 
       </div>
     </div>
   </div>  
-{% endblock %}
-
-{% block js %}
-  <script src="{% static 'bundle.js' %}"></script>
 {% endblock %}
     
