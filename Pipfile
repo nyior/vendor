@@ -14,6 +14,7 @@ django-webpack-loader = "*"
 django-rest-auth = "*"
 django-allauth = "*"
 pillow = "*"
+django-environ = "*"
 
 [requires]
 python_version = "3.7"
