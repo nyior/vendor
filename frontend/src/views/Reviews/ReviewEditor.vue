@@ -11,38 +11,37 @@
           Edit Your Review
         </h1>
 
-      <form
-        @submit.prevent="updateReview"
-        class="p-3 was-validated"
-        enctype="multipart/form-data"
-      >
-        <div class="form-group">
-          <label for="quantity">Rating</label>
-          <input
-            type="number"
-            class="form-control required"
-            id="quantity"
-            placeholder="required"
-            v-model="review_form.rating"
-            required
-          />
-          <div class="invalid-feedback">Only figures allowed</div>
-        </div>
+        <form
+          @submit.prevent="updateReview"
+          class="p-3 was-validated"
+          enctype="multipart/form-data"
+        >
+          <div class="form-group">
+            <label for="quantity">Rating</label>
+            <input
+              type="number"
+              class="form-control required"
+              id="quantity"
+              placeholder="required"
+              v-model="review_form.rating"
+              required
+            />
+            <div class="invalid-feedback">Only figures allowed</div>
+          </div>
 
-        <div class="form-group">
-          <label for="description">Say Something About this User</label>
-          <textarea
-            class="form-control"
-            id="description"
-            rows="5"
-            placeholder="say something bro !!!"
-            v-model="review_form.description"
-          ></textarea>
-        </div>
+          <div class="form-group">
+            <label for="description">Say Something About this User</label>
+            <textarea
+              class="form-control"
+              id="description"
+              rows="5"
+              placeholder="say something bro !!!"
+              v-model="review_form.description"
+            ></textarea>
+          </div>
 
-        <button class="btn btn-lg btn-blue" type="submit">Post Review</button>
-      </form>
-      
+          <button class="btn btn-lg btn-blue" type="submit">Post Review</button>
+        </form>
       </div>
     </div>
   </div>
@@ -55,24 +54,24 @@ export default {
   name: "review-update",
 
   props: {
-      id: {
-          type: Number,
-          required: true,
-      },
+    id: {
+      type: Number,
+      required: true
+    },
 
-      reviewee_id: {
-          type: Number,
-          required: true,
-      },
+    reviewee_id: {
+      type: Number,
+      required: true
+    },
 
-      rating: {
-          type: Number,
-          required: true,
-      },
-      description: {
-          type: String,
-          required: true,
-      }
+    rating: {
+      type: Number,
+      required: true
+    },
+    description: {
+      type: String,
+      required: true
+    }
   },
   data() {
     return {
@@ -81,23 +80,20 @@ export default {
       review_form: {
         rating: this.rating,
         description: this.description
-      },
-
+      }
     };
   },
 
-  async beforeRouteEnter(to, from, next){
-      let get_review_url = `api/v1/reviews/${to.params.id}/`;
-      
+  async beforeRouteEnter(to, from, next) {
+    let get_review_url = `api/v1/reviews/${to.params.id}/`;
 
-      let data = await apiService(get_review_url, "GET");
-      to.params.rating = data.rating;
-      to.params.description = data.description;
-      to.params.reviewee_id = data.reviewee;
+    let data = await apiService(get_review_url, "GET");
+    to.params.rating = data.rating;
+    to.params.description = data.description;
+    to.params.reviewee_id = data.reviewee;
 
-      return next();
+    return next();
   },
-
 
   methods: {
     updateReview() {
@@ -107,12 +103,10 @@ export default {
 
       apiService(post_review_url, method, this.review_form)
         .then(() => {
-          this.$router.push(
-              {
-                  name: 'user_detail',
-                  params: { id: this.reviewee_id }
-              }
-          )
+          this.$router.push({
+            name: "user_detail",
+            params: { id: this.reviewee_id }
+          });
         })
         .catch(error => {
           this.error = error;

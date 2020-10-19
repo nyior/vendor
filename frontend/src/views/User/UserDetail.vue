@@ -10,7 +10,11 @@
             <div>
               <a :href="user.profile_picture">
                 <div class="profilePicContainer">
-                  <img :src="user.profile_picture" class="img-fluid" alt="Responsive image" />
+                  <img
+                    :src="user.profile_picture"
+                    class="img-fluid"
+                    alt="Responsive image"
+                  />
                 </div>
               </a>
 
@@ -18,18 +22,30 @@
                 <button
                   class="btn mt-3 btn-blue"
                   @click="showAvatarUpdateForm = true"
-                >change display picture</button>
+                >
+                  change display picture
+                </button>
               </div>
 
-              <div v-if="showAvatarUpdateForm ">
-                <form @submit.prevent="UpdateAvatar" class="p-3" enctype="multipart/form-data">
+              <div v-if="showAvatarUpdateForm">
+                <form
+                  @submit.prevent="UpdateAvatar"
+                  class="p-3"
+                  enctype="multipart/form-data"
+                >
                   <div class="form-group">
                     <label>
-                      <input type="file" ref="file" v-on:change="handleFileUpload" />
+                      <input
+                        type="file"
+                        ref="file"
+                        v-on:change="handleFileUpload"
+                      />
                     </label>
                   </div>
 
-                  <button class="btn btn-lg btn-blue" type="submit">Post Avatar</button>
+                  <button class="btn btn-lg btn-blue" type="submit">
+                    Post Avatar
+                  </button>
                 </form>
               </div>
             </div>
@@ -44,11 +60,19 @@
               </p>
             </div>
             <div v-if="showProfileUpdateForm">
-              <UpdateUserProfileForm :user="user" @update-profile="UpdateProfile" />
+              <UpdateUserProfileForm
+                :user="user"
+                @update-profile="UpdateProfile"
+              />
             </div>
 
             <div v-if="UserHasProfile && !showProfileUpdateForm">
-              <button class="btn btn-blue editButton mt-4" @click="showProfileUpdateForm = true">edit profile</button>
+              <button
+                class="btn btn-blue editButton mt-4"
+                @click="showProfileUpdateForm = true"
+              >
+                edit profile
+              </button>
             </div>
           </div>
         </div>
@@ -56,37 +80,39 @@
     </div>
 
     <div class="row   mb-2  mt-2 w-100 d-flex text-center">
-     
-          <div class="col-12 text-center">
-              <h1 class="heading" v-if="UserHasProfile"><strong>Your Shop</strong> </h1>
-              <h1 class="heading" v-else><strong>Seller's Shop</strong></h1>
-          </div>
+      <div class="col-12 text-center">
+        <h1 class="heading" v-if="UserHasProfile">
+          <strong>Your Shop</strong>
+        </h1>
+        <h1 class="heading" v-else><strong>Seller's Shop</strong></h1>
+      </div>
 
-          <div class="row   mb-2 w-100 d-flex text-center">
-              <p v-if="!sellerShop" class="text-danger mt-5 pt-5" > 
-            <strong>Your shop is empty. Sell on Marche to populate your shop.</strong> 
-            </p>
-            
-            <div
-              class="col-md-3 col-6 m-2 p-0"
-              v-for="advert in sellerShop"
-              :key="advert.id"
-              v-else
-            >
-              <AdvertMinified :advert_object="advert"/>
-            </div>
-          </div>  
-      
+      <div class="row   mb-2 w-100 d-flex text-center">
+        <p v-if="!sellerShop" class="text-danger mt-5 pt-5">
+          <strong
+            >Your shop is empty. Sell on Marche to populate your shop.</strong
+          >
+        </p>
+
+        <div
+          class="col-md-3 col-6 m-2 p-0"
+          v-for="advert in sellerShop"
+          :key="advert.id"
+          v-else
+        >
+          <AdvertMinified :advert_object="advert" />
+        </div>
+      </div>
     </div>
 
-      <div class="row text-center d-flex justify-content-center mt-4">
-          <div class="col-6">
-            <p v-show="loadingAdverts">...loading...</p>
-            <a v-show="more" @click="getUserAdverts">
-                <strong>Load More</strong>
-            </a>
-          </div>
+    <div class="row text-center d-flex justify-content-center mt-4">
+      <div class="col-6">
+        <p v-show="loadingAdverts">...loading...</p>
+        <a v-show="more" @click="getUserAdverts">
+          <strong>Load More</strong>
+        </a>
       </div>
+    </div>
 
     <hr />
     <div v-if="!UserHasProfile && UserHasReviewed">
@@ -94,7 +120,11 @@
     </div>
 
     <div v-if="showForm">
-      <form @submit.prevent="postReview" class="p-3 was-validated" enctype="multipart/form-data">
+      <form
+        @submit.prevent="postReview"
+        class="p-3 was-validated"
+        enctype="multipart/form-data"
+      >
         <div class="form-group">
           <label for="quantity">Rating</label>
           <input
@@ -125,7 +155,9 @@
 
     <div v-else>
       <div v-if="!UserHasReviewed">
-        <button class="btn btn-blue" @click="showForm = true">review this user</button>
+        <button class="btn btn-blue" @click="showForm = true">
+          review this user
+        </button>
       </div>
     </div>
 
@@ -133,12 +165,17 @@
 
     <div
       class="row text-center d-flex justify-content-center align-items-center"
-      
     >
-      <div class="col-12 col-md-6"
-          v-for="(review, index) in reviews"
-          :key="index">
-        <ReviewDetail :review="review" :requestUser="requestUser" @delete-review="deleteReview" />
+      <div
+        class="col-12 col-md-6"
+        v-for="(review, index) in reviews"
+        :key="index"
+      >
+        <ReviewDetail
+          :review="review"
+          :requestUser="requestUser"
+          @delete-review="deleteReview"
+        />
       </div>
     </div>
 
@@ -155,23 +192,25 @@
 
 <script>
 import { apiService } from "@/common/api.service.js";
+import { is_authenticated } from "@/common/global_variables.js";
+
 import ReviewDetail from "@/components/Reviews/ReviewDetail.vue";
 import UpdateUserProfileForm from "@/components/User/UpdateUserProfileForm.vue";
 import AdvertMinified from "@/components/Adverts/AdvertMinified.vue";
 
 export default {
   name: "adverts-category",
-  
+
   components: {
-      ReviewDetail,
-      UpdateUserProfileForm,
-      AdvertMinified
+    ReviewDetail,
+    UpdateUserProfileForm,
+    AdvertMinified
   },
 
   props: {
     id: {
       type: Number,
-      required: true
+      required: false
     }
   },
 
@@ -246,7 +285,7 @@ export default {
       });
     },
 
-    getUserAdverts(){
+    getUserAdverts() {
       let get_shop_url = `api/v1/user/${this.id}/shop/`;
 
       if (this.more) {
@@ -342,34 +381,42 @@ export default {
     this.getUser();
     this.getReviews();
     this.getUserAdverts();
+  },
+
+  async beforeRouteEnter(to, from, next) {
+    if (is_authenticated) {
+      next();
+    } else {
+      next({
+        name: "continue" // back to safety route //
+      });
+    }
   }
 };
 </script>
 
 <style scoped>
+.profilePicContainer {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  flex-flow: column;
+  overflow: hidden;
+}
 
-  .profilePicContainer {
-    border-radius: 50%;
-    width: 200px;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    flex-flow: column;
-    overflow: hidden;
-  }
+.username {
+  color: #7a09c4;
+}
 
-  .username{
-    color: #7A09C4;
-  }
+a:hover {
+  color: black !important;
+}
 
-  a:hover{
-    color: black!important;
-  }
-
-  .editButton{
-    color: #7A09C4!important;
-    background: white!important;
-  }
-
+.editButton {
+  color: #7a09c4 !important;
+  background: white !important;
+}
 </style>

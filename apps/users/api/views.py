@@ -122,7 +122,6 @@ class UserWishlistItemsAPIView(generics.ListAPIView):
     serializer_class = AdvertSerializer
     permission_classes = [IsAuthenticated]
     
-
     def get_queryset(self):
         user = self.request.user
         return user.wishlist.all()
