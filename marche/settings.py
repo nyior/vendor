@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'bgt=wiuoxh!9aw-o35xiqa%j7r+iy6%bvjhi-2kko1aji$#(g0'
+SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', default=False)
@@ -36,7 +36,6 @@ ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-
 INSTALLED_APPS = [
     
     'django.contrib.admin',
@@ -119,9 +118,9 @@ else:
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', 
         'NAME': 'marche',                     
-        'USER': 'myuser',
-        'PASSWORD': 'password',
-        'HOST': '',                      
+        'USER': env.str('db_user'),
+        'PASSWORD': env.str('db_password'),
+        'HOST': 'localhost',                      
         'PORT': '',                      
     }
 }
@@ -219,12 +218,13 @@ WEBPACK_LOADER = {
 }
 
 MEDIA_URL  = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
     os.path.join(FRONTEND_DIR, 'dist'),
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
