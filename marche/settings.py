@@ -118,8 +118,8 @@ else:
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', 
         'NAME': 'marche',                     
-        'USER': env.str('db_user'),
-        'PASSWORD': env.str('db_password'),
+        'USER': env.str('DB_USER'),
+        'PASSWORD': env.str('DB_PASSWORD'),
         'HOST': 'localhost',                      
         'PORT': '',                      
     }
