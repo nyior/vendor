@@ -15,10 +15,10 @@ environ.Env.read_env(env_file)
 SITE_ROOT = root()
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'bgt=wiuoxh!9aw-o35xiqa%j7r+iy6%bvjhi-2kko1aji$#(g0'
+SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
@@ -92,24 +92,23 @@ WSGI_APPLICATION = 'marche.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# if DEBUG:
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    } 
-}
-# else:
-#     DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2', 
-#         'NAME': 'marche',                     
-#         'USER': env.str('DB_USER'),
-#         'PASSWORD': env.str('DB_PASSWORD'),
-#         'HOST': 'localhost',                      
-#         'PORT': '',                      
-#     }
-# }
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        } 
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': env.str('DATABASE_NAME'),
+            'USER': env.str('DATABASE_USER'),
+            'PASSWORD': env.str('DATABASE_PASSWORD'),
+            'HOST': 'MeleeMann.mysql.pythonanywhere-services.com',
+        }
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
