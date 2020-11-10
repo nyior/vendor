@@ -30,7 +30,7 @@
               <div class="row py-3 px-3 mb-5">
 
                 <div class="col-6 m-0 p-0 text-left">
-                    <button  class="btn blue-btn" type="submit">Sign In</button>
+                    <button  class="btn btn-block blue-btn" type="submit">Sign In</button>
                 </div>
 
                 <div class="col-6 m-0 p-0 text-right">
@@ -39,7 +39,7 @@
                     {% get_providers as socialaccount_providers %}
                     <ul class="social_providers_list p-0 m-0">
                     {% for provider in socialaccount_providers %}
-                        <a title="{{provider.name}}" class="btn red-btn" 
+                        <a title="{{provider.name}}" class="btn btn-block red-btn" 
                         href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">Google</a>
                     {% endfor %}
                     </ul>
