@@ -1,7 +1,7 @@
 import { CSRF_TOKEN } from "./csrf_token.js";
 import axios from "axios";
 
-const API_URL = "http://localhost:8000";
+const API_URL = "http://meleemann.pythonanywhere.com";
 
 function apiService(endpoint, method, data) {
   endpoint = `${API_URL}/${endpoint}`;

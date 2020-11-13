@@ -103,8 +103,6 @@ export default {
     return {
       id: user_id,
       search_word: null,
-      hide_nav_brand: this.hide_nav_brand,
-      title: this.title,
       is_authenticated: is_authenticated
     };
   },
