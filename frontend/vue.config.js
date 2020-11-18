@@ -26,13 +26,13 @@ module.exports = {
       .https(false)
       .disableHostCheck(true)
       .headers({ "Access-Control-Allow-Origin": ["*"] });
-  }
+  },
 
   // uncomment before executing 'npm run build'
-  //   css: {
-  //       extract: {
-  //         filename: 'bundle.css',
-  //         chunkFilename: 'bundle.css',
-  //       },
-  //   }
+    css: {
+        extract: {
+          filename: 'bundle.css',
+          chunkFilename: 'bundle.css',
+        },
+    }
 };
