@@ -1,20 +1,25 @@
 <template>
-  <div style="position: relative">
+  <div class="m-3">
     <router-link :to="{ name: 'ad_detail', params: { slug: advert.slug } }">
-      <div class="m-1 bg-grey mt-5">
-        <div id="productImageBackground">
+      <div>
+        <div 
+          id="productImageBackground"
+          >
           <img
             :src="advert.file"
-            class="img-fluid productImage"
-            alt="Responsive image"
+            class="img-fluid"
+            :alt="advert.name + ' image'"
           />
         </div>
       </div>
 
       <div class="text-muted mt-2">
-        <div class="d-flex" id="productText">
+        <div 
+          class="d-flex" 
+          id="productText"
+        >
           <p id="productName">{{ advert.name }}</p>
-          <p id="price ml-md-auto">₦{{ advert.price }}</p>
+          <p id="price" class="ml-md-auto">₦{{ advert.price }}</p>
         </div>
       </div>
     </router-link>
@@ -25,7 +30,11 @@
       @click="toggle"
       id="wishlist"
     >
-      <i class="far fa-heart fa-3x" v-if="!addedToWishList"></i>
+      <i 
+        class="far fa-heart fa-3x" 
+        v-if="!addedToWishList"
+      >
+      </i>
       <i class="fas fa-heart fa-3x" v-else></i>
     </button>
   </div>
@@ -104,6 +113,7 @@ export default {
 }
 
 #productName {
+  font-weight: 600;
   font-size: 1.3rem;
 }
 
@@ -113,6 +123,7 @@ export default {
   display: flex;
   justify-content: center;
   flex-flow: column;
+  background-color: #DCDCDC;
 }
 
 #wishlist {
@@ -140,11 +151,11 @@ a:hover {
   }
 
   #productName {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 
   #price {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 }
 </style>

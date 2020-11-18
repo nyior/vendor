@@ -4,11 +4,11 @@ self.__precacheManifest = [
     "url": "http://127.0.0.1:8080/index.html"
   },
   {
-    "revision": "c5fec171102ef132fbcb",
+    "revision": "f79f84a9c7f6e079aec6",
     "url": "http://127.0.0.1:8080/bundle.js"
   },
   {
-    "revision": "c5fec171102ef132fbcb",
+    "revision": "f79f84a9c7f6e079aec6",
     "url": "http://127.0.0.1:8080/bundle.css"
   }
 ];

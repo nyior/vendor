@@ -19,11 +19,12 @@
             <label for="file" style="cursor: pointer;">
               <img
                 :src="img_src"
-                class="img-fluid rounded"
+                class="img-fluid"
                 id="product-image"
-                width="300"
-                height="200"
+                width="600"
+                height="300"
               />
+              <p> tap to add an image</p>
             </label>
 
             <input
@@ -195,7 +196,8 @@ export default {
         category: this.category
       },
 
-      is_authenticated: is_authenticated
+      is_authenticated: is_authenticated,
+      has_file: this.file==null ? false : true
     };
   },
 

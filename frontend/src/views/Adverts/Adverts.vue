@@ -11,7 +11,7 @@
     </div>
 
     <div class="row categories px-2 px-md-5 mt-0 mb-2 text-center d-flex">
-      <div class="col-md-3 col-6" v-for="advert in adverts" :key="advert.id">
+      <div class="col-md-3 col-12" v-for="advert in adverts" :key="advert.id">
         <AdvertMinified :advert_object="advert" />
       </div>
     </div>

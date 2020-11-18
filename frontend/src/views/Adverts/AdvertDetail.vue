@@ -1,12 +1,9 @@
 <template>
-  <div class=" container advert mt-5 ">
-    <router-link class="sell" :to="{ name: 'ads_create' }">
-      <button class="btn btn-lg">Sell on Marche</button>
-    </router-link>
+  <div class=" container mt-5">
     <div
-      class="row   pt-5 mt-5 mb-2 text-center d-flex justify-content-center align-items-center"
+      class="row pt-5 mt-5 mb-2 text-center d-flex justify-content-center align-items-center"
     >
-      <div class="col-md-3 col-6 p-0">
+      <div class="col-md-3 col-12 p-0">
         <AdvertMinified :advert_object="advert" />
 
         <advertActions
@@ -31,7 +28,7 @@ import { apiService } from "@/common/api.service.js";
 
 // I will have to figure out how to import multiple files at once
 import AdvertActions from "@/components/Adverts/AdvertActions.vue";
-import AdvertMinified from "@/components/Adverts/AdvertActions.vue";
+import AdvertMinified from "@/components/Adverts/AdvertMinified.vue";
 
 export default {
   name: "advert-detail",
