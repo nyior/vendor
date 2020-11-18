@@ -24,7 +24,7 @@
                 width="600"
                 height="300"
               />
-              <p> tap to add an image</p>
+              <p>tap to add an image</p>
             </label>
 
             <input
@@ -197,7 +197,7 @@ export default {
       },
 
       is_authenticated: is_authenticated,
-      has_file: this.file==null ? false : true
+      has_file: this.file == null ? false : true
     };
   },
 

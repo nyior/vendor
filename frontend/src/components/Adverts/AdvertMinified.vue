@@ -2,9 +2,7 @@
   <div class="m-3">
     <router-link :to="{ name: 'ad_detail', params: { slug: advert.slug } }">
       <div>
-        <div 
-          id="productImageBackground"
-          >
+        <div id="productImageBackground">
           <img
             :src="advert.file"
             class="img-fluid"
@@ -14,10 +12,7 @@
       </div>
 
       <div class="text-muted mt-2">
-        <div 
-          class="d-flex" 
-          id="productText"
-        >
+        <div class="d-flex" id="productText">
           <p id="productName">{{ advert.name }}</p>
           <p id="price" class="ml-md-auto">₦{{ advert.price }}</p>
         </div>
@@ -30,11 +25,7 @@
       @click="toggle"
       id="wishlist"
     >
-      <i 
-        class="far fa-heart fa-3x" 
-        v-if="!addedToWishList"
-      >
-      </i>
+      <i class="far fa-heart fa-3x" v-if="!addedToWishList"> </i>
       <i class="fas fa-heart fa-3x" v-else></i>
     </button>
   </div>
@@ -123,7 +114,7 @@ export default {
   display: flex;
   justify-content: center;
   flex-flow: column;
-  background-color: #DCDCDC;
+  background-color: #dcdcdc;
 }
 
 #wishlist {
