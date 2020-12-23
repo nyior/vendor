@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     'rest_auth',
     'corsheaders',
+    'storages',
 
     #developer apps
     'apps.users',
@@ -127,16 +128,37 @@ USE_L10N = True
 
 USE_TZ = True
 
-MEDIA_URL  = '/media/'
-STATIC_URL = '/static/'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/') #comment this when working locally
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 CORS_ALLOW_ALL_ORIGINS=True
 
 if 'DATABASE_URL' in os.environ:
     import dj_database_url
     DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+
+
+if DEBUG:
+    MEDIA_URL  = '/media/'
+    STATIC_URL = '/static/'
+
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static/') #comment this when working locally
+else:
+
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'mysite/static'),
+    ]
+
+    AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+    AWS_S3_OBJECT_PARAMETERS = {
+        'CacheControl': 'max-age=86400',
+    }
+
+    AWS_LOCATION = 'static'
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+
+    DEFAULT_FILE_STORAGE = 'marche.storage_backends.MediaStorage'  
