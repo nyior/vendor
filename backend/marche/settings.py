@@ -145,7 +145,7 @@ if DEBUG:
 else:
 
     STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'marche/static'),
+        os.path.join(BASE_DIR, 'static'),
     ]
 
     AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
