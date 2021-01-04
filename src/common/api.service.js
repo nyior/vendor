@@ -1,7 +1,8 @@
 import { CSRF_TOKEN } from "./csrf_token.js";
 import axios from "axios";
 
-// const API_URL = "http://meleemann.pythonanywhere.com";
+//uncomment the line below before pushing to heroku
+// const API_URL = "https://vendor-aun.herokuapp.com/";
 const API_URL = "http://localhost:8000";
 
 function apiService(endpoint, method, data) {

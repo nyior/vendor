@@ -11,11 +11,46 @@ from rest_framework.parsers import  MultiPartParser, FormParser, FileUploadParse
 from apps.users.api.serializers import *
 from apps.adverts.api.serializers import AdvertSerializer
 
-from apps.users.models import *
+from apps.users.models import CustomUser, Review
 from apps.adverts.models import Advert
 
 from apps.users.api.permissions import *
 
+from rest_framework.authtoken.models import Token
+
+
+# class SignupView(APIView):
+
+#     """ This creates a new user object
+#     """
+#     def post(self, request):
+#         username = request.data["username"]
+#         email = request.data["email"]
+#         password = request.data["password"]
+
+#         user = CustomUser.objects.create(
+#                                             username=username, 
+#                                             email=email, 
+#                                             password=password
+#                                             )
+
+#         if user:
+#             token, _ = Token.objects.get_or_create(user=user)
+#             return Response({
+#                 'username': user.username,
+#                 'auth_token': f"{token}",
+#                 'user_created': True
+
+#             })
+        
+#         return Response({
+#             'user_created': False
+#         })
+
+
+class CreateUser(generics.CreateAPIView):
+    serializer_class = UserSerializer
+    
 
 class UserDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 
