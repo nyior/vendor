@@ -14,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ('email', 'username', 'password', 'token')
+        fields = ('id', 'email', 'username', 'password', 'token')
         extra_kwargs = {'password': {'write_only': True}}
 
     def get_token(self, instance):

@@ -192,7 +192,6 @@
 
 <script>
 import { apiService } from "@/common/api.service.js";
-import { is_authenticated } from "@/common/global_variables.js";
 
 import ReviewDetail from "@/components/Reviews/ReviewDetail.vue";
 import UpdateUserProfileForm from "@/components/User/UpdateUserProfileForm.vue";
@@ -242,6 +241,10 @@ export default {
   computed: {
     UserHasProfile() {
       return this.requestUser == this.user.username;
+    },
+
+    isAuthenticated(){
+        return this.$store.state.isAuthenticated;
     }
   },
 
@@ -384,7 +387,7 @@ export default {
   },
 
   async beforeRouteEnter(to, from, next) {
-    if (is_authenticated) {
+    if (this.isAuthenticated) {
       next();
     } else {
       next({

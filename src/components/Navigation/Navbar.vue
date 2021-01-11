@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg py-3 shadow my-navbar  sticky-top">
     <i
-      class="fa fa-long-arrow-left  pl-3"
+      class="fa fa-long-arrow-left"
       id="back-arrow"
       aria-hidden="true"
       @click="back"
@@ -40,19 +40,23 @@
           </router-link>
         </li>
 
-        <li class="nav-item mr-3 mt-3" v-if="!is_authenticated">
-          <a class="link" href="/accounts/login/">Login</a>
+        <li class="nav-item mr-3 mt-3" v-if="!isAuthenticated">
+          <router-link :to="{ name: 'login' }">
+            Login
+          </router-link> 
         </li>
 
-        <li class="nav-item mt-3" v-if="!is_authenticated">
-          <a class="link" href="/accounts/signup/">Register</a>
+        <li class="nav-item mt-3" v-if="!isAuthenticated">
+          <router-link :to="{ name: 'login' }">
+            Register
+          </router-link> 
         </li>
 
-        <li class="nav-item mr-3 mt-3" v-if="is_authenticated">
-          <a class="link" href="/accounts/logout/">Logout</a>
+        <li class="nav-item mr-3 mt-3" v-if="isAuthenticated">
+          Logout
         </li>
 
-        <li class="nav-item mr-3 mt-3" v-if="is_authenticated">
+        <li class="nav-item mr-3 mt-3" v-if="isAuthenticated">
           <router-link :to="{ name: 'wishlist' }">
             <a class="link">
               <i class="far fa-heart"></i>
@@ -60,8 +64,8 @@
           </router-link>
         </li>
 
-        <li class="nav-item mt-3" v-if="is_authenticated">
-          <router-link :to="{ name: 'user_detail', params: { id: id } }">
+        <li class="nav-item mt-3" v-if="isAuthenticated">
+          <router-link :to="{ name: 'user_detail', params: { id: userId } }">
             <a class="link">
               <i class="far fa-user"></i>
             </a>
@@ -76,9 +80,6 @@
 
 <script>
 import CategoryList from "@/components/Category/CategoriesList.vue";
-
-import { user_id } from "@/common/global_variables.js";
-import { is_authenticated } from "@/common/global_variables.js";
 
 export default {
   name: "NavbarComponent",
@@ -101,10 +102,18 @@ export default {
 
   data() {
     return {
-      id: user_id,
-      search_word: null,
-      is_authenticated: is_authenticated
+      search_word: null
     };
+  },
+
+  computed: {
+    isAuthenticated(){
+        return this.$store.state.isAuthenticated;
+    },
+
+    userId(){
+        return this.$store.state.userId;
+    }
   },
 
   methods: {
@@ -131,6 +140,11 @@ export default {
 </script>
 
 <style scoped>
+a{
+    color: white !important;
+    font-weight: bold;
+}
+
 .my-navbar {
   font-size: 1.4rem;
   background-color: #7a09c4;

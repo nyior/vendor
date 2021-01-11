@@ -19,35 +19,6 @@ from apps.users.api.permissions import *
 from rest_framework.authtoken.models import Token
 
 
-# class SignupView(APIView):
-
-#     """ This creates a new user object
-#     """
-#     def post(self, request):
-#         username = request.data["username"]
-#         email = request.data["email"]
-#         password = request.data["password"]
-
-#         user = CustomUser.objects.create(
-#                                             username=username, 
-#                                             email=email, 
-#                                             password=password
-#                                             )
-
-#         if user:
-#             token, _ = Token.objects.get_or_create(user=user)
-#             return Response({
-#                 'username': user.username,
-#                 'auth_token': f"{token}",
-#                 'user_created': True
-
-#             })
-        
-#         return Response({
-#             'user_created': False
-#         })
-
-
 class CreateUser(generics.CreateAPIView):
     serializer_class = UserSerializer
     

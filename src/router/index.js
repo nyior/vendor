@@ -12,6 +12,8 @@ import Category from "@/views/Category/Category.vue";
 import SearchView from "@/views/Search/SearchView.vue";
 import JoinMarche from "@/components/Modals/JoinMarche.vue";
 import Continue from "@/views/Auth/Continue.vue";
+import Login from "@/views/Auth/Login.vue";
+import Register from "@/views/Auth/Register.vue";
 
 Vue.use(Router);
 
@@ -23,6 +25,26 @@ const router = new Router({
       path: "/",
       name: "home",
       component: Home
+    },
+
+    {
+      path: "/login",
+      name: "login",
+      component: Login,
+      meta: {
+        hideFooter: true,
+        title: "login"
+      }
+    },
+
+    {
+      path: "/register",
+      name: "register",
+      component: Register,
+      meta: {
+        hideFooter: true,
+        title: "register"
+      }
     },
 
     {

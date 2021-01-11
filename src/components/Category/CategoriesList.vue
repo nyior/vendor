@@ -88,16 +88,12 @@
           </router-link>
         </li>
 
-        <li class="nav-item  mt-3" v-if="!is_authenticated">
-          <a class="btn color-purple white-btn py-3" href="/accounts/login/"
-            >Join</a
-          >
-        </li>
-
-        <li class="nav-item  mt-5" v-if="is_authenticated">
-          <a class="btn color-purple white-btn py-3" href="/accounts/logout/"
-            >Logout</a
-          >
+        <li class="nav-item  mt-3" v-if="!isAuthenticated">
+          <router-link :to="{ name: 'login' }">
+            <button class="btn color-purple white-btn py-3">
+                Join
+            </button>
+          </router-link>
         </li>
       </ul>
     </div>
@@ -109,15 +105,14 @@
 </template>
 
 <script>
-import { is_authenticated } from "@/common/global_variables.js";
 
 export default {
   name: "categories-list",
 
-  data() {
-    return {
-      is_authenticated: is_authenticated
-    };
+  computed: {
+    isAuthenticated(){
+        return this.$store.state.isAuthenticated;
+    }
   },
 
   methods: {

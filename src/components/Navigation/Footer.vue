@@ -51,7 +51,7 @@
 
       <div class="col-2 text-center">
         <router-link
-          :to="{ name: 'user_detail', params: { id: id } }"
+          :to="{ name: 'user_detail', params: { id: userId } }"
           class="footer-tab"
         >
           <div>
@@ -68,16 +68,15 @@
 </template>
 
 <script>
-import { user_id } from "@/common/global_variables.js";
 
 export default {
   name: "Footer",
-
-  data() {
-    return {
-      id: user_id
-    };
-  }
+  
+  computed: {
+    userId(){
+        return this.$store.state.userId;
+    }
+  },
 };
 </script>
 

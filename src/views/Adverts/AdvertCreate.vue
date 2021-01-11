@@ -133,7 +133,8 @@
 
 <script>
 import { apiService } from "@/common/api.service.js";
-import { is_authenticated } from "@/common/global_variables.js";
+
+import { store } from "@/store/store"
 
 import JoinMarche from "@/components/Modals/JoinMarche.vue";
 
@@ -196,10 +197,16 @@ export default {
         category: this.category
       },
 
-      is_authenticated: is_authenticated,
       has_file: this.file == null ? false : true
     };
   },
+
+//   computed: {
+//     isAuth(){
+//         // return this.$store.state.isAuthenticated;
+//         return false;
+//     }
+//   },
 
   methods: {
     handleFileUpload(event) {
@@ -241,7 +248,10 @@ export default {
   },
 
   async beforeRouteEnter(to, from, next) {
-    if (to.params.slug !== undefined && is_authenticated) {
+    
+    let isAuth = store.state.isAuthenticated;
+
+    if (to.params.slug !== undefined && isAuth) {
       let get_advert_url = `api/v1/adverts/${to.params.slug}/`;
 
       let data = await apiService(get_advert_url, "GET");
@@ -253,7 +263,7 @@ export default {
       to.params.category = data.category;
 
       return next();
-    } else if (!is_authenticated) {
+    } else if (!isAuth) {
       return next({
         name: "continue" // back to safety route //
       });
