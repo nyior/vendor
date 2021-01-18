@@ -127,14 +127,14 @@ export default {
       apiService(create_user_url, method, formData)
         .then(data => {
           
-          //change user's auth state to true
-          this.$store.dispatch("modifyAuthState", true)
+          ///change user's auth state to true
+          window.localStorage.setItem("isAuthenticated", true);
 
-          //save user's auth token to the store
-          this.$store.dispatch("modifyAuthToken", data.token)
+          //save user's auth token to the local store
+          window.localStorage.setItem("token", data.token);
 
-          //save user's id to the store
-          this.$store.dispatch("modifyUserId", data.id)
+          //save user id to the local store
+          window.localStorage.setItem("user_id", data.id);
 
           this.$router.push({
             name: "user_detail", 
@@ -144,8 +144,6 @@ export default {
         .catch(error => {
           this.error = error;
         });
-        
-        // {"email":"clementis@aun.edu.ng","username":"mentoo","token":"4017fc1e98219ccd74c61b35f5eeca49bf10dc18", password: greatestEver-47}
     }
   },
 

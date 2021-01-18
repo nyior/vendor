@@ -5,6 +5,8 @@ from apps.users.api.views import *
 urlpatterns = [
     path("user/signup/", CreateUser.as_view(), name="signup"),
 
+    path("user/login/", LoginView.as_view(), name="login"),
+
     path(
         "user/wishlist/advert/<slug:slug>/", 
         WishlistAPIView.as_view(), 

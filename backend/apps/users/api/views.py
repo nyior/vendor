@@ -17,10 +17,27 @@ from apps.adverts.models import Advert
 from apps.users.api.permissions import *
 
 from rest_framework.authtoken.models import Token
+from django.contrib.auth import authenticate
 
 
 class CreateUser(generics.CreateAPIView):
+    """ signup view """
     serializer_class = UserSerializer
+
+
+class LoginView(APIView):
+    serializer_class = UserSerializer
+    
+    def post(self, request):
+        username = request.data.get("username")
+        password = request.data.get("password")
+        user = authenticate(username=username, password=password)
+        
+        if user:
+            serializer = self.serializer_class(user)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response({"error": "Wrong Credentials"}, status=status.HTTP_400_BAD_REQUEST)
     
 
 class UserDetailAPIView(generics.RetrieveUpdateDestroyAPIView):

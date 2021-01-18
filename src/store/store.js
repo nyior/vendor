@@ -7,9 +7,9 @@ Vue.use(Vuex);
 export const store = new Vuex.Store(
     {
         state: {
-            isAuthenticated: false,
-            userId: null,
-            authToken: null
+            isAuthenticated: window.localStorage.getItem("isAuthenticated"),
+            userId: window.localStorage.getItem("user_id"),
+            authToken: window.localStorage.getItem("token")
         },
 
         mutations: {
@@ -33,19 +33,19 @@ export const store = new Vuex.Store(
         },
 
         actions: {
-            modifyAuthState: (context, newState) => {
+            modifyAuthStateAction: (context, newState) => {
                 context.commit("modifyAuthState", newState);
             },
 
-            modifyUserId: (context, userId) => {
+            modifyUserIdAction: (context, userId) => {
                 context.commit("modifyUserId", userId);
             },
 
-            modifyAuthToken: (context, authToken) => {
-                context.commit(" modifyAuthToken", authToken);
+            modifyAuthTokenAction: (context, authToken) => {
+                context.commit("modifyAuthToken", authToken);
             },
 
-            logout: context => {
+            logoutAction: context => {
                 context.commit("logout");
             }
         }

@@ -90,18 +90,8 @@ const router = new Router({
     {
       path: "/user_detail/:id",
       name: "user_detail",
-
       component: UserDetail,
-      meta: { hideFooter: true },
       props: true
-
-      // children: [
-      //   {
-      //     path: "",
-      //     name: "join",
-      //     component: JoinMarche
-      //   }
-      // ],
     },
 
     {

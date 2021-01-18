@@ -197,6 +197,8 @@ import ReviewDetail from "@/components/Reviews/ReviewDetail.vue";
 import UpdateUserProfileForm from "@/components/User/UpdateUserProfileForm.vue";
 import AdvertMinified from "@/components/Adverts/AdvertMinified.vue";
 
+import { store } from "@/store/store";
+
 export default {
   name: "adverts-category",
 
@@ -244,7 +246,7 @@ export default {
     },
 
     isAuthenticated(){
-        return this.$store.state.isAuthenticated;
+        return store.state.isAuthenticated;
     }
   },
 
@@ -387,7 +389,8 @@ export default {
   },
 
   async beforeRouteEnter(to, from, next) {
-    if (this.isAuthenticated) {
+    let isAuth = store.state.isAuthenticated;
+    if (isAuth) {
       next();
     } else {
       next({

@@ -46,6 +46,8 @@ export default {
       window.localStorage.setItem("username", requestUser);
       window.localStorage.setItem("authenticated", requestUserStatus);
       window.localStorage.setItem("user_id", requestUserId);
+
+      console.log(data);
     },
 
     hideFooter() {

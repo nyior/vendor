@@ -28,6 +28,7 @@ class UserSerializer(serializers.ModelSerializer):
             username=validated_data['username'],
             email = validated_data['email'],
         )
+        
         #Hash and save password
         user.set_password(validated_data['password'])
         user.save()

@@ -201,13 +201,6 @@ export default {
     };
   },
 
-//   computed: {
-//     isAuth(){
-//         // return this.$store.state.isAuthenticated;
-//         return false;
-//     }
-//   },
-
   methods: {
     handleFileUpload(event) {
       this.form.file = event.target.files[0];

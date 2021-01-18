@@ -47,7 +47,7 @@
         </li>
 
         <li class="nav-item mt-3" v-if="!isAuthenticated">
-          <router-link :to="{ name: 'login' }">
+          <router-link :to="{ name: 'register' }">
             Register
           </router-link> 
         </li>

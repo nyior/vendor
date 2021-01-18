@@ -29,7 +29,7 @@
 
           <div class="form-group mt-3">
             <input
-              type="text"
+              type="password"
               class="form-control"
               placeholder="your password here"
               required
@@ -89,7 +89,7 @@ export default {
   methods: {
 
     login() {
-      let login_url = `api/v1/obtain-auth-token/`;
+      let login_url = `api/v1/user/login/`;
 
       let method = "POST";
       let formData = new FormData();
@@ -99,6 +99,15 @@ export default {
 
       apiService(login_url, method, formData)
         .then(data => {
+          //change user's auth state to true
+          window.localStorage.setItem("isAuthenticated", true);
+
+          //save user's auth token to the local store
+          window.localStorage.setItem("token", data.token);
+
+          //save user id to the local store
+          window.localStorage.setItem("user_id", data.id);
+
           this.$router.push({
             name: "home"
           });

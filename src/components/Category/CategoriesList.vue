@@ -95,6 +95,11 @@
             </button>
           </router-link>
         </li>
+        <li class="nav-item  mt-3" v-else>
+            <button class="btn color-purple white-btn py-3">
+                Logout
+            </button>
+        </li>
       </ul>
     </div>
 
