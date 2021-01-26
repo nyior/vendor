@@ -74,24 +74,24 @@ class CustomUserSerializer(serializers.ModelSerializer):
             return value
         raise serializers.ValidationError("Only AUN emails allowed fam !!")
 
-class WishlistSerializer(serializers.ModelSerializer):
+# class WishlistSerializer(serializers.ModelSerializer):
 
-    advert = serializers.SerializerMethodField()
-    duration_since_date_added = serializers.SerializerMethodField()
+#     advert = serializers.SerializerMethodField()
+#     duration_since_date_added = serializers.SerializerMethodField()
 
-    class Meta:
-        model = Wishlist
-        fields = ["advert", "duration_since_date_added"]
+#     class Meta:
+#         model = Wishlist
+#         fields = ["advert", "duration_since_date_added"]
 
-    def get_duration_since_date_added(self, object):
-        time_created = object.date_added
-        now = datetime.now(timezone.utc)
-        time_delta = timesince(time_created, now)
-        return time_delta
+#     def get_duration_since_date_added(self, object):
+#         time_created = object.date_added
+#         now = datetime.now(timezone.utc)
+#         time_delta = timesince(time_created, now)
+#         return time_delta
 
-    def get_advert(self, object):
+#     def get_advert(self, object):
 
-        return object.advert
+#         return object.advert
 
 
 class ReviewSerializer(serializers.ModelSerializer):
