@@ -10,6 +10,7 @@ from rest_framework.authtoken.models import Token
 
 class UserSerializer(serializers.ModelSerializer):
     """Serializer class for user in order to transfer user data."""
+    id = serializers.IntegerField(read_only=True)
     token = serializers.SerializerMethodField()
 
     class Meta:

@@ -116,6 +116,10 @@ export default {
       apiService(create_user_url, method, formData)
         .then(data => {
           this.$store.dispatch("joinAction", data.token, data.id);
+          
+          this.$router.push({
+            name: "home"
+          });
         })
         .catch(error => {
           this.error = error;
