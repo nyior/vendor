@@ -29,7 +29,7 @@
           type="search"
           placeholder="Search and discover products/services on Marche"
           required
-          v-model="search_word"
+          v-model="searchWord"
         />
       </form>
 
@@ -43,17 +43,19 @@
         <li class="nav-item mr-3 mt-3" v-if="!isAuthenticated">
           <router-link :to="{ name: 'login' }">
             Login
-          </router-link> 
+          </router-link>
         </li>
 
         <li class="nav-item mt-3" v-if="!isAuthenticated">
           <router-link :to="{ name: 'register' }">
             Register
-          </router-link> 
+          </router-link>
         </li>
 
-        <li class="nav-item mr-3 mt-3" v-if="isAuthenticated">
-          Logout
+        <li class="nav-item mr-3" v-if="isAuthenticated">
+          <button class="btn white-btn py-3" @click="logout">
+            Logout
+          </button>
         </li>
 
         <li class="nav-item mr-3 mt-3" v-if="isAuthenticated">
@@ -74,7 +76,7 @@
       </ul>
     </div>
 
-    <CategoryList v-if="!hide_nav_brand" />
+    <CategoryList :isAuthenticated="isAuth" v-if="!hide_nav_brand" />
   </nav>
 </template>
 
@@ -102,17 +104,25 @@ export default {
 
   data() {
     return {
-      search_word: null
+      searchWord: null,
+      isAuth: null
     };
   },
 
   computed: {
-    isAuthenticated(){
-        return this.$store.state.isAuthenticated;
+    isAuthenticated() {
+      let isAuth = this.$store.state.isAuthenticated;
+      if (isAuth === true) {
+        this.isAuth = true;
+        return true;
+      } else {
+        this.isAuth = false;
+        return false;
+      }
     },
 
-    userId(){
-        return this.$store.state.userId;
+    userId() {
+      return this.$store.state.userId;
     }
   },
 
@@ -120,7 +130,15 @@ export default {
     onSubmit() {
       this.$router.push({
         name: "search",
-        params: { search_key: this.search_word }
+        params: { search_key: this.searchWord }
+      });
+    },
+
+    logout() {
+      this.$store.dispatch("logoutAction");
+
+      this.$router.push({
+        name: "home"
       });
     },
 
@@ -140,9 +158,9 @@ export default {
 </script>
 
 <style scoped>
-a{
-    color: white !important;
-    font-weight: bold;
+a {
+  color: white !important;
+  font-weight: bold;
 }
 
 .my-navbar {

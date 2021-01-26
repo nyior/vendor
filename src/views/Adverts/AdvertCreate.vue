@@ -134,7 +134,7 @@
 <script>
 import { apiService } from "@/common/api.service.js";
 
-import { store } from "@/store/store"
+import { store } from "@/store/store";
 
 import JoinMarche from "@/components/Modals/JoinMarche.vue";
 
@@ -241,7 +241,6 @@ export default {
   },
 
   async beforeRouteEnter(to, from, next) {
-    
     let isAuth = store.state.isAuthenticated;
 
     if (to.params.slug !== undefined && isAuth) {

@@ -1,8 +1,6 @@
 <template>
   <div class="container">
-    <div
-      class="row d-flex  justify-content-center align-items-center px-5"
-    >
+    <div class="row d-flex  justify-content-center align-items-center px-5">
       <div class="col-12 text-center ">
         <h1 class="heading mt-5 mb-2">
           Login to Your Account
@@ -15,7 +13,6 @@
           class="p-3 was-validated"
           enctype="multipart/form-data"
         >
-        
           <div class="form-group mt-3">
             <input
               type="text"
@@ -40,30 +37,23 @@
             </div>
           </div>
 
-          <button 
-                class="btn  blue-btn btn-block" 
-                type="submit"
-                >
-                login
+          <button class="btn  blue-btn btn-block" type="submit">
+            login
           </button>
-          
         </form>
 
         <div class="p-3">
-            <p v-if="error" class="mt-2">
-                <strong>{{ error }}</strong>
-            </p>
+          <p v-if="error" class="mt-2">
+            <strong>{{ error }}</strong>
+          </p>
 
-            <span>
-                <small>
-                    <router-link 
-                        class="text-muted"
-                        :to="{ name: 'register' }"
-                    >
-                    don't have an account? register
-                    </router-link> 
-                </small>
-            </span>
+          <span>
+            <small>
+              <router-link class="text-muted" :to="{ name: 'register' }">
+                don't have an account? register
+              </router-link>
+            </small>
+          </span>
         </div>
       </div>
     </div>
@@ -80,14 +70,13 @@ export default {
     return {
       error: null,
       form: {
-          username: null,
-          password: null
+        username: null,
+        password: null
       }
-    }
+    };
   },
 
   methods: {
-
     login() {
       let login_url = `api/v1/user/login/`;
 
@@ -99,14 +88,12 @@ export default {
 
       apiService(login_url, method, formData)
         .then(data => {
-          //change user's auth state to true
-          window.localStorage.setItem("isAuthenticated", true);
+          let payload = {
+            authToken: data.token,
+            userId: data.id
+          };
 
-          //save user's auth token to the local store
-          window.localStorage.setItem("token", data.token);
-
-          //save user id to the local store
-          window.localStorage.setItem("user_id", data.id);
+          this.$store.dispatch("joinAction", payload);
 
           this.$router.push({
             name: "home"
@@ -124,6 +111,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

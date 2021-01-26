@@ -1,8 +1,6 @@
 <template>
   <div class="container">
-    <div
-      class="row d-flex  justify-content-center align-items-center px-5"
-    >
+    <div class="row d-flex  justify-content-center align-items-center px-5">
       <div class="col-12 text-center ">
         <h1 class="heading mt-5 mb-2">
           Create an Account
@@ -63,32 +61,24 @@
             </div>
           </div>
 
-          <button 
-                  class="btn  blue-btn btn-block" 
-                  type="submit"
-          >
+          <button class="btn  blue-btn btn-block" type="submit">
             register
           </button>
-
         </form>
 
         <div class="p-3">
-            <p v-if="error" class="mt-2">
+          <p v-if="error" class="mt-2">
             <strong>{{ error }}</strong>
-            </p>
+          </p>
 
-            <span>
-                <small class="color-purple">
-                    <router-link  
-                        :to="{ name: 'login' }"
-                        class="text-muted"
-                        >
-                    already have an account? Login
-                    </router-link> 
-                </small>
-            </span>
+          <span>
+            <small class="color-purple">
+              <router-link :to="{ name: 'login' }" class="text-muted">
+                already have an account? Login
+              </router-link>
+            </small>
+          </span>
         </div>
-
       </div>
     </div>
   </div>
@@ -105,15 +95,14 @@ export default {
       error: null,
       confirmPassword: null,
       form: {
-          email: null,
-          username: null,
-          password: null
+        email: null,
+        username: null,
+        password: null
       }
-    }
+    };
   },
 
   methods: {
-
     createUser() {
       let create_user_url = `api/v1/user/signup/`;
 
@@ -126,20 +115,7 @@ export default {
 
       apiService(create_user_url, method, formData)
         .then(data => {
-          
-          ///change user's auth state to true
-          window.localStorage.setItem("isAuthenticated", true);
-
-          //save user's auth token to the local store
-          window.localStorage.setItem("token", data.token);
-
-          //save user id to the local store
-          window.localStorage.setItem("user_id", data.id);
-
-          this.$router.push({
-            name: "user_detail", 
-            params: { id: data.id }
-          });
+          this.$store.dispatch("joinAction", data.token, data.id);
         })
         .catch(error => {
           this.error = error;
@@ -153,6 +129,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

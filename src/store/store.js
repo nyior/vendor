@@ -1,53 +1,81 @@
-import Vue from 'vue';
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
 
 Vue.use(Vuex);
 
+export const store = new Vuex.Store({
+  state: {
+    isAuthenticated: window.localStorage.getItem("isAuthenticated"),
+    userId: window.localStorage.getItem("user_id"),
+    authToken: window.localStorage.getItem("token")
+  },
 
-export const store = new Vuex.Store(
-    {
-        state: {
-            isAuthenticated: window.localStorage.getItem("isAuthenticated"),
-            userId: window.localStorage.getItem("user_id"),
-            authToken: window.localStorage.getItem("token")
-        },
+  mutations: {
+    modifyAuthState: (state, payload) => {
+      state.isAuthenticated = payload;
+    },
 
-        mutations: {
-            modifyAuthState: (state, newState) => {
-                state.isAuthenticated = newState;
-            },
+    modifyUserId: (state, payload) => {
+      state.userId = payload;
+    },
 
-            modifyUserId: (state, userId) => {
-                state.userId = userId;
-            },
+    modifyAuthToken: (state, payload) => {
+      state.authToken = payload;
+    },
 
-            modifyAuthToken: (state, authToken) => {
-                state.authToken = authToken;
-            },
+    logout: state => {
+      //change user's auth state to false
+      window.localStorage.setItem("isAuthenticated", null);
 
-            logout: state => {
-                state.isAuthenticated = false;
-                state.authToken = null;
-                state.userId = null;
-            }
-        },
+      //set token to null
+      window.localStorage.setItem("token", null);
 
-        actions: {
-            modifyAuthStateAction: (context, newState) => {
-                context.commit("modifyAuthState", newState);
-            },
+      //set user id to null
+      window.localStorage.setItem("user_id", null);
 
-            modifyUserIdAction: (context, userId) => {
-                context.commit("modifyUserId", userId);
-            },
+      state.isAuthenticated = null;
+      state.authToken = null;
+      state.userId = null;
+    },
 
-            modifyAuthTokenAction: (context, authToken) => {
-                context.commit("modifyAuthToken", authToken);
-            },
+    join: (state, payload) => {
+      let authToken = payload["authToken"];
+      let userId = payload["userId"];
 
-            logoutAction: context => {
-                context.commit("logout");
-            }
-        }
+      //change user's auth state to true
+      window.localStorage.setItem("isAuthenticated", true);
+
+      //save user's auth token to the local store
+      window.localStorage.setItem("token", authToken);
+
+      //save user id to the local store
+      window.localStorage.setItem("user_id", userId);
+
+      state.isAuthenticated = true;
+      state.authToken = authToken;
+      state.userId = userId;
     }
-);
+  },
+
+  actions: {
+    modifyAuthStateAction: (context, payload) => {
+      context.commit("modifyAuthState", payload);
+    },
+
+    modifyUserIdAction: (context, payload) => {
+      context.commit("modifyUserId", payload);
+    },
+
+    modifyAuthTokenAction: (context, payload) => {
+      context.commit("modifyAuthToken", payload);
+    },
+
+    logoutAction: context => {
+      context.commit("logout");
+    },
+
+    joinAction: (context, payload) => {
+      context.commit("join", payload);
+    }
+  }
+});

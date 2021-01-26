@@ -91,14 +91,14 @@
         <li class="nav-item  mt-3" v-if="!isAuthenticated">
           <router-link :to="{ name: 'login' }">
             <button class="btn color-purple white-btn py-3">
-                Join
+              Join
             </button>
           </router-link>
         </li>
         <li class="nav-item  mt-3" v-else>
-            <button class="btn color-purple white-btn py-3">
-                Logout
-            </button>
+          <button class="btn color-purple white-btn py-3" @click="logout">
+            Logout
+          </button>
         </li>
       </ul>
     </div>
@@ -110,13 +110,13 @@
 </template>
 
 <script>
-
 export default {
   name: "categories-list",
 
-  computed: {
-    isAuthenticated(){
-        return this.$store.state.isAuthenticated;
+  props: {
+    isAuthenticated: {
+      type: Boolean,
+      required: true
     }
   },
 
@@ -127,6 +127,14 @@ export default {
 
     closeNav() {
       document.getElementById("myNav").style.width = "0%";
+    },
+
+    logout() {
+      this.$store.dispatch("logoutAction");
+
+      this.$router.push({
+        name: "home"
+      });
     }
   }
 };

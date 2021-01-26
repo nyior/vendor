@@ -11,7 +11,7 @@
           </h4>
           <router-link :to="{ name: 'login' }">
             <button class="btn mt-4 py-3 blue-btn">continue</button>
-          </router-link> 
+          </router-link>
         </div>
       </div>
     </div>

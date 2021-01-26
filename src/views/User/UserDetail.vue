@@ -245,8 +245,8 @@ export default {
       return this.requestUser == this.user.username;
     },
 
-    isAuthenticated(){
-        return store.state.isAuthenticated;
+    isAuthenticated() {
+      return store.state.isAuthenticated;
     }
   },
 

@@ -32,7 +32,7 @@
 <script>
 import { apiService } from "@/common/api.service.js";
 
-import { store } from "@/store/store"
+import { store } from "@/store/store";
 
 import AdvertMinified from "@/components/Adverts/AdvertMinified.vue";
 
@@ -104,7 +104,6 @@ export default {
   },
 
   async beforeRouteEnter(to, from, next) {
-    
     let isAuth = store.state.isAuthenticated;
     if (isAuth) {
       next();

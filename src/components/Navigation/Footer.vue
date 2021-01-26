@@ -68,15 +68,14 @@
 </template>
 
 <script>
-
 export default {
   name: "Footer",
-  
+
   computed: {
-    userId(){
-        return this.$store.state.userId;
+    userId() {
+      return this.$store.state.userId;
     }
-  },
+  }
 };
 </script>
 
