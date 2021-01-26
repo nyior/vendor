@@ -5,6 +5,37 @@ from django.utils.timesince import timesince
 
 from apps.users.models import CustomUser, Review
 
+from rest_framework.authtoken.models import Token
+
+
+class UserSerializer(serializers.ModelSerializer):
+    """Serializer class for user in order to transfer user data."""
+    token = serializers.SerializerMethodField()
+
+    class Meta:
+        model = CustomUser
+        fields = ('id', 'email', 'username', 'password', 'token')
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def get_token(self, instance):
+        token, _ = Token.objects.get_or_create(user=instance)
+        token = f"{token}"
+        return token
+    
+    def create(self, validated_data):
+        """Method for creating new users from posted data"""
+        user = CustomUser(
+            username=validated_data['username'],
+            email = validated_data['email'],
+        )
+        
+        #Hash and save password
+        user.set_password(validated_data['password'])
+        user.save()
+        Token.objects.create(user=user)
+        return user
+
+
 class AvatarSerializer(serializers.ModelSerializer):
     """This serializes a user's avatar"""
 

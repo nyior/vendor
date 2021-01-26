@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg py-3 shadow my-navbar  sticky-top">
     <i
-      class="fa fa-long-arrow-left  pl-3"
+      class="fa fa-long-arrow-left"
       id="back-arrow"
       aria-hidden="true"
       @click="back"
@@ -29,7 +29,7 @@
           type="search"
           placeholder="Search and discover products/services on Marche"
           required
-          v-model="search_word"
+          v-model="searchWord"
         />
       </form>
 
@@ -40,19 +40,25 @@
           </router-link>
         </li>
 
-        <li class="nav-item mr-3 mt-3" v-if="!is_authenticated">
-          <a class="link" href="/accounts/login/">Login</a>
+        <li class="nav-item mr-3 mt-3" v-if="!isAuthenticated">
+          <router-link :to="{ name: 'login' }">
+            Login
+          </router-link>
         </li>
 
-        <li class="nav-item mt-3" v-if="!is_authenticated">
-          <a class="link" href="/accounts/signup/">Register</a>
+        <li class="nav-item mt-3" v-if="!isAuthenticated">
+          <router-link :to="{ name: 'register' }">
+            Register
+          </router-link>
         </li>
 
-        <li class="nav-item mr-3 mt-3" v-if="is_authenticated">
-          <a class="link" href="/accounts/logout/">Logout</a>
+        <li class="nav-item mr-3" v-if="isAuthenticated">
+          <button class="btn white-btn py-3" @click="logout">
+            Logout
+          </button>
         </li>
 
-        <li class="nav-item mr-3 mt-3" v-if="is_authenticated">
+        <li class="nav-item mr-3 mt-3" v-if="isAuthenticated">
           <router-link :to="{ name: 'wishlist' }">
             <a class="link">
               <i class="far fa-heart"></i>
@@ -60,8 +66,8 @@
           </router-link>
         </li>
 
-        <li class="nav-item mt-3" v-if="is_authenticated">
-          <router-link :to="{ name: 'user_detail', params: { id: id } }">
+        <li class="nav-item mt-3" v-if="isAuthenticated">
+          <router-link :to="{ name: 'user_detail', params: { id: userId } }">
             <a class="link">
               <i class="far fa-user"></i>
             </a>
@@ -70,15 +76,12 @@
       </ul>
     </div>
 
-    <CategoryList v-if="!hide_nav_brand" />
+    <CategoryList :isAuthenticated="isAuth" v-if="!hide_nav_brand" />
   </nav>
 </template>
 
 <script>
 import CategoryList from "@/components/Category/CategoriesList.vue";
-
-import { user_id } from "@/common/global_variables.js";
-import { is_authenticated } from "@/common/global_variables.js";
 
 export default {
   name: "NavbarComponent",
@@ -101,17 +104,41 @@ export default {
 
   data() {
     return {
-      id: user_id,
-      search_word: null,
-      is_authenticated: is_authenticated
+      searchWord: null,
+      isAuth: null
     };
+  },
+
+  computed: {
+    isAuthenticated() {
+      let isAuth = this.$store.state.isAuthenticated;
+      if (isAuth === true) {
+        this.isAuth = true;
+        return true;
+      } else {
+        this.isAuth = false;
+        return false;
+      }
+    },
+
+    userId() {
+      return this.$store.state.userId;
+    }
   },
 
   methods: {
     onSubmit() {
       this.$router.push({
         name: "search",
-        params: { search_key: this.search_word }
+        params: { search_key: this.searchWord }
+      });
+    },
+
+    logout() {
+      this.$store.dispatch("logoutAction");
+
+      this.$router.push({
+        name: "home"
       });
     },
 
@@ -131,6 +158,11 @@ export default {
 </script>
 
 <style scoped>
+a {
+  color: white !important;
+  font-weight: bold;
+}
+
 .my-navbar {
   font-size: 1.4rem;
   background-color: #7a09c4;

@@ -192,11 +192,12 @@
 
 <script>
 import { apiService } from "@/common/api.service.js";
-import { is_authenticated } from "@/common/global_variables.js";
 
 import ReviewDetail from "@/components/Reviews/ReviewDetail.vue";
 import UpdateUserProfileForm from "@/components/User/UpdateUserProfileForm.vue";
 import AdvertMinified from "@/components/Adverts/AdvertMinified.vue";
+
+import { store } from "@/store/store";
 
 export default {
   name: "adverts-category",
@@ -242,6 +243,10 @@ export default {
   computed: {
     UserHasProfile() {
       return this.requestUser == this.user.username;
+    },
+
+    isAuthenticated() {
+      return store.state.isAuthenticated;
     }
   },
 
@@ -384,7 +389,8 @@ export default {
   },
 
   async beforeRouteEnter(to, from, next) {
-    if (is_authenticated) {
+    let isAuth = store.state.isAuthenticated;
+    if (isAuth) {
       next();
     } else {
       next({

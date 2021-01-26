@@ -9,9 +9,9 @@
             oops‼ This feature is only available to logged in users. To
             login/signup click the button below.
           </h4>
-          <a class="link" href="/accounts/login/">
+          <router-link :to="{ name: 'login' }">
             <button class="btn mt-4 py-3 blue-btn">continue</button>
-          </a>
+          </router-link>
         </div>
       </div>
     </div>

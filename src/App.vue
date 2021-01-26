@@ -33,21 +33,6 @@ export default {
   },
 
   methods: {
-    async setUserInfo() {
-      let get_user_url = `api/v1/users/currentUser/`;
-
-      const data = await apiService(get_user_url, "GET");
-      const requestUser = data["username"];
-      const requestUserStatus = data["authenticated"];
-      const requestUserId = data["user_id"];
-
-      this.is_authenticated = data["authenticated"];
-
-      window.localStorage.setItem("username", requestUser);
-      window.localStorage.setItem("authenticated", requestUserStatus);
-      window.localStorage.setItem("user_id", requestUserId);
-    },
-
     hideFooter() {
       this.show_footer = false;
     }
@@ -65,10 +50,6 @@ export default {
         this.title = null;
       }
     }
-  },
-
-  created() {
-    this.setUserInfo();
   }
 };
 </script>

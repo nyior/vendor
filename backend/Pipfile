@@ -9,12 +9,14 @@ verify_ssl = true
 django = "==2.2"
 djangorestframework = "*"
 django-rest-swagger = "*"
-django-crispy-forms = "*"
-django-webpack-loader = "*"
 django-rest-auth = "*"
-django-allauth = "*"
 pillow = "*"
 django-environ = "*"
+django-heroku = "*"
+django-cors-headers = "*"
+gunicorn = "*"
+boto3 = "*"
+django-storages = "*"
 
 [requires]
 python_version = "3.7"
