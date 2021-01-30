@@ -110,7 +110,18 @@
             ></textarea>
           </div>
 
-          <button class="btn  blue-btn" type="submit">create</button>
+          <button
+            class="btn  blue-btn  btn-block"
+            :class="{ 'is-loading': isLoading }"
+            type="submit"
+          >
+            <div class="text">
+              submit
+            </div>
+            <div class="loading-icon">
+              <i class="fa fa-cog fa-spin"></i>
+            </div>
+          </button>
         </form>
 
         <p v-if="error" class="mt-2">
@@ -118,16 +129,6 @@
         </p>
       </div>
     </div>
-
-    <!-- <div class="row  p-5  d-flex  justify-content-center align-items-center"
-          >
-
-      <div class="col-md-6 col-12 mt-5 px-3 py-3">
-
-         <router-view ></router-view>
-
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -185,6 +186,7 @@ export default {
   data() {
     return {
       error: null,
+      isLoading: false,
 
       img_src: null,
 
@@ -208,6 +210,7 @@ export default {
     },
 
     postAdvert() {
+      this.isLoading = true;
       let post_advert_url = `api/v1/adverts/`;
 
       let method = "POST";
@@ -223,18 +226,25 @@ export default {
       formData.append("category", this.form.category);
       formData.append("name", this.form.name);
       formData.append("price", this.form.price);
-      formData.append("quantity", this.form.quantity);
-      formData.append("description", this.form.description);
       formData.append("file", file);
+
+      if (this.form.quantity !== undefined) {
+        formData.append("quantity", this.form.quantity);
+      }
+      if (this.form.description !== undefined) {
+        formData.append("description", this.form.description);
+      }
 
       apiService(post_advert_url, method, formData)
         .then(data => {
+          this.isLoading = false;
           this.$router.push({
             name: "ad_detail",
             params: { slug: data.slug }
           });
         })
         .catch(error => {
+          this.isLoading = false;
           this.error = error;
         });
     }
@@ -243,7 +253,7 @@ export default {
   async beforeRouteEnter(to, from, next) {
     let isAuth = store.state.isAuthenticated;
 
-    if (to.params.slug !== undefined && isAuth) {
+    if (to.params.slug !== undefined && isAuth === true) {
       let get_advert_url = `api/v1/adverts/${to.params.slug}/`;
 
       let data = await apiService(get_advert_url, "GET");
@@ -255,7 +265,7 @@ export default {
       to.params.category = data.category;
 
       return next();
-    } else if (!isAuth) {
+    } else if (isAuth === false) {
       return next({
         name: "continue" // back to safety route //
       });
@@ -278,5 +288,27 @@ export default {
 
 p {
   z-index: 1;
+}
+
+button > .text {
+  will-change: transform, opacity;
+  transition: all 0.3s ease-in-out;
+  opacity: 1;
+}
+button > .loading-icon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  transition: all 0.3s ease-in-out;
+  will-change: transform, opacity;
+  opacity: 0;
+}
+button.is-loading > .text {
+  transform: translateY(-100px);
+  opacity: 0;
+}
+button.is-loading > .loading-icon {
+  transform: translateY(-100%);
+  opacity: 1;
 }
 </style>

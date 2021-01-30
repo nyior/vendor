@@ -61,7 +61,7 @@
             </div>
           </div>
 
-          <button class="btn  blue-btn btn-block" type="submit">
+          <button class="blue-btn btn-block" type="submit">
             register
           </button>
         </form>
@@ -115,8 +115,13 @@ export default {
 
       apiService(create_user_url, method, formData)
         .then(data => {
-          this.$store.dispatch("joinAction", data.token, data.id);
-          
+          let payload = {
+            authToken: data.token,
+            userId: data.id
+          };
+
+          this.$store.dispatch("joinAction", payload);
+
           this.$router.push({
             name: "home"
           });

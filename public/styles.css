@@ -75,21 +75,22 @@ a:hover {
 }
 
 .blue-btn {
-	background-color: #7a09c4 !important;
-	color: white !important;
-	width: 14rem !important;
-	font-size: 1.4rem !important;
-	letter-spacing: 1px !important;
-	
+    font-size: 1.4rem !important;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background: #7a09c4 !important;
+    text-align: center;
+    color: white !important;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
 }
 
-.red-btn {
-	background-color: #d34836 !important;
-	color: white !important;
-	width: 14rem !important;
-	font-size: 1.4rem !important;
-	letter-spacing: 1px !important;
-	
+.logout-btn{
+    font-size: 1rem !important;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background: #7a09c4 !important; 
 }
 
 label,  textarea,

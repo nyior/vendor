@@ -390,7 +390,7 @@ export default {
 
   async beforeRouteEnter(to, from, next) {
     let isAuth = store.state.isAuthenticated;
-    if (isAuth) {
+    if (isAuth === true) {
       next();
     } else {
       next({

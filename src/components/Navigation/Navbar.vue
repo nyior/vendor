@@ -1,5 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-lg py-3 shadow my-navbar  sticky-top">
+  <nav
+    class="navbar navbar-expand-lg py-3 shadow my-navbar  sticky-top"
+    id="my-nav"
+  >
     <i
       class="fa fa-long-arrow-left"
       id="back-arrow"
@@ -53,7 +56,7 @@
         </li>
 
         <li class="nav-item mr-3" v-if="isAuthenticated">
-          <button class="btn white-btn py-3" @click="logout">
+          <button class="btn logout-btn py-3" @click="logout">
             Logout
           </button>
         </li>
@@ -189,5 +192,10 @@ ul li {
 #back-arrow {
   font-size: 2rem;
   color: white;
+}
+
+#my-nav .router-link-exact-active {
+  color: #7a09c4 !important;
+  cursor: pointer;
 }
 </style>

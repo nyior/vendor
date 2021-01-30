@@ -5,8 +5,8 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    isAuthenticated: window.localStorage.getItem("isAuthenticated"),
-    userId: window.localStorage.getItem("user_id"),
+    isAuthenticated: JSON.parse(window.localStorage.getItem("isAuthenticated")),
+    userId: JSON.parse(window.localStorage.getItem("user_id")),
     authToken: window.localStorage.getItem("token")
   },
 
@@ -25,7 +25,7 @@ export const store = new Vuex.Store({
 
     logout: state => {
       //change user's auth state to false
-      window.localStorage.setItem("isAuthenticated", null);
+      window.localStorage.setItem("isAuthenticated", false);
 
       //set token to null
       window.localStorage.setItem("token", null);
@@ -33,7 +33,7 @@ export const store = new Vuex.Store({
       //set user id to null
       window.localStorage.setItem("user_id", null);
 
-      state.isAuthenticated = null;
+      state.isAuthenticated = false;
       state.authToken = null;
       state.userId = null;
     },

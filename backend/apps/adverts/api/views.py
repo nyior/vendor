@@ -16,7 +16,7 @@ from apps.adverts.api.permissions import *
 from apps.users.models import CustomUser
 
 from apps.adverts.api.serializers import *
-from apps.core.utils import generate_random_string
+from apps.core.utils import generate_unique_slug
 
 
 class SearchList(generics.ListAPIView):
@@ -51,7 +51,7 @@ class AdvertViewSet(mixins.ListModelMixin,
         serializer.save(category=category)
 
     def perform_create(self, serializer):
-        slug = self.request.data["name"] + generate_random_string()
+        slug = generate_unique_slug(self.request.data["name"])
         cat = self.request.data["category"] 
         user = self.request.user
         category = get_object_or_404(Category, name=cat)

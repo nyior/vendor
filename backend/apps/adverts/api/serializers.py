@@ -12,6 +12,8 @@ class AdvertSerializer(serializers.ModelSerializer):
     """
 
     slug = serializers.SlugField(read_only=True)
+    quantity = serializers.IntegerField(required=False)
+    description = serializers.CharField(required=False)
     user = CustomUserSerializer(read_only=True)
     category = serializers.SerializerMethodField()
     advert_in_current_user_wishlist= serializers.SerializerMethodField()
