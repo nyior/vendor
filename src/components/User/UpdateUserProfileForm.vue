@@ -59,7 +59,13 @@
         ></textarea>
       </div>
 
-      <button class="btn btn-lg btn-blue" type="submit">Update Profile</button>
+      <button class="btn btn-lg btn-blue mr-5" type="submit">Update Profile</button>
+      <i 
+            class="fa fa-times" 
+            aria-hidden="true"
+            @click="hideForm">
+
+      </i>
     </form>
   </div>
 </template>
@@ -93,6 +99,10 @@ export default {
   methods: {
     UpdateUserProfileTrigger() {
       this.$emit("update-profile", this.form);
+    },
+
+    hideForm() {
+      this.$emit("hide-form");
     }
   }
 };

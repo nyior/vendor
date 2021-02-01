@@ -103,9 +103,13 @@
       </ul>
     </div>
 
-    <span class="mr-2 hide-elem" v-on:click="openNav">
-      <i class="fa fa-bars" aria-hidden="true"></i>
-    </span>
+    <!-- <router-link
+      :to="{ name: 'home' }"
+    > -->
+        <span class="mr-2 hide-elem" v-on:click="openNav">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </span>
+    <!-- </router-link> -->
   </div>
 </template>
 

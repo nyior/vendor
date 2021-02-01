@@ -228,10 +228,15 @@ export default {
       formData.append("price", this.form.price);
       formData.append("file", file);
 
-      if (this.form.quantity !== undefined) {
+      if (
+          this.form.quantity !== undefined && this.form.quantity !== null
+          ) {
         formData.append("quantity", this.form.quantity);
       }
-      if (this.form.description !== undefined) {
+
+      if (
+          this.form.description !== undefined && this.form.description !== null
+        ) {
         formData.append("description", this.form.description);
       }
 

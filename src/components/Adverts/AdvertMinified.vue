@@ -1,33 +1,33 @@
 <template>
   <div class="m-3">
     <router-link :to="{ name: 'ad_detail', params: { slug: advert.slug } }">
-      <div>
-        <div id="productImageBackground">
-          <img
-            :src="advert.file"
-            class="img-fluid"
-            :alt="advert.name + ' image'"
-          />
-        </div>
-      </div>
+      
+     <div id="productImageBackground">
+        <img
+          :src="advert.file"
+          class="img-fluid"
+          :alt="advert.name + ' image'"
+        />
+     </div>
 
-      <div class="text-muted mt-2">
-        <div class="d-flex" id="productText">
-          <p id="productName">{{ advert.name }}</p>
-          <p id="price" class="ml-md-auto">₦{{ advert.price }}</p>
+      <div class="text-left mt-2">
+        <div>
+          <span id="productName">{{ advert.name }}</span>
+        </div>
+        <div>
+            <span id="price" class="mt-0">₦{{ advert.price }}</span>
         </div>
       </div>
     </router-link>
 
-    <button
+    <span
       v-if="!isAdvertOwner"
-      class="btn btn-sm"
       @click="toggle"
       id="wishlist"
     >
       <i class="far fa-heart fa-3x" v-if="!addedToWishList"> </i>
       <i class="fas fa-heart fa-3x" v-else></i>
-    </button>
+    </span>
   </div>
 </template>
 
@@ -95,17 +95,12 @@ export default {
 
 <style scoped>
 #price {
-  font-weight: 600;
-  font-size: 1.3rem;
-}
-
-#productText {
-  flex-flow: row;
+  font-weight: 400;
+  font-size: 1.5rem;
 }
 
 #productName {
-  font-weight: 600;
-  font-size: 1.3rem;
+  font-size: 1.6rem;
 }
 
 #productImageBackground {
@@ -142,11 +137,12 @@ a:hover {
   }
 
   #productName {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
 
   #price {
     font-size: 1.2rem;
+    font-weight: 400;
   }
 }
 </style>

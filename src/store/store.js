@@ -7,7 +7,8 @@ export const store = new Vuex.Store({
   state: {
     isAuthenticated: JSON.parse(window.localStorage.getItem("isAuthenticated")),
     userId: JSON.parse(window.localStorage.getItem("user_id")),
-    authToken: window.localStorage.getItem("token")
+    authToken: window.localStorage.getItem("token"),
+    username: window.localStorage.getItem("username")
   },
 
   mutations: {
@@ -33,14 +34,18 @@ export const store = new Vuex.Store({
       //set user id to null
       window.localStorage.setItem("user_id", null);
 
+      window.localStorage.setItem("username", null);
+
       state.isAuthenticated = false;
       state.authToken = null;
       state.userId = null;
+      state.username = null;
     },
 
     join: (state, payload) => {
       let authToken = payload["authToken"];
       let userId = payload["userId"];
+      let username = payload["username"];
 
       //change user's auth state to true
       window.localStorage.setItem("isAuthenticated", true);
@@ -51,9 +56,12 @@ export const store = new Vuex.Store({
       //save user id to the local store
       window.localStorage.setItem("user_id", userId);
 
+      window.localStorage.setItem("username", username);
+
       state.isAuthenticated = true;
       state.authToken = authToken;
       state.userId = userId;
+      state.username = username;
     }
   },
 

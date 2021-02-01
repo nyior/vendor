@@ -1,31 +1,30 @@
 <template>
-  <div class="container-fluid p-5 mx-md-5 advert mt-5">
-    <router-link class="sell" :to="{ name: 'ads_create' }">
-      <button class="btn btn-lg">Sell on Marche</button>
-    </router-link>
-    <div class="row p-md-5  mt-5 mb-2  d-flex ">
-      <div class="col-md-6 col-12 p-0 ml-md-auto mr-md-auto text-center ">
+  <div class="container-fluid mt-0">
+    
+    <div class="row px-md-5 px-3 dp-image-cover">
+      <div class="col-12 text-center ">
         <div class="card">
-          <div class="m-1 bg-grey mt-5">
+          <div class="mt-5">
             <div>
-              <a :href="user.profile_picture">
-                <div class="profilePicContainer">
-                  <img
-                    :src="user.profile_picture"
-                    class="img-fluid"
-                    alt="Responsive image"
-                  />
-                </div>
-              </a>
-
-              <div v-if="UserHasProfile && !showAvatarUpdateForm">
-                <button
-                  class="btn mt-3 btn-blue"
-                  @click="showAvatarUpdateForm = true"
+              
+              <div class="profilePicContainer mt-5">
+                <a :href="user.profile_picture">
+                    <img
+                        :src="user.profile_picture"
+                        class="img-fluid"
+                    />
+                </a>
+        
+                <i 
+                    v-if="UserHasProfile && !showAvatarUpdateForm"
+                    id="update-profile-avatar"
+                    class="fa fa-edit" 
+                    aria-hidden="true"
+                    @click="showAvatarUpdateForm = true"
                 >
-                  change display picture
-                </button>
+                </i>
               </div>
+              
 
               <div v-if="showAvatarUpdateForm">
                 <form
@@ -43,34 +42,52 @@
                     </label>
                   </div>
 
-                  <button class="btn btn-lg btn-blue" type="submit">
-                    Post Avatar
+                  <button class="btn btn-blue mr-5" type="submit">
+                    upload avatar
                   </button>
+
+                  <i 
+                    class="fa fa-times" 
+                    aria-hidden="true"
+                    @click="showAvatarUpdateForm = false">
+
+                  </i>
                 </form>
               </div>
             </div>
 
-            <div class="text-muted mt-2" v-if="!showProfileUpdateForm">
-              <p>
-                <a href="#">
-                  <p class="username text-uppercase">{{ user.username }}</p>
-                  <p class="mobile">Mobile Number : {{ user.phone_number }}</p>
-                  <p class="hall">Residence Hall : {{ user.residence_hall }}</p>
-                </a>
-              </p>
+            <div class="mt-5" v-if="!showProfileUpdateForm">
+                <p id="username">{{ user.username }}</p>      
             </div>
+
+            <div class="my-5 py-5" v-if="!showProfileUpdateForm">
+                <div>
+                    <span>mobile number : {{ user.phone_number }}</span>
+                </div>
+                <div>
+                    <span>residence hall : {{ user.residence_hall }}</span>
+                </div>
+            </div>
+
             <div v-if="showProfileUpdateForm">
               <UpdateUserProfileForm
                 :user="user"
                 @update-profile="UpdateProfile"
+                @hide-form="showProfileUpdateForm = false"
               />
             </div>
 
             <div v-if="UserHasProfile && !showProfileUpdateForm">
               <button
-                class="btn btn-blue editButton mt-4"
+                class="blue-btn btn-block"
                 @click="showProfileUpdateForm = true"
               >
+                <i 
+                    class="fa fa-edit" 
+                    id="edit-profile"
+                    aria-hidden="true"
+                >
+                </i>
                 edit profile
               </button>
             </div>
@@ -79,7 +96,7 @@
       </div>
     </div>
 
-    <div class="row   mb-2  mt-2 w-100 d-flex text-center">
+    <div class="row   px-md-5 px-3 py-5 my-5">
       <div class="col-12 text-center">
         <h1 class="heading" v-if="UserHasProfile">
           <strong>Your Shop</strong>
@@ -87,7 +104,7 @@
         <h1 class="heading" v-else><strong>Seller's Shop</strong></h1>
       </div>
 
-      <div class="row   mb-2 w-100 d-flex text-center">
+      <div class="row   text-center">
         <p v-if="!sellerShop" class="text-danger mt-5 pt-5">
           <strong
             >Your shop is empty. Sell on Marche to populate your shop.</strong
@@ -95,7 +112,7 @@
         </p>
 
         <div
-          class="col-md-3 col-6 m-2 p-0"
+          class="col-md-3 col-12 px-5"
           v-for="advert in sellerShop"
           :key="advert.id"
           v-else
@@ -155,7 +172,7 @@
 
     <div v-else>
       <div v-if="!UserHasReviewed">
-        <button class="btn btn-blue" @click="showForm = true">
+        <button class="blue-btn btn-block" @click="showForm = true">
           review this user
         </button>
       </div>
@@ -403,26 +420,59 @@ export default {
 
 <style scoped>
 .profilePicContainer {
-  border-radius: 50%;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   display: flex;
   justify-content: center;
   margin: auto;
-  flex-flow: column;
-  overflow: hidden;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: #FFFFFF;
+  box-shadow: 0 0 8px 3px #B8B8B8; 
+  position: relative;
 }
 
-.username {
-  color: #7a09c4;
+.profilePicContainer img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+
+
+#update-profile-avatar{
+  position: absolute;
+  bottom: 10%;
+  right: 0%;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  color: cornflowerblue;
+  box-shadow: 0 0 8px 3px #B8B8B8;
+}
+
+#username {
+  color:white;
+  font-size: 3rem;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
 }
 
 a:hover {
   color: black !important;
 }
 
-.editButton {
-  color: #7a09c4 !important;
-  background: white !important;
+.card{
+ background-color: #C0C0C0;
+}
+
+span{
+    font-size: 1.6rem;
+    letter-spacing: 0.1rem;
+    color: white;
+    font-weight: bold;
 }
 </style>

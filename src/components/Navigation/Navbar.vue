@@ -19,8 +19,9 @@
       :to="{ name: 'home' }"
       class="navbar-brand pacifico pl-3"
       v-if="!hide_nav_brand"
-      >Marche`</router-link
     >
+     Vendor
+    </router-link>
 
     <div class="collapse navbar-collapse" v-if="!hide_nav_brand">
       <form

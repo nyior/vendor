@@ -83,7 +83,6 @@ const router = new Router({
       path: "/category/:category",
       name: "category",
       component: Category,
-      meta: { hideFooter: true },
       props: true
     },
 

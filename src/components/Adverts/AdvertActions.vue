@@ -2,12 +2,12 @@
   <div class=" p-0 mt-5">
     <router-link
       :to="{ name: 'ads_create', params: { slug: slug } }"
-      class="btn btn-blue ml-2"
+      class="btn btn-sm btn-success ml-2"
     >
       Edit Your Advert
     </router-link>
 
-    <button @click="deleteAdvert" class="btn btn-blue ml-2">
+    <button @click="deleteAdvert" class="btn btn-sm ml-2 btn-danger">
       Delete Your Advert
     </button>
   </div>
@@ -46,4 +46,14 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.btn{
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    letter-spacing: 0.1rem;
+}
+
+a{
+    color: white!important;
+}
+</style>

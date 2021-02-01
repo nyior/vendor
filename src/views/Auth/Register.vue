@@ -117,7 +117,8 @@ export default {
         .then(data => {
           let payload = {
             authToken: data.token,
-            userId: data.id
+            userId: data.id,
+            username: data.username
           };
 
           this.$store.dispatch("joinAction", payload);
