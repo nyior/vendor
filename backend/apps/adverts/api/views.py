@@ -1,3 +1,5 @@
+from rest_framework.response import Response
+
 from rest_framework import (generics, 
                             viewsets, 
                             mixins, 
@@ -12,22 +14,55 @@ from rest_framework.parsers import  (MultiPartParser,
                                         FormParser, 
                                         FileUploadParser)
 
+from rest_framework.decorators import api_view
+
 from apps.adverts.api.permissions import *
+
+from apps.adverts.models import Advert
 from apps.users.models import CustomUser
 
 from apps.adverts.api.serializers import *
+from apps.users.api.serializers import CustomUserSerializer
+
 from apps.core.utils import generate_unique_slug
 
 
-class SearchList(generics.ListAPIView):
-    """ This returns a list of products/services
-        based on search keyword
-    """
+@api_view(['GET'])
+def general_search(request):
+	"""
+	This is used for general searches. it returns search results based on a user's input.
+	The search result could either be a user,or an advert.
+	"""
+	query = request.GET.get("search", None)
 
-    queryset = Advert.objects.all()
-    serializer_class = AdvertSerializer
-    filter_backend = [filters.SearchFilter]
-    search_fields = ["name"]
+	if query:
+		adverts = Advert.objects.all()
+		users = CustomUser.objects.all()
+		serializer_context = {"request":request}
+
+		adverts = adverts.filter(name__icontains=query)
+		users = users.filter(username__icontains=query)
+				
+		return Response({
+						"users": CustomUserSerializer(
+                                                    users, 
+                                                    many=True, 
+                                                    context=serializer_context
+                                                    ).data,
+						"adverts": AdvertSerializer(
+                                                    adverts, 
+                                                    many=True, 
+                                                    context=serializer_context
+                                                    ).data
+					    })
+
+	return Response(
+                {
+                    'success': False,
+
+                    'message': "You need to pass a query param"
+
+                })
 
 
 class AdvertViewSet(mixins.ListModelMixin,

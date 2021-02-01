@@ -2,9 +2,9 @@
     <div>
         <div class="hero-wrapper" id="hero">
             <div class="container">
-                <div class="headline row px-5 txt-center">
+                <div class="headline row px-3">
                     <div class="col-12 col-md-6">
-                        <div class="hero-text-first">
+                        <div class="text-center text-md-left">
                             <h1 class="heading mt-3">
                                AUN VENDOR
                             </h1>
@@ -28,13 +28,13 @@
                     </div>
 
                     <div
-                    class="col-12 col-md-6 image text-left text-md-center mt-md-0 mt-5"
+                    class="col-12 col-md-6 image text-left  mt-md-0 mt-5"
                     >
                         <div class="round-illustration">
                             <img
                                 alt="College Students"
-                                class="img-fluid is-rounded float-left img-home"
-                                src="../../assets/svg/undraw_agreement_aajr.svg"
+                                class="img-fluid"
+                                src="../../assets/svg/home-hero-image.svg"
                             />
                         </div>
                     </div>

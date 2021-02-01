@@ -24,18 +24,8 @@
     </router-link>
 
     <div class="collapse navbar-collapse" v-if="!hide_nav_brand">
-      <form
-        class="form-group has-search my-0 ml-auto mr-auto"
-        @submit.prevent="onSubmit"
-      >
-        <input
-          class="form-control mr-sm-2 p-3 px-4"
-          type="search"
-          placeholder="Search and discover products/services on Marche"
-          required
-          v-model="searchWord"
-        />
-      </form>
+
+      <SearchForm />
 
       <ul class="navbar-nav">
         <li class="nav-item mr-3">
@@ -86,12 +76,14 @@
 
 <script>
 import CategoryList from "@/components/Category/CategoriesList.vue";
+import SearchForm from "@/components/Search/SearchForm.vue";
 
 export default {
   name: "NavbarComponent",
 
   components: {
-    CategoryList
+    CategoryList,
+    SearchForm
   },
 
   props: {
@@ -180,12 +172,6 @@ a {
   color: white !important;
 }
 
-input[type="search"] {
-  width: 50rem;
-  height: 3rem;
-  border-radius: 20px;
-}
-
 ul li {
   margin: 0rem 1.5rem;
 }
@@ -195,8 +181,8 @@ ul li {
   color: white;
 }
 
-#my-nav .router-link-exact-active {
+/* #my-nav .router-link-exact-active {
   color: #7a09c4 !important;
   cursor: pointer;
-}
+} */
 </style>

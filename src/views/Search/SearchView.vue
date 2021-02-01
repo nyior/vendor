@@ -2,27 +2,43 @@
   <div class="container-fluid pt-5 pb-0 mt-5  ">
     <Sell />
 
-    <div class="row  text-center px-4 hide-on-desktop">
-      <div class="col-md-12">
-        <form class="form-group has-search py-3" @submit.prevent="onSubmit">
-          <input
-            class="form-control mr-sm-2 p-3 px-4"
-            type="search"
-            placeholder="Search and discover products/services on Marche"
-            required
-            v-model="search_word"
-          />
-        </form>
+    <div class="row px-3 hide-on-desktop">
+        <div class="col-12">
+            <SearchForm />
+        </div>
+        
+    </div>
+
+    <div class="row px-3 text-center mb-5" v-if="loadingAdverts">
+      <div class="col-md-6 ml-md-auto mr-md-auto col-12">
+        <Loader />
       </div>
     </div>
 
-    <div class="row categories px-2 px-md-5 mt-0 mb-2 text-center d-flex">
-      <div class="col-md-3 col-6" v-for="advert in adverts" :key="advert.id">
+    <div 
+        class="row categories px-3 mt-5 mb-2 text-center " 
+        v-if="!noAdverts"
+    >
+      <div 
+        class="col-md-3 col-12" 
+        v-for="advert in adverts" 
+        :key="advert.id">
         <AdvertMinified :advert_object="advert" />
       </div>
     </div>
 
-    <div class="row text-center d-flex justify-content-center mt-4">
+    <div
+      class="row p-5  mt-5 mb-2 text-center d-flex justify-content-center"
+      v-else
+    >
+      <div class="col-12 text-center">
+        <h4 class="heading mt-4 mb-2 text-danger">
+          <strong> no items found</strong>
+        </h4>
+      </div>
+    </div>
+
+    <div class="row text-center d-flex justify-content-center mt-5">
       <div class="col-6">
         <p v-show="loadingAdverts">...loading...</p>
         <a v-show="next" @click="getSearchResults" class>
@@ -37,9 +53,18 @@
 import { apiService } from "@/common/api.service.js";
 import AdvertMinified from "@/components/Adverts/AdvertMinified.vue";
 import Sell from "@/components/Others/Sell.vue";
+import SearchForm from "@/components/Search/SearchForm.vue";
+import Loader from "@/components/Utils/Loader.vue";
 
 export default {
   name: "SearchView",
+
+  components: {
+    SearchForm,
+    AdvertMinified,
+    Sell,
+    Loader
+  },
 
   props: {
     search_key: {
@@ -51,29 +76,26 @@ export default {
   data() {
     return {
       adverts: [],
+      users: [],
       next: null,
       loadingAdverts: false,
       search_word: this.search_key
     };
   },
 
-  components: {
-    AdvertMinified,
-    Sell
-  },
-
   methods: {
     getSearchResults() {
-      let get_adverts_url = "api/v1/adverts/";
+      let search_url = `api/v1/search/?search=${this.search_word}`;
 
       if (this.next) {
-        get_adverts_url = this.next.slice(22);
+        search_url = this.next.slice(22);
       }
 
       this.loadingAdverts = true;
-      apiService(get_adverts_url, "GET").then(data => {
+      apiService(search_url, "GET").then(data => {
         this.loadingAdverts = false;
-        this.adverts.push(...data.results);
+        this.adverts = [...data["adverts"]];
+        this.users = [...data["users"]];
 
         if (data.next) {
           this.next = data.next;
@@ -84,11 +106,26 @@ export default {
     }
   },
 
+  computed: {
+    noAdverts() {
+      if (this.adverts.length === 0) {
+        return true;
+      }
+    }
+  },
+
   mounted: function() {
     this.getSearchResults();
     document.title = "Search Results";
+  },
+
+  beforeRouteUpdate (to, from, next) {
+    this.search_word = to.params.search_key;
+    this.getSearchResults();;
+    next();
   }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>

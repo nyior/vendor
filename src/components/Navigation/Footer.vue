@@ -6,7 +6,7 @@
           <div>
             <i class="fa fa-window-maximize footer-icon">
                 <div>
-                    <small>Home</small>
+                    <small>home</small>
                 </div>
             </i>
           </div>
@@ -18,7 +18,7 @@
           <div>
             <i class="fa fa-search footer-icon">
                 <div class="mt-1">
-                    <small>Search</small>
+                    <small>search</small>
                 </div>
             </i>
           </div>
@@ -30,7 +30,7 @@
           <div>
             <i class="fa fa-plus-circle footer-icon">
                 <div class="mt-1">
-                    <small>Sell</small>
+                    <small>sell</small>
                 </div>
             </i>
           </div>
@@ -42,7 +42,7 @@
           <div>
             <i class="fa fa-gratipay footer-icon">
                 <div class="mt-1">
-                    <small>Wishlist</small>
+                    <small>wlist</small>
                 </div>
             </i>
           </div>
@@ -57,7 +57,7 @@
           <div>
             <i class="fa fa-user-circle footer-icon">
                 <div class="mt-1">
-                    <small>You</small>
+                    <small>you</small>
                 </div>
             </i>
           </div>

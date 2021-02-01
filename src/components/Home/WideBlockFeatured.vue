@@ -6,7 +6,10 @@
             <a 
                 href="https://nyior-clement.netlify.app/"
                 target="_blank">
-                <span>Nyior Clement</span>
+                <span>
+                    Nyior Clement
+                    <i class="fa fa-external-link" aria-hidden="true"></i>
+                </span>
             </a>
         </div>
     </div>
@@ -67,7 +70,8 @@ span{
     }
 
     span{
-        font-size: 2.5rem;
+        font-size: 2rem;
+        font-weight: bold;
     }
 }
 

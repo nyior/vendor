@@ -8,9 +8,18 @@ router.register(r"adverts", av.AdvertViewSet)
 
 urlpatterns = [
     
-    path("<str:category>/adverts/", av.CategoryListAPIView.as_view(), name="create-advert"),
-    path("search/", av.SearchList.as_view(), name="search"),
-    path("user/<int:user_id>/shop/", av. SellerShopAPIView.as_view(), name="seller-shop"),
+    path(
+            "<str:category>/adverts/", 
+            av.CategoryListAPIView.as_view(), 
+            name="create-advert"),
+
+    path("search/", av.general_search, name="search"),
+
+    path(
+            "user/<int:user_id>/shop/", 
+            av. SellerShopAPIView.as_view(), 
+            name="seller-shop"),
+            
     path("", include(router.urls)),
     
 ]
