@@ -10,15 +10,15 @@ env = environ.Env(
 )
 env_file = os.path.join(BASE_DIR, ".env")
 
-environ.Env.read_env(env_file)  
+environ.Env.read_env() 
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = env('DEBUG')
 
 SITE_ROOT = root()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env.str('SECRET_KEY')
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 

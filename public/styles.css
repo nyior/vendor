@@ -1,6 +1,7 @@
 
 @import url("https://fonts.googleapis.com/css?family=Pacifico&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Philosopher&display=swap');
 
 html,
 body {
@@ -19,6 +20,8 @@ h3 {
 .heading {
     font-size: 5rem;
     letter-spacing: 2px;
+    font-family: 'Philosopher', sans-serif;
+    color: #7a09c4 ;
 }
 
 .sub-heading {

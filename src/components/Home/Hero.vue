@@ -3,7 +3,7 @@
         <div class="hero-wrapper" id="hero">
             <div class="container">
                 <div class="headline row px-3">
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-6 px-md-5">
                         <div class="text-center text-md-left">
                             <h1 class="heading mt-3">
                                AUN VENDOR
@@ -28,7 +28,7 @@
                     </div>
 
                     <div
-                    class="col-12 col-md-6 image text-left  mt-md-0 mt-5"
+                    class="col-12 col-md-6 image text-left  mt-md-0 mt-5 px-md-5"
                     >
                         <div class="round-illustration">
                             <img
