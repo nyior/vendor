@@ -5,19 +5,24 @@ import axios from "axios";
 const API_URL = "https://vendor-aun.herokuapp.com";
 // const API_URL = "http://localhost:8000";
 const TKN = window.localStorage.getItem("token");
-const TOKEN = `Token ${TKN}`;
 
-function apiService(endpoint, method, data) {
+
+function apiService(endpoint, method, data, token=null) {
   endpoint = `${API_URL}/${endpoint}`;
+
+  if (TKN !== undefined || TKN !== "null") {
+    token = `Token ${TKN}`;
+  }
 
   const config = {
     url: endpoint,
     method: method,
     data: data !== undefined ? data : null,
+
     headers: {
       "content-type": "application/json",
       "X-CSRFTOKEN": CSRF_TOKEN,
-      Authorization: TKN !== undefined && TKN !== "null" ? TOKEN : null
+      Authorization: token
     }
   };
 

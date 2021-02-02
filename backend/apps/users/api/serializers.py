@@ -68,11 +68,6 @@ class CustomUserSerializer(serializers.ModelSerializer):
             return True
             
         return instance.reviews.filter(reviewer__id=request.user.id).exists()
-
-    def validate_email(self, value):
-        if value.endswith("@aun.edu.ng"):
-            return value
-        raise serializers.ValidationError("Only AUN emails allowed fam !!")
     
 
 class ReviewSerializer(serializers.ModelSerializer):

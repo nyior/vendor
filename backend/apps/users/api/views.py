@@ -46,7 +46,7 @@ class UserDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
-    permission_classes = [HasAccountOrReadOnly, IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, HasAccountOrReadOnly]
 
 
 class CurrentUserView(APIView):
