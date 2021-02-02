@@ -16,6 +16,27 @@
       </div>
     </div>
 
+    <div
+      class="row p-5  mt-5 mb-2 text-center d-flex justify-content-center"
+      v-if="noAdverts && !loadingAdverts"
+    >
+      <div class="col-12 text-center">
+        <h2 class="sub-heading mt-4 mb-2">
+          no ads just yet!
+        </h2>
+
+        <router-link 
+            :to="{ name: 'ads_create' }"
+            class="blue-btn btn block"
+                            
+            >
+                be the first to add an add
+        </router-link>
+
+        <router-view></router-view>
+      </div>
+    </div>
+
     <div class="row text-center d-flex justify-content-center mt-4">
       <div class="col-6">
         <p v-show="loadingAdverts">...loading...</p>
@@ -77,6 +98,14 @@ export default {
 
     setRequestUser() {
       this.requestUser = window.localStorage.getItem("username");
+    }
+  },
+
+  computed: {
+    noAdverts() {
+      if (this.adverts.length === 0) {
+        return true;
+      }
     }
   },
 

@@ -286,12 +286,12 @@ export default {
       to.params.category = data.category;
 
       return next();
-    } else if (isAuth === false) {
+    } else if (isAuth === true) {
+        return next();
+    } else {
       return next({
         name: "continue" // back to safety route //
       });
-    } else {
-      return next();
     }
   },
 
