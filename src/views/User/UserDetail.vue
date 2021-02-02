@@ -132,9 +132,6 @@
     </div>
 
     <hr />
-    <div v-if="!UserHasProfile && UserHasReviewed">
-      <p class="text-danger">You have reviewed this user in the past</p>
-    </div>
 
     <div v-if="showForm">
       <form
@@ -171,7 +168,7 @@
     </div>
 
     <div v-else>
-      <div v-if="!UserHasReviewed">
+      <div v-if="!UserHasProfile">
         <button class="blue-btn btn-block" @click="showForm = true">
           review this user
         </button>
@@ -259,7 +256,7 @@ export default {
 
   computed: {
     UserHasProfile() {
-      return this.requestUser == this.user.username;
+      return this.requestUser === this.user.username;
     },
 
     isAuthenticated() {
@@ -394,7 +391,7 @@ export default {
     },
 
     setRequestUser() {
-      this.requestUser = window.localStorage.getItem("username");
+      this.requestUser = this.$store.state.username;
     }
   },
 

@@ -65,7 +65,7 @@ export default {
       this.loadingAdverts = true;
       apiService(get_adverts_url, "GET").then(data => {
         this.loadingAdverts = false;
-        this.adverts.push(...data.results);
+        this.adverts = [...data.results];
 
         if (data.next) {
           this.next = data.next;

@@ -140,7 +140,7 @@ if 'DATABASE_URL' in os.environ:
     DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 
-if not DEBUG:
+if DEBUG:
     MEDIA_URL  = '/media/'
     STATIC_URL = '/static/'
 

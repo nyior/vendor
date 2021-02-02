@@ -37,13 +37,18 @@
             </div>
           </div>
 
-          <button class="blue-btn btn-block" type="submit">
+          <!-- <button class="blue-btn btn-block" type="submit">
             login
-          </button>
+          </button> -->
+
+          <LoaderButton 
+                :status="isLoading" 
+                :text="text"
+          />
         </form>
 
         <div class="p-3">
-          <p v-if="error" class="mt-2">
+          <p v-if="error" class="mt-2 text-danger">
             <strong>{{ error }}</strong>
           </p>
 
@@ -62,13 +67,19 @@
 
 <script>
 import { apiService } from "@/common/api.service.js";
+import LoaderButton from "@/components/Utils/LoaderButton.vue";
 
 export default {
-  name: "register",
+  name: "login",
+
+  components: {
+    LoaderButton
+  },
 
   data() {
     return {
       error: null,
+      isLoading: false,
       form: {
         username: null,
         password: null
@@ -76,8 +87,15 @@ export default {
     };
   },
 
+  computed: {
+      text(){
+          return "login"
+      }
+  },
+
   methods: {
     login() {
+      this.isLoading = true;
       let login_url = `api/v1/user/login/`;
 
       let method = "POST";
@@ -95,13 +113,16 @@ export default {
           };
 
           this.$store.dispatch("joinAction", payload);
+          
+          this.isLoading = false;
 
           this.$router.push({
             name: "home"
           });
         })
         .catch(error => {
-          this.error = error;
+          this.isLoading = false;
+          this.error = "invalid credentials";
         });
     }
   },

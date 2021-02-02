@@ -93,6 +93,9 @@
               <option>Video Games</option>
               <option>Fashion</option>
               <option>Phones and Accessories</option>
+              <option>Electronic Appliances</option>
+              <option>Health and Beauty</option>
+              <option>Others</option>
             </select>
             <div class="invalid-feedback">
               Please select one option to continue.
@@ -110,7 +113,7 @@
             ></textarea>
           </div>
 
-          <button
+          <!-- <button
             class="btn  blue-btn  btn-block"
             :class="{ 'is-loading': isLoading }"
             type="submit"
@@ -121,10 +124,14 @@
             <div class="loading-icon">
               <i class="fa fa-cog fa-spin"></i>
             </div>
-          </button>
+          </button> -->
+          <LoaderButton 
+                :status="isLoading" 
+                :text="text"
+          />
         </form>
 
-        <p v-if="error" class="mt-2">
+        <p v-if="error" class="mt-2 text-danger">
           <strong>{{ error }}</strong>
         </p>
       </div>
@@ -139,11 +146,14 @@ import { store } from "@/store/store";
 
 import JoinMarche from "@/components/Modals/JoinMarche.vue";
 
+import LoaderButton from "@/components/Utils/LoaderButton.vue";
+
 export default {
   name: "adverts-create",
 
   components: {
-    JoinMarche
+    JoinMarche,
+    LoaderButton
   },
 
   props: {
@@ -203,6 +213,12 @@ export default {
     };
   },
 
+  computed: {
+      text(){
+          return "submit"
+      }
+  },
+
   methods: {
     handleFileUpload(event) {
       this.form.file = event.target.files[0];
@@ -250,7 +266,7 @@ export default {
         })
         .catch(error => {
           this.isLoading = false;
-          this.error = error;
+          this.error = "something wrong with your request";
         });
     }
   },

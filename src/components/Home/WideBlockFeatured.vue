@@ -1,14 +1,15 @@
 <template>
     <div class="wide-block">
-        brought to you by
-        <div class="featured-logo-row">
-            <span>Milton Doibo</span>
+        <h3>made with 💜 by</h3>
+        <div class="featured-logo-row sub-heading">
+            <span>
+                Milton Doibo
+            </span>
             <a 
                 href="https://nyior-clement.netlify.app/"
                 target="_blank">
                 <span>
                     Nyior Clement
-                    <i class="fa fa-external-link" aria-hidden="true"></i>
                 </span>
             </a>
         </div>

@@ -8,13 +8,13 @@
                             <h1 class="heading mt-3">
                                AUN VENDOR
                             </h1>
-                            <h2 class="md-3 font-weight-bold">
+                            <h2 class="md-3 sub-heading">
                                 Welcome to AUN's Premier Online Market Place
                             </h2>
                             <h3 class="mt-5 text-justify text-faded">
                                We help you discover products and services you are looking for on
                                campus, and we help student entrepreneurs build successful
-                               businesses. We are Marche! ✨
+                               businesses. We are Vendor! ✨
                             </h3>
 
                             <router-link 

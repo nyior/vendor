@@ -15,7 +15,7 @@ class CustomUser(AbstractUser):
     residence_hall = models.CharField(max_length=12, null=True, blank=True)
     bio = models.TextField(null=True, blank=True)
     wishlist = models.ManyToManyField(Advert, blank=True, related_name="users")
-    profile_picture = models.ImageField(upload_to="profile_pic", default="default.png")
+    profile_picture = models.ImageField(upload_to="profile_pic", default="default.jpg")
 
 
 #user-review

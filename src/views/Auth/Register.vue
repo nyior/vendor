@@ -17,7 +17,7 @@
             <input
               type="text"
               class="form-control"
-              placeholder="valid AUN email here"
+              placeholder="valid email here"
               required
               v-model="form.email"
             />
@@ -48,7 +48,7 @@
             </div>
           </div>
 
-          <div class="form-group mt-3">
+          <!-- <div class="form-group mt-3">
             <input
               type="password"
               class="form-control"
@@ -59,15 +59,20 @@
             <div class="invalid-feedback">
               Please fill out this field
             </div>
-          </div>
+          </div> -->
 
-          <button class="blue-btn btn-block" type="submit">
+          <LoaderButton 
+                :status="isLoading" 
+                :text="text"
+          />
+
+          <!-- <button class="blue-btn btn-block" type="submit">
             register
-          </button>
+          </button> -->
         </form>
 
         <div class="p-3">
-          <p v-if="error" class="mt-2">
+          <p v-if="error" class="mt-2 text-danger">
             <strong>{{ error }}</strong>
           </p>
 
@@ -86,13 +91,19 @@
 
 <script>
 import { apiService } from "@/common/api.service.js";
+import LoaderButton from "@/components/Utils/LoaderButton.vue";
 
 export default {
   name: "register",
 
+  components: {
+    LoaderButton
+  },
+
   data() {
     return {
       error: null,
+      isLoading: false,
       confirmPassword: null,
       form: {
         email: null,
@@ -102,8 +113,15 @@ export default {
     };
   },
 
+  computed: {
+      text(){
+          return "register"
+      }
+  },
+
   methods: {
     createUser() {
+      this.isLoading = true;
       let create_user_url = `api/v1/user/signup/`;
 
       let method = "POST";
@@ -122,13 +140,14 @@ export default {
           };
 
           this.$store.dispatch("joinAction", payload);
-
+          this.isLoading = false;
           this.$router.push({
             name: "home"
           });
         })
         .catch(error => {
-          this.error = error;
+          this.isLoading = false;
+          this.error = "something wrong with the data you provided";
         });
     }
   },

@@ -5,16 +5,16 @@
         <div class="step step-1">
             <div class="row px-5 justify-content-md-center">
                 <div class="col-md">
-                    <div class="header">
+                    <h2 class="md-3 sub-heading">
                         Create a new  account or login to an existing account
-                    </div>
-                    <p class="sub-heading text-muted">
+                    </h2>
+                    <h3 class="text-muted mt-3">
                         We use this data to grant you permission to functionalities 
                         that are available to logged in users only
-                    </p>
+                    </h3>
                 </div>
 
-                <div class="col-md col-center image">
+                <div class="col-md col-center image mt-md-0 mt-3">
                     <img
                         class="illustration "
                         src="../../assets/svg/undraw_home_screen_4n7s.svg"
@@ -33,13 +33,13 @@
                         alt=""
                     />
                 </div>
-                <div class="col-md">
-                    <div class="header">
+                <div class="col-md mt-md-0 mt-3">
+                    <h2 class="md-3 sub-heading">
                         upload ads or search for a product/service
-                    </div>
-                    <p class="sub-heading text-muted">
+                    </h2>
+                    <h3 class="text-muted">
                         immediately start selling on our platform by creating ads or search and discover services/products you seek.
-                    </p>
+                    </h3>
                 </div>
             </div>
         </div>
@@ -62,11 +62,9 @@ export default {
     padding: 50px 0 50px 0;
     width: 100%;
 }
-.step .header {
-    font-size: 4rem;
-}
-.step .sub-heading {
-    font-size: 2rem;
+
+p{
+    font-size: 1.6rem;
 }
 .step .illustration {
     width: 300px;
@@ -80,11 +78,6 @@ export default {
 }
 
 @media only screen and (max-width: 600px) {
-  .step .header {
-    font-size: 2.5rem;
-  }
-  .step .sub-heading {
-        font-size: 1.6rem;
-  }
+  
 }
 </style>
