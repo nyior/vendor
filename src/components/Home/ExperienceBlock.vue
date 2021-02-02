@@ -3,7 +3,7 @@
         <h1 class="container-header text-center">Easy as 1, 2</h1>
 
         <div class="step step-1">
-            <div class="row px-5 justify-content-md-center">
+            <div class="row px-3 px-md-5 justify-content-md-center">
                 <div class="col-md">
                     <h2 class="md-3 sub-heading">
                         Create a new  account or login to an existing account
@@ -17,7 +17,7 @@
                 <div class="col-md col-center image mt-md-0 mt-3">
                     <img
                         class="illustration "
-                        src="../../assets/svg/undraw_home_screen_4n7s.svg"
+                        src="../../assets/svg/signup.svg"
                         alt=""
                     />
                 </div>
@@ -25,11 +25,11 @@
         </div>
 
         <div class="step step-2">
-            <div class="row px-5 justify-content-md-center">
-                <div class="col-md col-center">
+            <div class="row px-3 px-md-5 justify-content-md-center">
+                <div class="col-md col-center px-md-0 px-5">
                     <img
                         class="illustration"
-                        src="../../assets/svg/undraw_data_xmfy.svg"
+                        src="../../assets/svg/upload.svg"
                         alt=""
                     />
                 </div>

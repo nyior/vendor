@@ -1,7 +1,7 @@
 <template>
     <div class="wide-block">
         <h3>made with 💜 by</h3>
-        <div class="featured-logo-row sub-heading">
+        <div class="featured-logo-row sub-heading-smaller">
             <span>
                 Milton Doibo
             </span>
@@ -63,6 +63,10 @@ span{
     filter: none;
 }
 
+i{
+    font-size: 1.8rem;
+}
+
 @media screen and (max-width: 640px) {
     .wide-block {
         margin-top: -100px;
@@ -74,6 +78,10 @@ span{
     span{
         font-size: 2rem;
         font-weight: bold;
+    }
+
+    i{
+        font-size: 1.2rem;
     }
 }
 

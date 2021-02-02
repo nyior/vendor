@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center shadow  hide-on-desktop py-4" id="my-footer">
+  <div class="text-center shadow  hide-on-desktop py-1" id="my-footer">
     <div class="row m-2 text-muted">
       <div class="col-2 text-center">
         <router-link :to="{ name: 'home' }" class="footer-tab">

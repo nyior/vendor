@@ -10,7 +10,7 @@ env = environ.Env(
 )
 env_file = os.path.join(BASE_DIR, ".env")
 
-environ.Env.read_env() 
+environ.Env.read_env(env_file) 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
