@@ -10,6 +10,7 @@
                 target="_blank">
                 <span>
                     Nyior Clement
+                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
                 </span>
             </a>
         </div>
