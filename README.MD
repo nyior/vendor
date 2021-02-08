@@ -1,12 +1,11 @@
 <h1 align="center">
-	Marche: An online market place
+	vendor: An online market place
 </h1>
 
 <p align="center">
 	<i>A web application that digitizes buying and selling among students.</i>
 </p>
 
-<img align="center" width="900" height="400" src="./src/assets/marche.png">
 
 ## DESCRIPTION
 
