@@ -32,7 +32,7 @@
       v-if="noAdverts && !loadingAdverts"
     >
       <div class="col-12 text-center">
-        <h4 class="heading mt-4 mb-2 text-danger">
+        <h4 class="sub-heading mt-4 mb-2 text-danger">
           <strong> no items found</strong>
         </h4>
       </div>

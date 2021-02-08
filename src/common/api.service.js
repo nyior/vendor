@@ -7,10 +7,12 @@ const API_URL = "https://vendor-aun.herokuapp.com";
 const TKN = window.localStorage.getItem("token");
 
 
-function apiService(endpoint, method, data, token=null) {
+function apiService(endpoint, method, data) {
   endpoint = `${API_URL}/${endpoint}`;
 
-  if (TKN !== undefined && TKN !== "null" && TKN !== "null") {
+  token = null;
+  
+  if (TKN !== undefined && TKN !== "null" && TKN !== null) {
     token = `Token ${TKN}`;
   }
 

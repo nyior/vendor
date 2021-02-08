@@ -19,7 +19,7 @@
       v-if="noAdverts"
     >
       <div class="col-12 text-center">
-        <h4 class="heading mt-4 mb-2 text-danger">
+        <h4 class="sub-heading mt-4 mb-2 text-danger">
           <strong> You haven't saved any item yet !!</strong>
         </h4>
 

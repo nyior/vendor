@@ -93,7 +93,10 @@ export default {
         } else {
           this.next = null;
         }
-      });
+      })
+      .catch(error => {
+          this.loadingAdverts = false;
+        });
     },
 
     setRequestUser() {
