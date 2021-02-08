@@ -28,7 +28,6 @@
   width: 0;
   height: 100%;
   background-color: #7a09c4;
-  box-shadow: 10px 0px 15px 0px #7a09c4;
   animation: load 2s linear infinite;
 }
 
