@@ -17,7 +17,7 @@
       </div>
       <div
         class="row p-5  mt-5 mb-2 text-center d-flex justify-content-center"
-        v-if="noAdverts"
+        v-if="noAdverts && !loadingAdverts"
       >
         <div class="col-12 text-center">
           <h4 class="heading mt-4 mb-2 text-danger">
@@ -99,7 +99,10 @@ export default {
         } else {
           this.next = null;
         }
-      });
+      })
+      .catch(error => {
+          this.loadingAdverts = false;
+        });
     },
 
     setRequestUser() {

@@ -292,10 +292,12 @@ export default {
       }
 
       this.loadingReviews = true;
+      this.loadingAdverts = true;
 
       apiService(get_reviews_url, "GET").then(data => {
         this.reviews.push(...data.results);
         this.loadingReviews = false;
+        this.loadingAdverts = false;
         if (data.next) {
           this.next = data.next;
         } else {
