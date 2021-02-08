@@ -1,7 +1,11 @@
 <template>
   <div class="container-fluid mt-0">
+
+    <div v-if="loadingUser">
+        ...loading user...
+    </div>  
     
-    <div class="row px-md-5 px-3 dp-image-cover">
+    <div v-else class="row px-md-5 px-3 dp-image-cover">
       <div class="col-12 text-center ">
         <div class="card">
           <div class="mt-5">
@@ -105,11 +109,9 @@
       </div>
 
       <div class="row   text-center">
-        <p v-if="!sellerShop" class="text-danger mt-5 pt-5">
-          <strong
-            >Your shop is empty. Sell on Marche to populate your shop.</strong
-          >
-        </p>
+        <h3 v-if="sellerHasItems" class="sub-heading mt-5 pt-5">
+            Your shop is empty. Sell on Marche to populate your shop
+        </h3>
 
         <div
           class="col-md-3 col-12 px-5"
@@ -124,14 +126,13 @@
 
     <div class="row text-center d-flex justify-content-center mt-4">
       <div class="col-6">
-        <p v-show="loadingAdverts">...loading...</p>
         <a v-show="more" @click="getUserAdverts">
           <strong>Load More</strong>
         </a>
       </div>
     </div>
 
-    <hr />
+    <!-- <hr />
 
     <div v-if="showForm">
       <form
@@ -165,17 +166,17 @@
 
         <button class="btn btn-lg btn-blue" type="submit">Post Review</button>
       </form>
-    </div>
+    </div> -->
 
-    <div v-else>
+    <!-- <div v-else>
       <div v-if="!UserHasProfile">
         <button class="blue-btn btn-block" @click="showForm = true">
           review this user
         </button>
       </div>
-    </div>
+    </div> -->
 
-    <hr />
+    <!-- <hr />
 
     <div
       class="row text-center d-flex justify-content-center align-items-center"
@@ -200,7 +201,7 @@
           <strong>Load More</strong>
         </a>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -249,6 +250,7 @@ export default {
       next: null,
       more: null,
       loadingReviews: false,
+      loadingUser: false,
       loadingAdverts: false,
       requestUser: null
     };
@@ -261,6 +263,10 @@ export default {
 
     isAuthenticated() {
       return store.state.isAuthenticated;
+    },
+
+    sellerHasItems(){
+        return sellerShop.length > 0;
     }
   },
 
@@ -275,13 +281,18 @@ export default {
 
     getUser() {
       let get_user_url = `api/v1/users/${this.id}/`;
+      this.loadingUser = true;
 
       apiService(get_user_url, "GET").then(data => {
+        this.loadingUser = false;
         this.user = data;
         this.UserHasReviewed = data.current_user_has_reviewed;
 
         this.setPageTitle(data.username);
-      });
+      })
+      .catch(error => {
+          this.loadingUser = false;
+        });
     },
 
     getReviews() {
@@ -292,12 +303,12 @@ export default {
       }
 
       this.loadingReviews = true;
-      this.loadingAdverts = true;
 
       apiService(get_reviews_url, "GET").then(data => {
         this.reviews.push(...data.results);
+
         this.loadingReviews = false;
-        this.loadingAdverts = false;
+        
         if (data.next) {
           this.next = data.next;
         } else {
@@ -324,7 +335,10 @@ export default {
         } else {
           this.more = null;
         }
-      });
+      })
+      .catch(error => {
+          this.loadingAdverts = false;
+        });
     },
 
     postReview() {
@@ -400,7 +414,7 @@ export default {
   mounted: function() {
     this.setRequestUser();
     this.getUser();
-    this.getReviews();
+    // this.getReviews();
     this.getUserAdverts();
   },
 

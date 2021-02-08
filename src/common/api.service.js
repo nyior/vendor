@@ -4,10 +4,9 @@ import axios from "axios";
 //uncomment the line below before pushing to heroku
 const API_URL = "https://vendor-aun.herokuapp.com";
 // const API_URL = "http://localhost:8000";
-const TKN = window.localStorage.getItem("token");
-
 
 function apiService(endpoint, method, data) {
+  const TKN = window.localStorage.getItem("token");
   endpoint = `${API_URL}/${endpoint}`;
 
   var token = null;
