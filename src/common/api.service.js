@@ -10,8 +10,8 @@ const TKN = window.localStorage.getItem("token");
 function apiService(endpoint, method, data) {
   endpoint = `${API_URL}/${endpoint}`;
 
-  token = null;
-  
+  var token = null;
+
   if (TKN !== undefined && TKN !== "null" && TKN !== null) {
     token = `Token ${TKN}`;
   }
