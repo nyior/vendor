@@ -15,7 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ('id', 'email', 'username', 'password', 'token')
+        fields = ('id', 'email', 'username', 'password', 'phone_number', 'token')
         extra_kwargs = {'password': {'write_only': True}}
 
     def get_token(self, instance):
@@ -28,6 +28,7 @@ class UserSerializer(serializers.ModelSerializer):
         user = CustomUser(
             username=validated_data['username'],
             email = validated_data['email'],
+            phone_number = validated_data['phone_number'],
         )
         
         #Hash and save password

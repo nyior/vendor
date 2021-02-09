@@ -10,7 +10,7 @@
       <div class="col-md-6 col-12 mt-5 shadow border px-3 py-3">
         <form
           @submit.prevent="createUser"
-          class="p-3 was-validated"
+          class="p-3"
           enctype="multipart/form-data"
         >
           <div class="form-group mt-3">
@@ -18,21 +18,45 @@
               type="text"
               class="form-control"
               placeholder="valid email here"
+              v-validate="'required|email'"
+              name="email"
               required
               v-model="form.email"
             />
-            <div class="invalid-feedback">Please fill out this field.</div>
+            <div class="mt-2">
+                <span>{{ errors.first('email') }}</span>
+            </div>
           </div>
 
           <div class="form-group mt-3">
             <input
               type="text"
               class="form-control"
+              placeholder="phone number here"
+              v-validate="'required|digits'"
+              name="phone"
+              required
+              v-model="form.phoneNumber"
+            />
+            <div class="mt-2">
+                <span>{{ errors.first('phone') }}</span>
+            </div>
+          </div>
+
+
+          <div class="form-group mt-3">
+            <input
+              type="text"
+              class="form-control"
+              v-validate="'required|alpha_num|alpha_dash'"
+              name="username"
               required
               placeholder="your username here"
               v-model="form.username"
             />
-            <div class="invalid-feedback">Please fill out this field</div>
+            <div class="mt-2">
+                <span>{{ errors.first('username') }}</span>
+            </div>
           </div>
 
           <div class="form-group mt-3">
@@ -40,11 +64,13 @@
               type="password"
               class="form-control"
               placeholder="your password here"
+              v-validate="'required|min:8'"
+              name="password"
               required
               v-model="form.password"
             />
-            <div class="invalid-feedback">
-              Please fill out this field
+            <div class="mt-2">
+                <span>{{ errors.first('password') }}</span>
             </div>
           </div>
 
@@ -108,7 +134,8 @@ export default {
       form: {
         email: null,
         username: null,
-        password: null
+        password: null,
+        phoneNumber: null,
       }
     };
   },
@@ -130,6 +157,7 @@ export default {
       formData.append("email", this.form.email);
       formData.append("username", this.form.username);
       formData.append("password", this.form.password);
+      formData.append("phone_number", this.form.phoneNumber);
 
       apiService(create_user_url, method, formData)
         .then(data => {

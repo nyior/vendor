@@ -114,8 +114,8 @@
         <h1 class="heading" v-else><strong>Seller's Shop</strong></h1>
       </div>
 
-      <div class="row   text-center">
-        <div v-if="!sellerHasItems" class="px-3 px-md-5 mt-5">
+      <div class="row px-md-5 px-3 py-5 my-5" v-if="!sellerHasItems">
+          <div class=" col-12 text-center">
             <h2 class="text-danger px-3">
             Your shop is empty. Sell on Marche to populate your shop
             </h2>
@@ -127,12 +127,13 @@
                 upload items
             </router-link>
         </div>
+      </div>
 
+      <div  v-else class="row  text-center">
         <div
           class="col-md-3 col-12 px-5"
           v-for="advert in sellerShop"
           :key="advert.id"
-          v-else
         >
           <AdvertMinified :advert_object="advert" />
         </div>
@@ -506,6 +507,12 @@ export default {
 
 a:hover {
   color: black !important;
+}
+
+span{
+    color: red !important;
+    margin-top: 0.2rem;
+    font-size: 1.2rem;
 }
 
 .card{

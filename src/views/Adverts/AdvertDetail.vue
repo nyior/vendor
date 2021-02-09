@@ -28,24 +28,34 @@
                 v-else
                 class="mt-3"
             >
-            <span>
-                <a 
-                 :href="mailTo"
-                >
-                    email seller
-                </a> 
-            </span>
+            <div class="mt-2">
+                <span>
+                    <a 
+                    :href="mailTo"
+                    >
+                        email seller
+                    </a> 
+                </span>
+            </div>
+
+            <div class="mt-2">
+                <span>
+                   <i class="fa fa-mobile" aria-hidden="true"></i> 
+                   {{ advert.user.phone_number }}
+                </span>
+            </div>
             </div>
             
         </div>
 
         <div class="col-md-6 mr-md-auto px-5 py-3 mt-md-0 mt-5">
             <span>
-                uploaded by 
                 <router-link
                     :to="{ name: 'user_detail', params: { id: advert.user.id } }"
                 >
-                    {{ advert.user.username }}
+                uploaded by 
+                {{ advert.user.username }}
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
                 </router-link>
             </span>
 
@@ -100,9 +110,19 @@
                         </div>
                         
                     </button>
+
+                </div>
+
+                <div class="mt-5">
+                    <router-link :to="{ name: 'adverts' }">
+                        <button 
+                            class="blue-btn btn-block" 
+                        >
+                            view other adverts
+                        </button>
+                    </router-link>
                 </div>
             </div>
-
         </div>
     </div>
   </div>
@@ -196,17 +216,6 @@ export default {
 
   mounted: function() {
     this.getAdvert();
-  },
-
-  async beforeRouteEnter(to, from, next) {
-    let isAuth = store.state.isAuthenticated;
-    if (isAuth === true) {
-      next();
-    } else {
-      next({
-        name: "continue" // back to safety route //
-      });
-    }
   }
 };
 </script>
@@ -232,7 +241,7 @@ span{
 }
 
 a{
-    color: #e00029 !important;
+    color: white !important;
     font-weight: bold;
 }
 
