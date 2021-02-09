@@ -59,27 +59,42 @@
         ></textarea>
       </div>
 
-      <button class="btn btn-lg btn-blue mr-5" type="submit">Update Profile</button>
-      <i 
-            class="fa fa-times" 
-            aria-hidden="true"
-            @click="hideForm">
+      <LoaderButton 
+            :status="status" 
+            :text="buttonText"
+      />
 
-      </i>
+      <div class="mt-2">
+        <i 
+                class="fa fa-times" 
+                aria-hidden="true"
+                @click="hideForm">
+            close
+        </i>
+      </div>
     </form>
   </div>
 </template>
 
 <script>
-import { apiService } from "@/common/api.service.js";
+import LoaderButton from "@/components/Utils/LoaderButton.vue";
 
 export default {
   name: "update-profile",
+
+  components: {
+    LoaderButton
+  },
 
   props: {
     user: {
       type: Object,
       required: true
+    },
+
+    status: {
+        type: Boolean,
+        required: true,
     }
   },
 
@@ -94,6 +109,12 @@ export default {
         bio: this.user.bio
       }
     };
+  },
+
+  computed: {
+    buttonText() {
+        return "update details";
+    }
   },
 
   methods: {

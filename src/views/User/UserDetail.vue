@@ -1,8 +1,10 @@
 <template>
   <div class="container-fluid mt-0">
-
-    <div v-if="loadingUser">
-        ...loading user...
+    
+    <div v-if="loadingUser" class="row pt-5 mt-5">
+        <div class="col-12 text-center ">
+            <h3> ...loading user...</h3>
+        </div>
     </div>  
     
     <div v-else class="row px-md-5 px-3 dp-image-cover">
@@ -46,16 +48,19 @@
                     </label>
                   </div>
 
-                  <button class="btn btn-blue mr-5" type="submit">
-                    upload avatar
-                  </button>
-
-                  <i 
-                    class="fa fa-times" 
-                    aria-hidden="true"
-                    @click="showAvatarUpdateForm = false">
-
-                  </i>
+                  <LoaderButton 
+                    :status="updatingAvatar" 
+                    :text="avatarText"
+                  />
+                  
+                  <div class="mt-2">
+                    <i 
+                        class="fa fa-times" 
+                        aria-hidden="true"
+                        @click="showAvatarUpdateForm = false">
+                            close
+                    </i>
+                  </div>
                 </form>
               </div>
             </div>
@@ -76,6 +81,7 @@
             <div v-if="showProfileUpdateForm">
               <UpdateUserProfileForm
                 :user="user"
+                :status="updatingUserProfile"
                 @update-profile="UpdateProfile"
                 @hide-form="showProfileUpdateForm = false"
               />
@@ -109,9 +115,18 @@
       </div>
 
       <div class="row   text-center">
-        <h3 v-if="sellerHasItems" class="sub-heading mt-5 pt-5">
+        <div v-if="!sellerHasItems" class="px-3 px-md-5 mt-5">
+            <h2 class="text-danger px-3">
             Your shop is empty. Sell on Marche to populate your shop
-        </h3>
+            </h2>
+            <router-link 
+            :to="{ name: 'ads_create' }"
+            class="blue-btn btn block mt-2"
+                            
+            >
+                upload items
+            </router-link>
+        </div>
 
         <div
           class="col-md-3 col-12 px-5"
@@ -211,6 +226,7 @@ import { apiService } from "@/common/api.service.js";
 import ReviewDetail from "@/components/Reviews/ReviewDetail.vue";
 import UpdateUserProfileForm from "@/components/User/UpdateUserProfileForm.vue";
 import AdvertMinified from "@/components/Adverts/AdvertMinified.vue";
+import LoaderButton from "@/components/Utils/LoaderButton.vue";
 
 import { store } from "@/store/store";
 
@@ -220,7 +236,8 @@ export default {
   components: {
     ReviewDetail,
     UpdateUserProfileForm,
-    AdvertMinified
+    AdvertMinified,
+    LoaderButton
   },
 
   props: {
@@ -252,6 +269,8 @@ export default {
       loadingReviews: false,
       loadingUser: false,
       loadingAdverts: false,
+      updatingAvatar: false,
+      updatingUserProfile: false,
       requestUser: null
     };
   },
@@ -266,7 +285,11 @@ export default {
     },
 
     sellerHasItems(){
-        return sellerShop.length > 0;
+        return this.sellerShop.length > 0;
+    },
+
+    avatarText() {
+        return "upload avatar";
     }
   },
 
@@ -280,12 +303,13 @@ export default {
     },
 
     getUser() {
-      let get_user_url = `api/v1/users/${this.id}/`;
       this.loadingUser = true;
+      let get_user_url = `api/v1/users/${this.id}/`;
 
       apiService(get_user_url, "GET").then(data => {
-        this.loadingUser = false;
+        
         this.user = data;
+        this.loadingUser = false;
         this.UserHasReviewed = data.current_user_has_reviewed;
 
         this.setPageTitle(data.username);
@@ -364,6 +388,7 @@ export default {
     },
 
     UpdateProfile(formData) {
+      this.updatingUserProfile = true;
       let updateprofile_url = `api/v1/users/${formData.user_id}/`;
 
       let method = "PUT";
@@ -371,15 +396,18 @@ export default {
       apiService(updateprofile_url, method, formData)
         .then(data => {
           this.user = data;
+          this.updatingUserProfile = false;
           this.requestUser = data.username;
           this.showProfileUpdateForm = false;
         })
         .catch(error => {
+          this.updatingUserProfile = false;
           this.error = error;
         });
     },
 
     UpdateAvatar() {
+      this.updatingAvatar = true;
       let updateprofile_url = `api/v1/avatar/`;
 
       let formData = new FormData();
@@ -391,8 +419,10 @@ export default {
         .then(data => {
           this.user.profile_picture = data.profile_picture;
           this.showAvatarUpdateForm = false;
+          this.updatingAvatar = false;
         })
         .catch(error => {
+          this.updatingAvatar = false;
           this.error = error;
         });
     },
