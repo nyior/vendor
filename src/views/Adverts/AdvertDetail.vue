@@ -1,6 +1,13 @@
 <template>
   <div class=" container mt-5">
+    <div v-if="isLoading" class="row pt-5 mt-5">
+        <div class="text-center col-12 p-0  ml-md-auto px-5 py-3">
+            <h2>...loading advert...</h2>
+        </div>
+
+    </div>
     <div
+      v-else
       class="row pt-5 mt-5"
     >
         <div class="col-md-4 col-12 p-0  ml-md-auto px-5 py-3">
@@ -127,7 +134,8 @@ export default {
       advert: null,
       addedToWishList: null,
       counter: 0,
-      message: null
+      message: null,
+      isLoading: false,
     };
   },
 
@@ -137,13 +145,19 @@ export default {
     },
 
     getAdvert() {
+      this.isLoading = true;
       let get_adverts_url = `api/v1/adverts/${this.slug}/`;
 
       apiService(get_adverts_url, "GET").then(data => {
         this.advert = data;
+        this.isLoading = false;
         this.addedToWishList = data.advert_in_current_user_wishlist;
         this.setPageTitle(data.name);
-      });
+      })
+      .catch(error => {
+          this.isLoading = false;
+          this.error = error;
+        });
     },
     toggle() {
       this.addedToWishList === false
@@ -176,7 +190,7 @@ export default {
     },
 
     mailTo() {
-        return `mailto:${this.advert.user.username}?subject=${this.advert.name} purchase`
+        return `mailto:${this.advert.user.email}?subject=${this.advert.name} purchase`
     }
   },
 

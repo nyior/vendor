@@ -2,8 +2,13 @@
   <div class=" container-fluid products">
     <Sell />
 
+    <div class="row pt-5 mt-5" v-if="loadingAdverts">
+        <div class="col-12 text-center">
+            <h2>...loading wishlist items</h2>
+        </div>
+    </div>
     <div
-      v-if="adverts"
+      v-if="!noAdverts && !loadingAdverts"
       class="row  pt-5 mt-5 categories  px-3 mt-0 mb-2 text-center d-flex"
     >
       <div class="col-md-3 col-12" v-for="advert in adverts" :key="advert.id">
@@ -16,7 +21,7 @@
 
     <div
       class="row p-5  mt-5 mb-2 text-center d-flex justify-content-center"
-      v-if="noAdverts"
+      v-if="noAdverts && !loadingAdverts"
     >
       <div class="col-12 text-center">
         <h4 class="sub-heading mt-4 mb-2 text-danger">
@@ -64,17 +69,18 @@ export default {
   },
 
   methods: {
+      
     getAdverts() {
+      this.loadingAdverts = true;
       let get_adverts_url = "api/v1/user/wishlist/";
 
       if (this.next) {
         get_adverts_url = this.next.slice(22);
       }
 
-      this.loadingAdverts = true;
       apiService(get_adverts_url, "GET").then(data => {
-        this.loadingAdverts = false;
         this.adverts.push(...data.results);
+        this.loadingAdverts = false; 
 
         if (data.next) {
           this.next = data.next;
