@@ -15,21 +15,21 @@
       <div class="col-md-3 col-12 " v-for="advert in adverts" :key="advert.id">
         <AdvertMinified :advert_object="advert" />
       </div>
+
       <div
-        class="row p-5  mt-5 mb-2 text-center d-flex justify-content-center"
+        class="row p-5  mt-5 mb-2 text-center d-flex"
         v-if="noAdverts && !loadingAdverts"
       >
         <div class="col-12 text-center">
-          <h4 class="sub-heading mt-4 mb-2 text-danger">
-            <strong>
-              Nothing found in this category, may be check back later !!</strong
+          <h4 class="sub-heading mt-5 text-muted mb-2">
+              Nothing found in this category, may be check back later !!
             >
           </h4>
         </div>
       </div>
     </div>
 
-    <div class="row text-center d-flex justify-content-center mt-4">
+    <div class="row text-center mt-5">
       <div class="col-6">
         <p v-show="loadingAdverts">...loading...</p>
         <a v-show="next" @click="getAdverts" class=" ">

@@ -30,7 +30,7 @@
             class="blue-btn btn block"
                             
             >
-                be the first to add an add
+                be the first to add an ad
         </router-link>
 
         <router-view></router-view>

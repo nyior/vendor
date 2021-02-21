@@ -509,12 +509,6 @@ a:hover {
   color: black !important;
 }
 
-span{
-    color: red !important;
-    margin-top: 0.2rem;
-    font-size: 1.2rem;
-}
-
 .card{
  background-color: #C0C0C0;
 }

@@ -181,8 +181,4 @@ ul li {
   color: white;
 }
 
-/* #my-nav .router-link-exact-active {
-  color: #7a09c4 !important;
-  cursor: pointer;
-} */
 </style>

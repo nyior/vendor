@@ -3,7 +3,7 @@
     <Sell />
 
     <Hero />
-
+    
     <WideBlockFeatured />
 
     <ExperienceBlock />
@@ -37,30 +37,30 @@ export default {
 </script>
 
 <style scoped>
-.home-hero {
-  padding-bottom: 15rem;
-  overflow-y: hidden;
-}
-
-.hero-text {
-  margin-top: 15rem;
-}
-
-.col-md-3:nth-child(n + 5) {
-  margin-top: 3rem;
-}
-
-@media only screen and (max-width: 600px) {
-  .home-hero {
-    padding-bottom: 20rem;
+    .home-hero {
+    padding-bottom: 15rem;
     overflow-y: hidden;
-  }
-  .col-md-3:nth-child(n + 5) {
-    margin-top: 0rem;
-  }
+    }
 
-  .hero-text {
+    .hero-text {
     margin-top: 15rem;
-  }
-}
+    }
+
+    .col-md-3:nth-child(n + 5) {
+    margin-top: 3rem;
+    }
+
+    @media only screen and (max-width: 600px) {
+    .home-hero {
+        padding-bottom: 20rem;
+        overflow-y: hidden;
+    }
+    .col-md-3:nth-child(n + 5) {
+        margin-top: 0rem;
+    }
+
+    .hero-text {
+        margin-top: 15rem;
+    }
+    }
 </style>

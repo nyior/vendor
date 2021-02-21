@@ -2,8 +2,11 @@
   <div id="app">
     <div class="margin-bottom">
       <NavbarComponent :hide_nav_brand="hide_nav_brand" :title="title" />
-
-      <router-view />
+      
+      <transition name="fade">
+        <router-view />
+      </transition>
+      
     </div>
 
     <FooterComponent v-if="show_footer" />
@@ -54,4 +57,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+    }
+
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+    }
+</style>
